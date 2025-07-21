@@ -10,9 +10,9 @@ import PageTransition from "@/components/page-transition"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "FutureDev - Futuristic Web Development",
+  title: "404studios - Modern Web Development",
   description: "Next-generation web and mobile app development with cutting-edge design",
-    generator: 'v0.dev'
+    generator: '404studios'
 }
 
 export default function RootLayout({

@@ -47,7 +47,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center space-x-2 group">
             <Code2 className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300" />
             <span className="text-base sm:text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">
-              FutureDev
+              404studios
             </span>
           </Link>
 

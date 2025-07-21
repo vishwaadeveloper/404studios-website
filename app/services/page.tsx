@@ -25,34 +25,20 @@ import { Separator } from "@/components/ui/separator"
 import ParticleBackground from "@/components/particle-background"
 import Link from "next/link"
 
-interface Service {
-  id: string
-  name: string
-  description: string
-  price: { min: number; max: number }
-  category: string
-  icon: React.ReactNode
-  demoUrl?: string
-}
+// Clean Architecture Imports
+import { useServicesManager } from "@/src/features/services/hooks/useServicesManager"
+import type { Service } from "@/src/features/services/types/services.types"
 
 export default function ServicesPage() {
-  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
-
-  const addFeature = (featureId: string) => {
-    if (!selectedFeatures.includes(featureId)) {
-      setSelectedFeatures((prev) => [...prev, featureId])
-    }
-  }
-
-  const removeFeature = (featureId: string) => {
-    setSelectedFeatures((prev) => prev.filter((id) => id !== featureId))
-  }
-
-  // Calculate total price of selected features
-  const totalPrice = selectedFeatures.reduce((total, featureId) => {
-    const feature = services.find((s) => s.id === featureId)
-    return total + (feature ? feature.price.min : 0)
-  }, 0)
+  // Use clean architecture hook for business logic
+  const {
+    services,
+    selectedFeatures,
+    addFeature,
+    removeFeature,
+    totalPrice,
+    getServicesByCategory,
+  } = useServicesManager()
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-slate-900 to-slate-800">
@@ -116,7 +102,7 @@ export default function ServicesPage() {
 
                 <TabsContent value="all" className="mt-0">
                   <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-                    {services.map((service, index) => (
+                    {getServicesByCategory("all").map((service, index) => (
                       <div
                         key={service.id}
                         className="animate-fade-in-up"
@@ -135,64 +121,58 @@ export default function ServicesPage() {
 
                 <TabsContent value="frontend" className="mt-0">
                   <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-                    {services
-                      .filter((service) => service.category === "frontend")
-                      .map((service, index) => (
-                        <div
-                          key={service.id}
-                          className="animate-fade-in-up"
-                          style={{ animationDelay: `${index * 0.1}s` }}
-                        >
-                          <ServiceCard
-                            service={service}
-                            isSelected={selectedFeatures.includes(service.id)}
-                            onAdd={() => addFeature(service.id)}
-                            onRemove={() => removeFeature(service.id)}
-                          />
-                        </div>
-                      ))}
+                    {getServicesByCategory("frontend").map((service, index) => (
+                      <div
+                        key={service.id}
+                        className="animate-fade-in-up"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        <ServiceCard
+                          service={service}
+                          isSelected={selectedFeatures.includes(service.id)}
+                          onAdd={() => addFeature(service.id)}
+                          onRemove={() => removeFeature(service.id)}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </TabsContent>
 
                 <TabsContent value="backend" className="mt-0">
                   <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-                    {services
-                      .filter((service) => service.category === "backend")
-                      .map((service, index) => (
-                        <div
-                          key={service.id}
-                          className="animate-fade-in-up"
-                          style={{ animationDelay: `${index * 0.1}s` }}
-                        >
-                          <ServiceCard
-                            service={service}
-                            isSelected={selectedFeatures.includes(service.id)}
-                            onAdd={() => addFeature(service.id)}
-                            onRemove={() => removeFeature(service.id)}
-                          />
-                        </div>
-                      ))}
+                    {getServicesByCategory("backend").map((service, index) => (
+                      <div
+                        key={service.id}
+                        className="animate-fade-in-up"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        <ServiceCard
+                          service={service}
+                          isSelected={selectedFeatures.includes(service.id)}
+                          onAdd={() => addFeature(service.id)}
+                          onRemove={() => removeFeature(service.id)}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </TabsContent>
 
                 <TabsContent value="mobile" className="mt-0">
                   <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-                    {services
-                      .filter((service) => service.category === "mobile")
-                      .map((service, index) => (
-                        <div
-                          key={service.id}
-                          className="animate-fade-in-up"
-                          style={{ animationDelay: `${index * 0.1}s` }}
-                        >
-                          <ServiceCard
-                            service={service}
-                            isSelected={selectedFeatures.includes(service.id)}
-                            onAdd={() => addFeature(service.id)}
-                            onRemove={() => removeFeature(service.id)}
-                          />
-                        </div>
-                      ))}
+                    {getServicesByCategory("mobile").map((service, index) => (
+                      <div
+                        key={service.id}
+                        className="animate-fade-in-up"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        <ServiceCard
+                          service={service}
+                          isSelected={selectedFeatures.includes(service.id)}
+                          onAdd={() => addFeature(service.id)}
+                          onRemove={() => removeFeature(service.id)}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </TabsContent>
               </Tabs>
@@ -428,77 +408,4 @@ function ServiceCard({ service, isSelected, onAdd, onRemove }: ServiceCardProps)
   )
 }
 
-const services: Service[] = [
-  {
-    id: "landing-page",
-    name: "Landing Page",
-    description: "High-converting landing page with modern design and animations",
-    price: { min: 15000, max: 50000 },
-    category: "frontend",
-    icon: <Code className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />,
-    demoUrl: "#",
-  },
-  {
-    id: "ecommerce",
-    name: "E-commerce Store",
-    description: "Full-featured online store with payment integration and admin panel",
-    price: { min: 75000, max: 200000 },
-    category: "frontend",
-    icon: <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400" />,
-    demoUrl: "#",
-  },
-  {
-    id: "mobile-app",
-    name: "Mobile App",
-    description: "Cross-platform mobile application for iOS and Android",
-    price: { min: 100000, max: 300000 },
-    category: "mobile",
-    icon: <Smartphone className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />,
-    demoUrl: "#",
-  },
-  {
-    id: "api-development",
-    name: "API Development",
-    description: "RESTful API with authentication, database integration, and documentation",
-    price: { min: 25000, max: 75000 },
-    category: "backend",
-    icon: <Database className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />,
-    demoUrl: "#",
-  },
-  {
-    id: "seo-optimization",
-    name: "SEO Optimization",
-    description: "Complete SEO audit and optimization for better search rankings",
-    price: { min: 10000, max: 30000 },
-    category: "frontend",
-    icon: <Search className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400" />,
-    demoUrl: "#",
-  },
-  {
-    id: "booking-system",
-    name: "Booking System",
-    description: "Appointment booking system with calendar integration and notifications",
-    price: { min: 40000, max: 100000 },
-    category: "backend",
-    icon: <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-pink-400" />,
-    demoUrl: "#",
-  },
-  {
-    id: "analytics-dashboard",
-    name: "Analytics Dashboard",
-    description: "Custom analytics dashboard with real-time data visualization",
-    price: { min: 50000, max: 150000 },
-    category: "frontend",
-    icon: <BarChart className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400" />,
-    demoUrl: "#",
-  },
-  {
-    id: "security-audit",
-    name: "Security Audit",
-    description: "Comprehensive security assessment and vulnerability testing",
-    price: { min: 20000, max: 60000 },
-    category: "backend",
-    icon: <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-red-400" />,
-    demoUrl: "#",
-  },
-]
+

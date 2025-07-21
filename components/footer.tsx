@@ -21,7 +21,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center space-x-2 group">
               <Code2 className="h-6 w-6 sm:h-8 sm:w-8 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300" />
               <span className="text-lg sm:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">
-                FutureDev
+                404studios
               </span>
             </Link>
             <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-sm">
@@ -158,7 +158,7 @@ export default function Footer() {
       <div className="relative z-20 container px-3 sm:px-4 md:px-6 lg:px-8 mx-auto py-4 sm:py-6">
         <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
           <div className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
-            © 2024 FutureDev. All rights reserved. Built with passion in India.
+            © 2024 404studios. All rights reserved. Built with passion in India.
           </div>
           <div className="flex flex-wrap justify-center sm:justify-end space-x-4 sm:space-x-6 text-xs sm:text-sm">
             <Link href="#" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
