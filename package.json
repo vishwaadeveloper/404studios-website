@@ -6,11 +6,21 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:reset": "npx prisma db push --force-reset && pnpm run db:seed",
+    "db:studio": "npx prisma studio",
+    "db:validate": "tsx scripts/validate-migration.ts",
+    "db:status": "tsx scripts/migration-dashboard.ts",
+    "db:health": "tsx scripts/advanced-health-check.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.9.1",
+    "@prisma/client": "^6.13.0",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
     "@radix-ui/react-aspect-ratio": "latest",
@@ -40,6 +50,7 @@
     "@radix-ui/react-tooltip": "latest",
     "@react-three/drei": "latest",
     "@react-three/fiber": "latest",
+    "@supabase/supabase-js": "^2.53.0",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -74,7 +85,9 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "postcss": "^8.5",
+    "prisma": "^6.13.0",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
   }
 }
