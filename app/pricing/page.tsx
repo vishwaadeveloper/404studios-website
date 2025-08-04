@@ -446,7 +446,7 @@ function FeatureGroupCard({
   )
 }
 
-export default function CalculatorPage() {
+export default function PricingPage() {
   const {
     businessType,
     setBusinessType,

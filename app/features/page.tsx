@@ -53,7 +53,7 @@ export default function FeaturesPage() {
               English to help you make informed decisions.
             </p>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-0">
-              <Link href="/calculator" className="w-full sm:w-auto">
+              <Link href="/pricing" className="w-full sm:w-auto">
                 <Button className="relative overflow-hidden rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:shadow-[0_0_50px_rgba(56,189,248,0.8)] transition-all duration-300 w-full hover:transform hover:scale-105 text-xs sm:text-sm md:text-base">
                   <span className="relative z-10">Build Your Quote</span>
                   <Rocket className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
@@ -223,7 +223,7 @@ export default function FeaturesPage() {
                 needs and budget.
               </p>
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-0">
-                <Link href="/calculator" className="w-full sm:w-auto">
+                <Link href="/pricing" className="w-full sm:w-auto">
                   <Button className="relative overflow-hidden rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:shadow-[0_0_50px_rgba(56,189,248,0.8)] transition-all duration-300 w-full hover:transform hover:scale-105 text-xs sm:text-sm md:text-base">
                     <span className="relative z-10">Start Building Quote</span>
                     <Rocket className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />

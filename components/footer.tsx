@@ -73,10 +73,10 @@ export default function Footer() {
                 Features & Tiers
               </Link>
               <Link
-                href="/calculator"
+                href="/pricing"
                 className="block text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm sm:text-base"
               >
-                Price Calculator
+                Pricing
               </Link>
               <Link
                 href="/services"

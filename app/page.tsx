@@ -56,7 +56,7 @@ export default function HomePage() {
             <AnimatedSection delay={800}>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
                 <MagneticButton>
-                  <Link href="/calculator" className="group w-full sm:w-auto">
+                  <Link href="/pricing" className="group w-full sm:w-auto">
                     <Button className="relative overflow-hidden rounded-full h-12 sm:h-14 px-6 sm:px-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:shadow-[0_0_50px_rgba(56,189,248,0.8)] transition-all duration-300 text-sm sm:text-lg font-semibold w-full sm:w-auto">
                       <span className="relative z-10 flex items-center justify-center">
                         <span className="hidden sm:inline">Calculate Your Website Cost</span>
@@ -212,7 +212,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <MagneticButton className="w-full sm:w-auto">
-                      <Link href="/calculator">
+                      <Link href="/pricing">
                         <Button className="relative overflow-hidden rounded-full h-11 sm:h-12 px-6 sm:px-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:shadow-[0_0_50px_rgba(56,189,248,0.8)] transition-all duration-300 w-full sm:w-auto text-sm sm:text-base">
                           <span className="relative z-10">
                             <span className="hidden sm:inline">Calculate Your Website Cost</span>

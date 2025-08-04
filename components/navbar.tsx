@@ -22,7 +22,7 @@ export default function Navbar() {
 
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/calculator", label: "Calculator" },
+    { href: "/pricing", label: "Pricing" },
     { href: "/features", label: "Features & Tiers" },
     { href: "/services", label: "Services" },
     { href: "/contact", label: "Contact" },
@@ -73,7 +73,7 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link href="/calculator">
+            <Link href="/pricing">
               <Button className="relative overflow-hidden rounded-full h-8 sm:h-9 md:h-10 px-3 sm:px-4 md:px-6 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] transition-all duration-300 text-xs sm:text-sm font-semibold">
                 <span className="relative z-10">Get Quote</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
@@ -115,7 +115,7 @@ export default function Navbar() {
               ))}
 
               <div className="pt-3 sm:pt-4 px-2">
-                <Link href="/calculator" onClick={() => setIsOpen(false)}>
+                <Link href="/pricing" onClick={() => setIsOpen(false)}>
                   <Button className="w-full relative overflow-hidden rounded-full h-10 sm:h-12 px-6 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] transition-all duration-300 text-sm font-semibold">
                     <span className="relative z-10">Get Quote</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
