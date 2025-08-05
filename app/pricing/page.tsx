@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import type { Metadata } from "next"
 import { ArrowRight, Info, Calculator, Check, ChevronDown, ChevronUp, Plus, Minus, Edit2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,6 +9,44 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { breadcrumbSchemas } from "@/src/shared/data/breadcrumbSchemas"
+
+// SEO Structured Data for Pricing Page
+const pricingSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Website Pricing Calculator - 404studios",
+  "description": "Calculate your custom website cost with our interactive pricing tool. Get instant quotes for web development projects.",
+  "url": "https://404studios.com/pricing",
+  "mainEntity": {
+    "@type": "PriceSpecification",
+    "description": "Custom Website Development Pricing",
+    "priceCurrency": "USD",
+    "price": "5000-50000",
+    "eligibleQuantity": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "unitText": "project"
+    }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://404studios.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Pricing Calculator",
+        "item": "https://404studios.com/pricing"
+      }
+    ]
+  }
+}
 import {
   Dialog,
   DialogContent,
@@ -472,7 +511,16 @@ export default function PricingPage() {
   const pageStats = getTotalPages()
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
+    <>
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([pricingSchema, breadcrumbSchemas.pricing])
+        }}
+      />
+      
+      <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
       <ParticleBackground />
 
       {/* Header */}
@@ -748,5 +796,6 @@ export default function PricingPage() {
         }
       `}</style>
     </div>
+    </>
   )
 }

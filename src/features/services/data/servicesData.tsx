@@ -10,6 +10,49 @@ import {
 } from "lucide-react"
 import type { ServicesData } from "../types/services.types"
 
+// SEO Structured Data for Services
+export const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Web Development Services",
+  "provider": {
+    "@type": "Organization",
+    "name": "404studios",
+    "url": "https://404studios.com"
+  },
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Web Development Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Web Development",
+          "description": "Full-stack web application development with modern technologies"
+        }
+      },
+      {
+        "@type": "Offer", 
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Mobile App Development",
+          "description": "Native and cross-platform mobile application development"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service", 
+          "name": "UI/UX Design",
+          "description": "User interface and user experience design services"
+        }
+      }
+    ]
+  }
+}
+
 export const servicesData: ServicesData = {
   services: [
     {
