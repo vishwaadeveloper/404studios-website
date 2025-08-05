@@ -14,6 +14,7 @@ import AnimatedSection from "@/components/animated-section"
 import StaggerContainer from "@/components/stagger-container"
 import MagneticButton from "@/components/magnetic-button"
 import { LazySection } from "@/components/performance/LazyComponent"
+import { useBusinessABTests } from "@/lib/abTesting"
 
 // Clean Architecture Imports
 import { homeData } from "@/src/features/home/data/homeData"
@@ -79,6 +80,8 @@ const websiteSchema = {
 }
 
 export default function HomePage() {
+  const { homepageCTA } = useBusinessABTests()
+  
   return (
     <>
       {/* Structured Data */}
@@ -133,11 +136,15 @@ export default function HomePage() {
             <AnimatedSection delay={800}>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
                 <MagneticButton>
-                  <Link href="/pricing" className="group w-full sm:w-auto">
+                  <Link href="/pricing" className="group w-full sm:w-auto" onClick={homepageCTA.trackClick}>
                     <Button className="relative overflow-hidden rounded-full h-12 sm:h-14 px-6 sm:px-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:shadow-[0_0_50px_rgba(56,189,248,0.8)] transition-all duration-300 text-sm sm:text-lg font-semibold w-full sm:w-auto">
                       <span className="relative z-10 flex items-center justify-center">
-                        <span className="hidden sm:inline">Calculate Your Website Cost</span>
-                        <span className="sm:hidden">Get Quote</span>
+                        <span className="hidden sm:inline">
+                          {homepageCTA.variant === 'A' ? 'Calculate Your Website Cost' : 'Get Your Free Quote Now'}
+                        </span>
+                        <span className="sm:hidden">
+                          {homepageCTA.variant === 'A' ? 'Get Quote' : 'Free Quote'}
+                        </span>
                         <Rocket className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

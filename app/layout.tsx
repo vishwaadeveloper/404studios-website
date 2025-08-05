@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import PageLoader from "@/components/page-loader"
 import PageTransition from "@/components/page-transition"
+import AppProviders from "@/components/AppProviders"
 import { ResourcePreloader, FontPreloader, ConnectionPreloader } from '@/components/performance/ResourcePreloader'
 
 const inter = Inter({ subsets: ["latin"] })
@@ -121,12 +122,14 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <PageLoader />
-        <Navbar />
-        <PageTransition>
-          <main>{children}</main>
-        </PageTransition>
-        <Footer />
+        <AppProviders>
+          <PageLoader />
+          <Navbar />
+          <PageTransition>
+            <main>{children}</main>
+          </PageTransition>
+          <Footer />
+        </AppProviders>
       </body>
     </html>
   )
