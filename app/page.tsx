@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, Code, Database, Layers, Zap, Rocket, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -12,17 +13,96 @@ import ParticleBackground from "@/components/particle-background"
 import AnimatedSection from "@/components/animated-section"
 import StaggerContainer from "@/components/stagger-container"
 import MagneticButton from "@/components/magnetic-button"
+import { LazySection } from "@/components/performance/LazyComponent"
+import { useBusinessABTests } from "@/lib/abTesting"
 
 // Clean Architecture Imports
 import { homeData } from "@/src/features/home/data/homeData"
+import { faqSchema } from "@/src/shared/data/faqSchema"
+import { localBusinessSchema } from "@/src/shared/data/localBusinessSchema"
+import { breadcrumbSchemas } from "@/src/shared/data/breadcrumbSchemas"
+
+// SEO Structured Data
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "404studios",
+  "alternateName": "404 Studios",
+  "description": "Next-generation web and mobile app development company specializing in modern technologies and cutting-edge design",
+  "url": "https://404studios.com",
+  "logo": "https://404studios.com/logo.png",
+  "image": "https://404studios.com/og-image.jpg",
+  "sameAs": [
+    "https://github.com/404studios",
+    "https://linkedin.com/company/404studios",
+    "https://twitter.com/404studios"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-XXX-XXX-XXXX",
+    "contactType": "customer service",
+    "email": "contact@404studios.com",
+    "availableLanguage": "English"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "US"
+  },
+  "foundingDate": "2024",
+  "numberOfEmployees": "2-10",
+  "knowsAbout": [
+    "Web Development",
+    "Mobile App Development", 
+    "React Development",
+    "Next.js Development",
+    "UI/UX Design",
+    "Full Stack Development",
+    "Modern Web Technologies"
+  ]
+}
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "404studios",
+  "alternateName": "404 Studios Website",
+  "url": "https://404studios.com",
+  "description": "Professional web and mobile app development services with modern technologies",
+  "publisher": {
+    "@type": "Organization",
+    "name": "404studios"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://404studios.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
 
 export default function HomePage() {
+  const { homepageCTA } = useBusinessABTests()
+  
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-slate-900 to-slate-800">
+    <>
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            organizationSchema, 
+            websiteSchema, 
+            localBusinessSchema,
+            faqSchema,
+            breadcrumbSchemas.home
+          ])
+        }}
+      />
+      
+      <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-slate-900 to-slate-800">
       <ParticleBackground />
       <GlassShards />
 
-      {/* Hero Section */}
+      {/* Hero Section - Above the fold, no lazy loading */}
       <section className="relative pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-28 z-20">
         <div className="container px-4 sm:px-6 md:px-8 mx-auto">
           <div className="flex flex-col items-center text-center space-y-6 sm:space-y-8 max-w-4xl mx-auto">
@@ -56,11 +136,15 @@ export default function HomePage() {
             <AnimatedSection delay={800}>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
                 <MagneticButton>
-                  <Link href="/pricing" className="group w-full sm:w-auto">
+                  <Link href="/pricing" className="group w-full sm:w-auto" onClick={homepageCTA.trackClick}>
                     <Button className="relative overflow-hidden rounded-full h-12 sm:h-14 px-6 sm:px-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:shadow-[0_0_50px_rgba(56,189,248,0.8)] transition-all duration-300 text-sm sm:text-lg font-semibold w-full sm:w-auto">
                       <span className="relative z-10 flex items-center justify-center">
-                        <span className="hidden sm:inline">Calculate Your Website Cost</span>
-                        <span className="sm:hidden">Get Quote</span>
+                        <span className="hidden sm:inline">
+                          {homepageCTA.variant === 'A' ? 'Calculate Your Website Cost' : 'Get Your Free Quote Now'}
+                        </span>
+                        <span className="sm:hidden">
+                          {homepageCTA.variant === 'A' ? 'Get Quote' : 'Free Quote'}
+                        </span>
                         <Rocket className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -85,8 +169,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Quick Package Preview */}
-      <section className="relative py-12 sm:py-16 md:py-20 lg:py-28 z-20">
+      {/* Quick Package Preview - Lazy loaded */}
+      <LazySection className="relative py-12 sm:py-16 md:py-20 lg:py-28 z-20">
         <div className="container px-4 sm:px-6 md:px-8 mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-12 md:mb-16">
@@ -124,10 +208,10 @@ export default function HomePage() {
             </div>
           </AnimatedSection>
         </div>
-      </section>
+      </LazySection>
 
-      {/* Our Specialty */}
-      <section className="relative py-12 sm:py-16 md:py-20 lg:py-28 z-20">
+      {/* Our Specialty - Lazy loaded */}
+      <LazySection className="relative py-12 sm:py-16 md:py-20 lg:py-28 z-20">
         <div className="container px-4 sm:px-6 md:px-8 mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-12 md:mb-16">
@@ -167,10 +251,10 @@ export default function HomePage() {
             ))}
           </StaggerContainer>
         </div>
-      </section>
+      </LazySection>
 
-      {/* Why Choose Us */}
-      <section className="relative py-12 sm:py-16 md:py-20 lg:py-28 z-20">
+      {/* Why Choose Us - Lazy loaded */}
+      <LazySection className="relative py-12 sm:py-16 md:py-20 lg:py-28 z-20">
         <div className="container px-4 sm:px-6 md:px-8 mx-auto">
           <AnimatedSection>
             <div className="text-center mb-8 sm:mb-12 md:mb-16">
@@ -190,10 +274,10 @@ export default function HomePage() {
             ))}
           </StaggerContainer>
         </div>
-      </section>
+      </LazySection>
 
-      {/* CTA Section */}
-      <section className="relative py-12 sm:py-16 md:py-20 lg:py-28 z-20">
+      {/* CTA Section - Lazy loaded */}
+      <LazySection className="relative py-12 sm:py-16 md:py-20 lg:py-28 z-20">
         <div className="container px-4 sm:px-6 md:px-8 mx-auto">
           <AnimatedSection>
             <GlassCard className="max-w-6xl mx-auto p-6 sm:p-8 md:p-12 lg:p-16 hover:transform hover:scale-105 transition-all duration-500">
@@ -247,8 +331,9 @@ export default function HomePage() {
             </GlassCard>
           </AnimatedSection>
         </div>
-      </section>
+      </LazySection>
     </div>
+    </>
   )
 }
 
