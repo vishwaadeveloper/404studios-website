@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import type { Metadata } from "next"
 import { ArrowRight, Info, Calculator, Check, ChevronDown, ChevronUp, Plus, Minus, Edit2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -75,6 +75,11 @@ interface PageManagerProps {
 function PageManager({ pageNames, onUpdateNames, pageType }: PageManagerProps) {
   const [editingNames, setEditingNames] = useState(pageNames)
   const [isOpen, setIsOpen] = useState(false)
+
+  // Sync editingNames with pageNames prop changes
+  useEffect(() => {
+    setEditingNames(pageNames)
+  }, [pageNames])
 
   const handleSave = () => {
     onUpdateNames(editingNames)
@@ -419,7 +424,17 @@ function FeatureGroupCard({
     "After-Launch Support": "border-orange-500/30 hover:shadow-[0_8px_32px_rgba(249,115,22,0.2)]",
   }
 
-  const selectedCount = group.features.filter((f) => selections[f.feature]).length
+  const selectedCount = group.features.reduce((total, feature) => {
+    if (!selections[feature.feature]) return total;
+    
+    // For countable features (Static/Dynamic Pages), sum the actual counts
+    if (feature.feature === "Static Page" || feature.feature === "Dynamic Page") {
+      return total + (pageCounts[feature.feature] || 0);
+    }
+    
+    // For non-countable features, count as 1 if selected
+    return total + 1;
+  }, 0);
   const totalFeatures = group.features.length
 
   return (
