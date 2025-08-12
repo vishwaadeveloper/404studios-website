@@ -72,12 +72,6 @@ export const usePricingCalculator = (): CalculatorHookReturn => {
       ...prev,
       [feature]: names,
     }))
-    
-    // Automatically synchronize page count with names array length
-    setPageCounts((prev) => ({
-      ...prev,
-      [feature]: names.length,
-    }))
   }
 
   const toggleGroupExpanded = (groupName: string) => {
