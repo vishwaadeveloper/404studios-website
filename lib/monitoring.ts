@@ -38,6 +38,34 @@ export interface LogPerformance {
 }
 
 /**
+ * Runtime detection utilities
+ */
+function isNodeRuntime(): boolean {
+  return typeof process !== 'undefined' && 
+         typeof process.versions === 'object' &&
+         typeof process.versions.node === 'string' &&
+         typeof process.memoryUsage === 'function'
+}
+
+function getMemoryUsage(): { heapUsed: number; heapTotal: number; rss: number; external: number } {
+  if (isNodeRuntime()) {
+    try {
+      return process.memoryUsage()
+    } catch {
+      // Fallback if process.memoryUsage fails
+    }
+  }
+  
+  // Edge Runtime fallback
+  return {
+    heapUsed: 0,
+    heapTotal: 0,
+    rss: 0,
+    external: 0
+  }
+}
+
+/**
  * Production Logger
  */
 export class Logger {
@@ -111,7 +139,7 @@ export class Logger {
   }
 
   private getPerformanceMetrics(): LogPerformance {
-    const memUsage = process.memoryUsage()
+    const memUsage = getMemoryUsage()
     return {
       duration: 0, // This would be set by request middleware
       memory: Math.round(memUsage.heapUsed / 1024 / 1024) // MB
@@ -249,14 +277,17 @@ export class PerformanceMonitor {
   }
 
   private startPeriodicCollection(): void {
-    setInterval(() => {
-      this.collectSystemMetrics()
-    }, config.monitoring.metricsInterval)
+    // Only start interval-based collection in Node.js runtime
+    if (isNodeRuntime()) {
+      setInterval(() => {
+        this.collectSystemMetrics()
+      }, config.monitoring.metricsInterval)
+    }
   }
 
   private collectSystemMetrics(): void {
     try {
-      const memUsage = process.memoryUsage()
+      const memUsage = getMemoryUsage()
       const systemMetrics = {
         responseTime: 0,
         memoryUsage: Math.round(memUsage.heapUsed / 1024 / 1024),
@@ -267,8 +298,8 @@ export class PerformanceMonitor {
 
       this.metrics.set('system', systemMetrics)
 
-      // Alert on high memory usage
-      if (systemMetrics.memoryUsage > config.monitoring.memoryThreshold) {
+      // Alert on high memory usage (only if we have real memory data)
+      if (isNodeRuntime() && systemMetrics.memoryUsage > config.monitoring.memoryThreshold) {
         this.logger.warn('High memory usage detected', {
           memoryUsage: systemMetrics.memoryUsage,
           threshold: config.monitoring.memoryThreshold
@@ -330,12 +361,14 @@ export class HealthMonitor {
   }
 
   private registerDefaultHealthChecks(): void {
-    // Memory health check
-    this.registerHealthCheck('memory', async () => {
-      const memUsage = process.memoryUsage()
-      const usedMB = Math.round(memUsage.heapUsed / 1024 / 1024)
-      return usedMB < config.monitoring.memoryThreshold
-    })
+    // Memory health check (only in Node.js runtime)
+    if (isNodeRuntime()) {
+      this.registerHealthCheck('memory', async () => {
+        const memUsage = getMemoryUsage()
+        const usedMB = Math.round(memUsage.heapUsed / 1024 / 1024)
+        return usedMB < config.monitoring.memoryThreshold
+      })
+    }
 
     // Error rate health check
     this.registerHealthCheck('errorRate', async () => {
@@ -350,19 +383,22 @@ export class HealthMonitor {
   }
 
   private startHealthChecking(): void {
-    setInterval(async () => {
-      const results = await this.runHealthChecks()
-      const failedChecks = Object.entries(results)
-        .filter(([, passed]) => !passed)
-        .map(([name]) => name)
+    // Only start interval-based health checking in Node.js runtime
+    if (isNodeRuntime()) {
+      setInterval(async () => {
+        const results = await this.runHealthChecks()
+        const failedChecks = Object.entries(results)
+          .filter(([, passed]) => !passed)
+          .map(([name]) => name)
 
-      if (failedChecks.length > 0) {
-        this.logger.warn('Health checks failed', {
-          failedChecks,
-          allResults: results
-        })
-      }
-    }, config.monitoring.healthCheckInterval)
+        if (failedChecks.length > 0) {
+          this.logger.warn('Health checks failed', {
+            failedChecks,
+            allResults: results
+          })
+        }
+      }, config.monitoring.healthCheckInterval)
+    }
   }
 }
 

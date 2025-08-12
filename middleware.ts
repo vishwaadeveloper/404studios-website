@@ -240,6 +240,8 @@ function getPermissionsPolicyHeader(): string {
 
 // Configure which paths the middleware should run on
 export const config = {
+  // Use Node.js runtime for full monitoring features
+  runtime: 'nodejs',
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
