@@ -140,6 +140,14 @@ async function checkDatabase(): Promise<{ status: 'pass' | 'fail' | 'warn'; mess
 
 function checkMemoryUsage(): { status: 'pass' | 'fail' | 'warn'; message?: string } {
   try {
+    // Runtime detection for Edge compatibility
+    if (typeof process === 'undefined' || typeof process.memoryUsage !== 'function') {
+      return {
+        status: 'pass',
+        message: 'Memory check skipped (Edge Runtime)'
+      }
+    }
+
     const memUsage = process.memoryUsage()
     const usedMB = Math.round(memUsage.heapUsed / 1024 / 1024)
     const totalMB = Math.round(memUsage.heapTotal / 1024 / 1024)
@@ -166,7 +174,7 @@ function checkMemoryUsage(): { status: 'pass' | 'fail' | 'warn'; message?: strin
     }
   } catch (error) {
     return {
-      status: 'fail',
+      status: 'warn',
       message: `Memory check failed: ${error instanceof Error ? error.message : 'Unknown error'}`
     }
   }
