@@ -10,9 +10,8 @@ import AppProviders from "@/components/AppProviders"
 import { ResourcePreloader, FontPreloader, ConnectionPreloader } from '@/components/performance/ResourcePreloader'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/react'
-import SmoothScroll from "@/components/smooth-scroll"
-import ScrollPerformanceMonitor from "@/components/performance/ScrollPerformanceMonitor"
-import ParticleScrollOptimizer from "@/components/performance/ParticleScrollOptimizer"
+import ModernPerformanceOptimizer from "@/components/performance/ModernPerformanceOptimizer"
+import SmartResourceManager from "@/components/performance/SmartResourceManager"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -85,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en-US" dir="ltr">
+    <html lang="en-US" dir="ltr" data-scroll-behavior="smooth" className="scroll-smooth">
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="canonical" href="https://404studios.com" />
@@ -127,20 +126,18 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <SmoothScroll>
-          <ScrollPerformanceMonitor />
-          <ParticleScrollOptimizer />
-          <AppProviders>
-            <PageLoader />
-            <Navbar />
-            <PageTransition>
-              <main>{children}</main>
-            </PageTransition>
-            <Footer />
-            <SpeedInsights />
-            <Analytics />
-          </AppProviders>
-        </SmoothScroll>
+        <ModernPerformanceOptimizer />
+        <SmartResourceManager />
+        <AppProviders>
+          <PageLoader />
+          <Navbar />
+          <PageTransition>
+            <main>{children}</main>
+          </PageTransition>
+          <Footer />
+          <SpeedInsights />
+          <Analytics />
+        </AppProviders>
       </body>
     </html>
   )

@@ -65,6 +65,9 @@ const nextConfig = {
   // Experimental performance features
   experimental: {
     scrollRestoration: true,
+    reactCompiler: true,
+    serverComponentsHmrCache: true,
+    preloadEntriesOnStart: false, // Reduce memory usage
   },
   
   eslint: {

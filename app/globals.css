@@ -2,51 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Lenis Smooth Scroll Styles */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-/* Performance optimizations for scroll states */
+/* Modern Native Scroll Optimizations */
 :root {
+  /* Performance variables */
   --scroll-performance: smooth;
+  --gpu-acceleration: translateZ(0);
 }
 
-/* Optimize rendering during fast scrolling */
-html[style*="--scroll-performance: fast"] * {
-  pointer-events: none;
-  transform: translateZ(0);
+/* Native smooth scrolling with performance optimization */
+html {
+  scroll-behavior: smooth;
+  /* Hardware acceleration for entire page */
+  transform: var(--gpu-acceleration);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
-html[style*="--scroll-performance: fast"] canvas,
-html[style*="--scroll-performance: fast"] video,
-html[style*="--scroll-performance: fast"] iframe {
+/* Optimize scrolling performance */
+* {
+  /* Enable GPU acceleration for scroll-heavy elements */
+  will-change: auto;
+}
+
+/* Performance optimizations for scroll containers */
+.scroll-container {
+  /* Hardware acceleration */
+  transform: translateZ(0);
+  /* Optimize for smooth scrolling */
+  -webkit-overflow-scrolling: touch;
+  /* Modern overscroll behavior */
+  overscroll-behavior: contain;
+  /* Scroll snapping performance */
+  scroll-snap-type: y proximity;
+}
+
+/* Optimize particle background during scroll */
+canvas {
+  /* Hardware acceleration for canvas */
   will-change: transform;
   transform: translate3d(0, 0, 0);
+  /* Reduce repaints during scroll */
+  pointer-events: none;
 }
 
-/* Smooth scrolling optimizations */
-html[style*="--scroll-performance: smooth"] {
-  /* Re-enable interactions during smooth scrolling */
-  pointer-events: auto;
+/* Performance optimization for high-frequency updates */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Enhanced smooth scrolling for modern browsers */
+  @supports (scroll-timeline: auto) {
+    html {
+      scroll-timeline: --page-scroll;
+    }
+  }
 }
 
-/* Hardware acceleration for scroll containers */
-.lenis {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+/* Adaptive performance classes */
+.scrolling-fast * {
+  /* Reduce quality during fast scrolling for better performance */
+  will-change: transform;
+  pointer-events: none;
+}
+
+.scrolling-fast canvas {
+  /* Optimize canvas during fast scroll */
+  transform: translate3d(0, 0, 0);
+  filter: blur(0.5px); /* Slight blur to hide rendering artifacts */
+}
+
+.in-viewport {
+  /* Full quality for elements in viewport */
+  will-change: transform, opacity;
+}
+
+/* Device-specific optimizations */
+[style*="--device-optimization: mobile"] canvas {
+  /* Reduce canvas quality on mobile */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+[style*="--device-optimization: desktop"] canvas {
+  /* Full quality on desktop */
+  image-rendering: auto;
+}
+
+/* Performance-optimized animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.performance-animate {
+  animation: fadeInUp 0.6s ease-out;
+  will-change: transform, opacity;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High-DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  canvas {
+    /* Optimize canvas rendering on high-DPI displays */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+  }
 }
 
 @layer base {
