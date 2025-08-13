@@ -31,7 +31,8 @@ export const usePricingCalculator = (): CalculatorHookReturn => {
 
   // Calculate total price
   useEffect(() => {
-    let total = businessTypes[businessType as keyof typeof businessTypes]?.basePrice || 0
+    const businessConfig = businessTypes[businessType as keyof typeof businessTypes]
+    let total = businessConfig?.basePrice || 0
 
     Object.entries(selections).forEach(([featureName, tierName]) => {
       if (tierName) {
@@ -42,7 +43,25 @@ export const usePricingCalculator = (): CalculatorHookReturn => {
             const tier = feature.tiers.find((t) => t.name === tierName)
             if (tier) {
               const count = feature.isCountable ? pageCounts[featureName] || 1 : 1
-              total += tier.price * count
+              
+              // Check if this feature is included in the base template
+              const defaultTier = businessConfig?.defaults[featureName]
+              
+              if (defaultTier) {
+                // This feature is included in base price
+                if (tierName !== defaultTier) {
+                  // User selected a different tier, add the difference
+                  const defaultTierObj = feature.tiers.find((t) => t.name === defaultTier)
+                  if (defaultTierObj) {
+                    const additionalCost = (tier.price - defaultTierObj.price) * count
+                    total += additionalCost
+                  }
+                }
+                // If same tier as default, no additional cost (already included in base)
+              } else {
+                // Feature not included in base, add full price
+                total += tier.price * count
+              }
             }
             break
           }

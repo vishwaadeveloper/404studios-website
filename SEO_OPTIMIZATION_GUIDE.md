@@ -131,7 +131,7 @@ const organizationSchema = {
 ### 2. **Internal Linking Strategy**
 - Link to pages using "404 Studios" anchor text
 - Create breadcrumbs with brand name
-- Footer should include "© 2024 404studios (404 Studios)"
+- Footer should include "© 2025 404studios (404 Studios)"
 
 ---
 
