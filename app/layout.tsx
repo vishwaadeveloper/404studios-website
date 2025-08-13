@@ -10,6 +10,9 @@ import AppProviders from "@/components/AppProviders"
 import { ResourcePreloader, FontPreloader, ConnectionPreloader } from '@/components/performance/ResourcePreloader'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/react'
+import SmoothScroll from "@/components/smooth-scroll"
+import ScrollPerformanceMonitor from "@/components/performance/ScrollPerformanceMonitor"
+import ParticleScrollOptimizer from "@/components/performance/ParticleScrollOptimizer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -124,16 +127,20 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <AppProviders>
-          <PageLoader />
-          <Navbar />
-          <PageTransition>
-            <main>{children}</main>
-          </PageTransition>
-          <Footer />
-          <SpeedInsights />
-          <Analytics />
-        </AppProviders>
+        <SmoothScroll>
+          <ScrollPerformanceMonitor />
+          <ParticleScrollOptimizer />
+          <AppProviders>
+            <PageLoader />
+            <Navbar />
+            <PageTransition>
+              <main>{children}</main>
+            </PageTransition>
+            <Footer />
+            <SpeedInsights />
+            <Analytics />
+          </AppProviders>
+        </SmoothScroll>
       </body>
     </html>
   )

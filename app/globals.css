@@ -2,6 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Lenis Smooth Scroll Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Performance optimizations for scroll states */
+:root {
+  --scroll-performance: smooth;
+}
+
+/* Optimize rendering during fast scrolling */
+html[style*="--scroll-performance: fast"] * {
+  pointer-events: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+html[style*="--scroll-performance: fast"] canvas,
+html[style*="--scroll-performance: fast"] video,
+html[style*="--scroll-performance: fast"] iframe {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Smooth scrolling optimizations */
+html[style*="--scroll-performance: smooth"] {
+  /* Re-enable interactions during smooth scrolling */
+  pointer-events: auto;
+}
+
+/* Hardware acceleration for scroll containers */
+.lenis {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
