@@ -8,6 +8,8 @@ import PageLoader from "@/components/page-loader"
 import PageTransition from "@/components/page-transition"
 import AppProviders from "@/components/AppProviders"
 import { ResourcePreloader, FontPreloader, ConnectionPreloader } from '@/components/performance/ResourcePreloader'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -129,6 +131,8 @@ export default function RootLayout({
             <main>{children}</main>
           </PageTransition>
           <Footer />
+          <SpeedInsights />
+          <Analytics />
         </AppProviders>
       </body>
     </html>
