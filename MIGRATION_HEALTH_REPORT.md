@@ -94,30 +94,30 @@ The system is **production-ready** for gradual database migration with the follo
 The migration monitoring agent **approves proceeding** with the following controlled approach:
 
 #### **Phase 4A: Enable Features Database (IMMEDIATE)**
-```bash
+\`\`\`bash
 # Safe to execute immediately
 pnpm exec tsx -e "
 import { enableMigrationPhase } from './src/lib/database/feature-flags.js';
 enableMigrationPhase('features').then(() => console.log('✅ Features enabled'));
 "
-```
+\`\`\`
 
 #### **Phase 4B: Validation Testing (NEXT)**
-```bash
+\`\`\`bash
 # Run after enabling features
 pnpm run db:validate
 pnpm run db:health
-```
+\`\`\`
 
 #### **Phase 4C: Gradual Service Enablement (STAGED)**
-```bash
+\`\`\`bash
 # Enable services after features validation
 await enableMigrationPhase('services');
 # Enable contact after services validation  
 await enableMigrationPhase('contact');
 # Enable pricing last after all others validated
 await enableMigrationPhase('pricing');
-```
+\`\`\`
 
 ### **🔧 PRODUCTION OPTIMIZATION PLAN**
 
@@ -131,7 +131,7 @@ For production deployment, implement:
 ## 🚨 EMERGENCY PROCEDURES
 
 ### **Instant Rollback Protocol:**
-```bash
+\`\`\`bash
 # Emergency rollback to static data
 pnpm exec tsx -e "
 import { rollbackMigrationPhase } from './src/lib/database/feature-flags.js';
@@ -142,12 +142,12 @@ Promise.all([
   rollbackMigrationPhase('features')
 ]).then(() => console.log('🔄 Full rollback complete'));
 "
-```
+\`\`\`
 
 ### **Health Check Command:**
-```bash
+\`\`\`bash
 pnpm run db:health  # Real-time system status
-```
+\`\`\`
 
 ## 🎉 FINAL VERDICT
 

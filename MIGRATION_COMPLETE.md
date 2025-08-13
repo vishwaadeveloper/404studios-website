@@ -18,7 +18,7 @@ The complete autonomous implementation of 404Studios migration from static data 
 - **Migration Validation**: All 385 lines of seed script executed successfully
 
 #### Data Migration Results:
-```
+\`\`\`
 🏗️  Feature Groups: 5
 ⚙️  Features: 23  
 🎯 Feature Tiers: 69
@@ -27,7 +27,7 @@ The complete autonomous implementation of 404Studios migration from static data 
 📞 Contact Info Items: 4
 ⏰ Time Slots: 6
 🚩 Feature Flags: 4
-```
+\`\`\`
 
 ### Phase 3: Data Access Layer ✅ COMPLETE
 - **Feature Flag System**: Gradual migration control implemented
@@ -39,7 +39,7 @@ The complete autonomous implementation of 404Studios migration from static data 
 ## 🏗️ Technical Architecture
 
 ### Database Schema (Deployed)
-```
+\`\`\`
 📦 Core Models
 ├── FeatureGroup (5 groups)
 ├── Feature (23 features) 
@@ -52,10 +52,10 @@ The complete autonomous implementation of 404Studios migration from static data 
 ├── ContactInfo (4 items)
 ├── TimeSlot (6 slots)
 └── FeatureFlag (4 flags)
-```
+\`\`\`
 
 ### Data Access Layer
-```typescript
+\`\`\`typescript
 // Safe dual-source architecture
 export async function getPricingData(): Promise<PricingData> {
   const flags = await getFeatureFlags();
@@ -66,20 +66,20 @@ export async function getPricingData(): Promise<PricingData> {
     return getStaticPricingData(); // Current default
   }
 }
-```
+\`\`\`
 
 ### Feature Flag Control
-```typescript
+\`\`\`typescript
 // Gradual migration enablement
 await enableMigrationPhase('features');   // Enable database for features
 await enableMigrationPhase('services');   // Enable database for services  
 await enableMigrationPhase('contact');    // Enable database for contact
 await enableMigrationPhase('pricing');    // Enable database for pricing
-```
+\`\`\`
 
 ## 🛠️ Available Commands
 
-```bash
+\`\`\`bash
 # Database Management
 pnpm run db:seed       # Seed database with static data
 pnpm run db:reset      # Reset and re-seed database
@@ -89,7 +89,7 @@ pnpm run db:validate   # Run migration validation tests
 # Development
 pnpm dev               # Start development server (UI unchanged)
 pnpm build             # Build for production
-```
+\`\`\`
 
 ## 🔧 Usage Instructions
 
@@ -100,7 +100,7 @@ pnpm build             # Build for production
 - **Database ready** - fully populated and validated
 
 ### Gradual Migration (When Ready)
-```typescript
+\`\`\`typescript
 import { enableMigrationPhase } from './src/lib/database/feature-flags';
 
 // Enable database features one by one
@@ -108,15 +108,15 @@ await enableMigrationPhase('features');  // Start with features
 // Test thoroughly
 await enableMigrationPhase('services');  // Then services
 // Continue gradual rollout...
-```
+\`\`\`
 
 ### Rollback (If Needed)
-```typescript
+\`\`\`typescript
 import { rollbackMigrationPhase } from './src/lib/database/feature-flags';
 
 // Instant rollback to static data
 await rollbackMigrationPhase('features');
-```
+\`\`\`
 
 ## 📈 Validation Results
 
@@ -160,7 +160,7 @@ await rollbackMigrationPhase('features');
 
 ## 📋 File Structure
 
-```
+\`\`\`
 ├── prisma/
 │   ├── schema.prisma          # Complete database schema
 │   └── seed.ts               # Comprehensive data migration
@@ -175,7 +175,7 @@ await rollbackMigrationPhase('features');
 │       └── prisma/           # Generated Prisma client
 └── scripts/
     └── validate-migration.ts # Automated validation tests
-```
+\`\`\`
 
 ## 🎯 Mission Accomplished
 

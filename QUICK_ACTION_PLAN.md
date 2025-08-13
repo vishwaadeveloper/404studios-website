@@ -10,7 +10,7 @@
 ## 🚀 **DO THIS WEEK (Critical for Ranking)**
 
 ### 1. **Google Business Profile** (90% Impact - Do TODAY)
-```
+\`\`\`
 🎯 Go to: https://business.google.com
 - Business Name: "404studios (404 Studios)"
 - Category: "Web Design Company" 
@@ -19,7 +19,7 @@
 - Website: https://404studios.com
 - Add photos of your workspace/team
 - Get your first 5-star review from a friend/client
-```
+\`\`\`
 
 ### 2. **Social Media Setup** (48 hours)
 Create accounts with consistent branding:
@@ -30,11 +30,11 @@ Create accounts with consistent branding:
 
 ### 3. **Homepage Content Update** (30 minutes)
 Update your hero section to:
-```
+\`\`\`
 "404studios - Premium Web Development Studio"
 "Professional React & Next.js development services"
 "Also known as 404 Studios - Building the future of web"
-```
+\`\`\`
 
 ### 4. **Create About Page** (2 hours)
 Add comprehensive about page explaining who 404studios is.

@@ -407,5 +407,3 @@ function ServiceCard({ service, isSelected, onAdd, onRemove }: ServiceCardProps)
     </Card>
   )
 }
-
-

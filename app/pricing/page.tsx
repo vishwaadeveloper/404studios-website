@@ -103,7 +103,11 @@ function PageManager({ pageNames, onUpdateNames, pageType }: PageManagerProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="sm" className="text-cyan-400 hover:text-cyan-300 h-6 px-2">
+        <Button
+          variant="outlineCyan"
+          size="sm"
+          className="h-6 px-2"
+        >
           <Edit2 className="h-3 w-3 mr-1" />
           Edit Pages
         </Button>

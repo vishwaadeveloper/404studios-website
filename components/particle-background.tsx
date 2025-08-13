@@ -28,12 +28,12 @@ export default function ParticleBackground() {
     if (!canvas) return
 
     const width = window.innerWidth
-    const height = window.innerHeight
+    const height = Math.max(window.innerHeight, document.documentElement.scrollHeight)
 
     dimensionsRef.current = { width, height }
 
     // Use device pixel ratio for crisp rendering
-    const dpr = Math.min(window.devicePixelRatio || 1, 2) // Cap at 2 for performance
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
 
     canvas.width = width * dpr
     canvas.height = height * dpr
@@ -50,15 +50,15 @@ export default function ParticleBackground() {
     const { width, height } = dimensionsRef.current
     if (width === 0 || height === 0) return
 
-    // Significantly reduced particle count for better performance
-    const particleCount = Math.min(30, Math.floor((width * height) / 25000))
+    // Significantly increased particle count for dense effect
+    const particleCount = Math.min(150, Math.floor((width * height) / 6000))
     particlesRef.current = []
 
     for (let i = 0; i < particleCount; i++) {
-      const size = Math.random() * 1.2 + 0.6
-      const opacity = Math.random() * 0.4 + 0.2
-      const vx = (Math.random() - 0.5) * 0.2
-      const vy = (Math.random() - 0.5) * 0.2
+      const size = Math.random() * 1.5 + 0.8
+      const opacity = Math.random() * 0.6 + 0.4
+      const vx = (Math.random() - 0.5) * 0.4
+      const vy = (Math.random() - 0.5) * 0.4
 
       particlesRef.current.push({
         x: Math.random() * width,
@@ -92,21 +92,21 @@ export default function ParticleBackground() {
     const particles = particlesRef.current
 
     particles.forEach((particle, index) => {
-      // Simplified mouse interaction
+      // Enhanced mouse interaction
       if (mouse.active) {
         const dx = mouse.x - particle.x
         const dy = mouse.y - particle.y
         const distance = Math.sqrt(dx * dx + dy * dy)
-        const maxDistance = 120
+        const maxDistance = 150
 
         if (distance < maxDistance) {
-          const force = (1 - distance / maxDistance) * 0.01
+          const force = (1 - distance / maxDistance) * 0.02
           particle.vx += (dx / distance) * force
           particle.vy += (dy / distance) * force
 
-          const enhancement = (1 - distance / maxDistance) * 0.8
-          particle.size = Math.min(particle.baseSize * 1.8, particle.baseSize + enhancement)
-          particle.opacity = Math.min(0.8, particle.baseOpacity + enhancement * 0.3)
+          const enhancement = (1 - distance / maxDistance) * 1.5
+          particle.size = Math.min(particle.baseSize * 2.5, particle.baseSize + enhancement)
+          particle.opacity = Math.min(1.0, particle.baseOpacity + enhancement * 0.5)
         }
       }
 
@@ -123,12 +123,12 @@ export default function ParticleBackground() {
       particle.y += particle.vy
 
       // Boundary wrapping
-      if (particle.x < -5) particle.x = width + 5
-      if (particle.x > width + 5) particle.x = -5
-      if (particle.y < -5) particle.y = height + 5
-      if (particle.y > height + 5) particle.y = -5
+      if (particle.x < -10) particle.x = width + 10
+      if (particle.x > width + 10) particle.x = -10
+      if (particle.y < -10) particle.y = height + 10
+      if (particle.y > height + 10) particle.y = -10
 
-      // Simplified particle rendering
+      // Enhanced particle rendering
       ctx.beginPath()
       ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
       ctx.fillStyle = `${particle.color}${Math.floor(particle.opacity * 255)
@@ -136,48 +136,54 @@ export default function ParticleBackground() {
         .padStart(2, "0")}`
       ctx.fill()
 
-      // Reduced connections for performance
-      if (index % 3 === 0) {
-        for (let j = index + 1; j < Math.min(particles.length, index + 3); j++) {
-          const other = particles[j]
-          const dx = particle.x - other.x
-          const dy = particle.y - other.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+      // Add glow effect to particles
+      ctx.beginPath()
+      ctx.arc(particle.x, particle.y, particle.size * 1.5, 0, Math.PI * 2)
+      ctx.fillStyle = `${particle.color}${Math.floor(particle.opacity * 0.3 * 255)
+        .toString(16)
+        .padStart(2, "0")}`
+      ctx.fill()
 
-          if (distance < 60) {
-            ctx.beginPath()
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(other.x, other.y)
+      // More connections for denser network effect
+      for (let j = index + 1; j < Math.min(particles.length, index + 4); j++) {
+        const other = particles[j]
+        const dx = particle.x - other.x
+        const dy = particle.y - other.y
+        const distance = Math.sqrt(dx * dx + dy * dy)
 
-            let opacity = (1 - distance / 60) * 0.08
+        if (distance < 100) {
+          ctx.beginPath()
+          ctx.moveTo(particle.x, particle.y)
+          ctx.lineTo(other.x, other.y)
 
-            if (mouse.active) {
-              const midX = (particle.x + other.x) / 2
-              const midY = (particle.y + other.y) / 2
-              const mouseDistance = Math.sqrt((mouse.x - midX) ** 2 + (mouse.y - midY) ** 2)
+          let opacity = (1 - distance / 100) * 0.15
 
-              if (mouseDistance < 80) {
-                opacity *= 1 + (1 - mouseDistance / 80) * 1.5
-              }
+          if (mouse.active) {
+            const midX = (particle.x + other.x) / 2
+            const midY = (particle.y + other.y) / 2
+            const mouseDistance = Math.sqrt((mouse.x - midX) ** 2 + (mouse.y - midY) ** 2)
+
+            if (mouseDistance < 120) {
+              opacity *= 1 + (1 - mouseDistance / 120) * 2.5
             }
-
-            ctx.strokeStyle = `rgba(139, 92, 246, ${opacity})`
-            ctx.lineWidth = 0.3
-            ctx.stroke()
           }
+
+          ctx.strokeStyle = `rgba(139, 92, 246, ${opacity})`
+          ctx.lineWidth = 0.5
+          ctx.stroke()
         }
       }
     })
 
-    // Simplified mouse glow
+    // Enhanced mouse glow
     if (mouse.active) {
-      const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 100)
-      gradient.addColorStop(0, "rgba(139, 92, 246, 0.08)")
-      gradient.addColorStop(0.5, "rgba(6, 182, 212, 0.04)")
+      const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 150)
+      gradient.addColorStop(0, "rgba(139, 92, 246, 0.15)")
+      gradient.addColorStop(0.5, "rgba(6, 182, 212, 0.1)")
       gradient.addColorStop(1, "rgba(139, 92, 246, 0)")
 
       ctx.fillStyle = gradient
-      ctx.fillRect(mouse.x - 100, mouse.y - 100, 200, 200)
+      ctx.fillRect(mouse.x - 150, mouse.y - 150, 300, 300)
     }
 
     animationRef.current = requestAnimationFrame(animate)
@@ -186,7 +192,7 @@ export default function ParticleBackground() {
   const handleMouseMove = useCallback((event: MouseEvent) => {
     mouseRef.current = {
       x: event.clientX,
-      y: event.clientY,
+      y: event.clientY + window.scrollY,
       active: true,
     }
   }, [])
@@ -200,16 +206,28 @@ export default function ParticleBackground() {
     createParticles()
   }, [resizeCanvas, createParticles])
 
+  const handleScroll = useCallback(() => {
+    // Update canvas height on scroll to ensure full coverage
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const newHeight = Math.max(window.innerHeight, document.documentElement.scrollHeight)
+    if (newHeight !== dimensionsRef.current.height) {
+      resizeCanvas()
+    }
+  }, [resizeCanvas])
+
   useEffect(() => {
     resizeCanvas()
 
     const initTimer = setTimeout(() => {
       createParticles()
       animate()
-    }, 50)
+    }, 100)
 
     window.addEventListener("resize", handleResize, { passive: true })
     window.addEventListener("mousemove", handleMouseMove, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true })
     document.addEventListener("mouseleave", handleMouseLeave, { passive: true })
 
     return () => {
@@ -219,16 +237,18 @@ export default function ParticleBackground() {
       }
       window.removeEventListener("resize", handleResize)
       window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener("scroll", handleScroll)
       document.removeEventListener("mouseleave", handleMouseLeave)
     }
-  }, [animate, handleResize, handleMouseMove, handleMouseLeave])
+  }, [animate, handleResize, handleMouseMove, handleMouseLeave, handleScroll])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 pointer-events-none"
       style={{
         background: "transparent",
+        zIndex: 1,
       }}
     />
   )
