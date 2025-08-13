@@ -21,7 +21,7 @@ The massive calculator page (1,181 lines) has been successfully refactored using
 - **Clean Interfaces**: Defined clear contracts between UI and business logic
 
 ### 4. **Folder Structure**
-```
+\`\`\`
 src/
 ├── features/
 │   ├── pricing/
@@ -40,7 +40,7 @@ src/
     └── components/
         ├── effects/
         └── layout/
-```
+\`\`\`
 
 ### 5. **Technical Validation**
 - ✅ **Build Success**: `npm run build` passes without errors

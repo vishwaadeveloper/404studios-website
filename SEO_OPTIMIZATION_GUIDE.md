@@ -20,7 +20,7 @@ Your website is technically excellent, but ranking #1 for "404 studios" requires
 - ✅ **Already Updated**: Structured data includes alternate names
 
 ### 2. **Google Business Profile** (CRITICAL)
-```
+\`\`\`
 🎯 Action: Create Google Business Profile
 - Business Name: "404studios (404 Studios)"
 - Category: "Web Design Company" + "Software Company"
@@ -29,16 +29,16 @@ Your website is technically excellent, but ranking #1 for "404 studios" requires
 - Email: vishwaadeveloper@gmail.com
 - Website: https://404studios.com
 - Description: "Professional web development studio specializing in React, Next.js applications and mobile app development. Serving clients globally from Coimbatore, India."
-```
+\`\`\`
 
 ### 3. **Content Optimization**
 Update your homepage hero section to include "404 Studios":
 
-```tsx
+\`\`\`tsx
 // In your hero component, update the title:
 "404studios - Premium Web Development Studio"
 // Subtitle: "Also known as 404 Studios"
-```
+\`\`\`
 
 ---
 
@@ -48,14 +48,14 @@ Update your homepage hero section to include "404 Studios":
 Add these pages/sections:
 
 #### **About Page Enhancement**
-```markdown
+\`\`\`markdown
 # About 404studios (404 Studios)
 
 Founded as 404studios, also known as 404 Studios, we are a premier web development studio based in Coimbatore, India. Our team specializes in creating cutting-edge web applications using React, Next.js, and modern technologies.
 
 ## Why 404studios?
 The "404" in our name represents our mission to fix what's broken in web development - turning "404 Not Found" errors into "Found the Perfect Solution."
-```
+\`\`\`
 
 #### **Blog Section** (High Impact for SEO)
 Create `/blog` with articles like:
@@ -76,13 +76,13 @@ Add questions like:
 
 ### 1. **Social Media Presence**
 Create consistent profiles:
-```
+\`\`\`
 - LinkedIn: "404studios | 404 Studios"
 - Twitter: "@404studios"
 - Instagram: "@404studios"
 - GitHub: "404studios"
 - Facebook: "404 Studios Web Development"
-```
+\`\`\`
 
 ### 2. **Directory Listings**
 Submit to:
@@ -105,7 +105,7 @@ Submit to:
 ### 1. **Schema Markup Enhancements**
 I've already updated your local business schema, but also add:
 
-```javascript
+\`\`\`javascript
 // Organization Schema (add to layout.tsx)
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -126,25 +126,25 @@ const organizationSchema = {
     "availableLanguage": ["English", "Tamil", "Hindi"]
   }
 }
-```
+\`\`\`
 
 ### 2. **Internal Linking Strategy**
 - Link to pages using "404 Studios" anchor text
 - Create breadcrumbs with brand name
-- Footer should include "© 2024 404studios (404 Studios)"
+- Footer should include "© 2025 404studios (404 Studios)"
 
 ---
 
 ## 📊 **PHASE 5: Monitoring & Optimization (Ongoing)**
 
 ### 1. **Tools to Set Up**
-```bash
+\`\`\`bash
 # Install Google Analytics & Search Console
 - Google Analytics 4: Track "404 studios" search queries
 - Google Search Console: Monitor ranking for "404 studios"
 - Bing Webmaster Tools
 - Semrush/Ahrefs for competitor analysis
-```
+\`\`\`
 
 ### 2. **Key Metrics to Track**
 - Search ranking for "404 studios"

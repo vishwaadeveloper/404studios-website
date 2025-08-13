@@ -6,9 +6,9 @@ This document explains the changes made to ensure the monitoring and logging sys
 
 The original monitoring code used Node.js-specific APIs like `process.memoryUsage()` which are not available in Vercel's Edge Runtime, causing deployment failures with:
 
-```
+\`\`\`
 TypeError: process.memoryUsage is not a function
-```
+\`\`\`
 
 ## Solution
 
@@ -16,7 +16,7 @@ TypeError: process.memoryUsage is not a function
 
 Added runtime detection utilities to safely handle different environments:
 
-```typescript
+\`\`\`typescript
 function isNodeRuntime(): boolean {
   return typeof process !== 'undefined' && 
          typeof process.versions === 'object' &&
@@ -41,7 +41,7 @@ function getMemoryUsage() {
     external: 0
   }
 }
-```
+\`\`\`
 
 ### 2. Conditional Feature Activation
 
@@ -56,20 +56,20 @@ Features that require Node.js APIs are conditionally activated:
 Two middleware configurations are available:
 
 #### Option A: Node.js Runtime (Current - `middleware.ts`)
-```typescript
+\`\`\`typescript
 export const config = {
   runtime: 'nodejs', // Force Node.js for full monitoring
   matcher: [...]
 }
-```
+\`\`\`
 
 #### Option B: Edge Runtime (`middleware.edge.ts`)
-```typescript
+\`\`\`typescript
 export const config = {
   runtime: 'edge', // Use Edge Runtime with limited monitoring
   matcher: [...]
 }
-```
+\`\`\`
 
 ## Files Modified
 
@@ -111,9 +111,9 @@ If you need Edge Runtime for performance:
 
 Run the compatibility test:
 
-```bash
+\`\`\`bash
 npx tsx scripts/test-edge-compatibility.ts
-```
+\`\`\`
 
 This verifies that:
 - Monitoring works in Node.js runtime

@@ -5,7 +5,7 @@ Clean Architecture with Custom Hooks pattern for maximum maintainability and deb
 
 ## Folder Structure
 
-```
+\`\`\`
 src/
 ├── app/                          # Next.js App Router (routes only)
 │   ├── calculator/
@@ -78,7 +78,7 @@ src/
 └── lib/                         # External library configurations
     ├── utils.ts
     └── validations.ts
-```
+\`\`\`
 
 ## Layer Responsibilities
 
@@ -143,26 +143,26 @@ src/
 ## Migration Path to Dynamic Data
 
 ### Phase 1: Current Refactoring
-```typescript
+\`\`\`typescript
 // features/pricing/data/pricingData.ts
 export const pricingData = [/* static data */]
-```
+\`\`\`
 
 ### Phase 2: API Integration
-```typescript
+\`\`\`typescript
 // features/pricing/services/pricingApi.ts
 export const fetchPricingData = async () => {
   // Replace static data with API calls
 }
-```
+\`\`\`
 
 ### Phase 3: Real-time Updates
-```typescript
+\`\`\`typescript
 // features/pricing/hooks/usePricingData.ts
 export const usePricingData = () => {
   // Add real-time subscriptions
 }
-```
+\`\`\`
 
 ## Benefits
 

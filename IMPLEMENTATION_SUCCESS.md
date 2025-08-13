@@ -39,7 +39,7 @@ The **complete autonomous implementation** of 404Studios migration from static d
 
 ## 🎯 Current Status: READY FOR MIGRATION
 
-```bash
+\`\`\`bash
 🎛️  404Studios Migration Dashboard
 ══════════════════════════════════════════════════
 📡 Database Status: ✅ CONNECTED
@@ -50,7 +50,7 @@ The **complete autonomous implementation** of 404Studios migration from static d
    Business Types: 5
    Services:       8
 🚀 Migration Status: 📦 READY TO MIGRATE (all static data)
-```
+\`\`\`
 
 ## 🛡️ Safety-First Architecture
 
@@ -61,23 +61,23 @@ The **complete autonomous implementation** of 404Studios migration from static d
 - **Feature Flags OFF**: No database queries affecting UI
 
 ### Migration Path (When Ready)
-```typescript
+\`\`\`typescript
 // Gradual, controlled migration
 await enableMigrationPhase('features');  // Enable database features
 // Test thoroughly, validate pricing
 await enableMigrationPhase('services');  // Enable database services  
 // Continue step-by-step...
-```
+\`\`\`
 
 ### Instant Rollback (If Needed)
-```typescript
+\`\`\`typescript
 // Immediate fallback to static data
 await rollbackMigrationPhase('features');
-```
+\`\`\`
 
 ## 📋 Available Commands
 
-```bash
+\`\`\`bash
 # Migration Management
 pnpm run db:status      # 📊 View migration dashboard
 pnpm run db:validate    # 🧪 Run all validation tests  
@@ -90,12 +90,12 @@ pnpm run db:reset       # 🔄 Reset and re-seed database
 # Development (Unchanged)
 pnpm dev                # 🚀 Start development server
 pnpm build              # 📦 Build for production
-```
+\`\`\`
 
 ## 🔧 Architecture Overview
 
 ### Data Access Layer
-```typescript
+\`\`\`typescript
 // Intelligent dual-source architecture
 export async function getPricingData(): Promise<PricingData> {
   const flags = await getFeatureFlags();
@@ -106,10 +106,10 @@ export async function getPricingData(): Promise<PricingData> {
     return getStaticPricingData();          // Static source (current)
   }
 }
-```
+\`\`\`
 
 ### Feature Flag Control
-```typescript
+\`\`\`typescript
 // Migration control system
 const flags = await getFeatureFlags();
 // {
@@ -118,7 +118,7 @@ const flags = await getFeatureFlags();
 //   useDatabaseContact: false,   // Static data (current)
 //   useDatabaseFeatures: false   // Static data (current)
 // }
-```
+\`\`\`
 
 ## 📈 Validation Results
 

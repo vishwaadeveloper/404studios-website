@@ -28,7 +28,7 @@ export const organizationSchema = {
       "email": "abinayaa.dev@gmail.com"
     }
   ],
-  "foundingDate": "2024",
+  "foundingDate": "2025",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "IN",
