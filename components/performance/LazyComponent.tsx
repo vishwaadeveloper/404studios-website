@@ -9,6 +9,7 @@ interface LazyComponentProps {
   rootMargin?: string
   threshold?: number
   className?: string
+  style?: React.CSSProperties
 }
 
 /**
@@ -20,7 +21,8 @@ export const LazyComponent: React.FC<LazyComponentProps> = ({
   fallback = null,
   rootMargin = '50px',
   threshold = 0.1,
-  className
+  className,
+  style
 }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [hasLoaded, setHasLoaded] = useState(false)
@@ -49,7 +51,7 @@ export const LazyComponent: React.FC<LazyComponentProps> = ({
   }, [rootMargin, threshold, hasLoaded])
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={style}>
       {isVisible ? children : fallback}
     </div>
   )

@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useEffect } from "react"
+import { useDeviceDetection, getPerformanceBudget } from "@/hooks/use-device-detection"
 
 interface ParticleGlobeProps {
   className?: string
@@ -21,7 +22,11 @@ interface Particle {
 
 export default function ParticleGlobe({ className = "", size = 800 }: ParticleGlobeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
+  const lastFrameTime = useRef(0)
+  
+  const deviceInfo = useDeviceDetection()
+  const performanceBudget = getPerformanceBudget(deviceInfo)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -33,7 +38,11 @@ export default function ParticleGlobe({ className = "", size = 800 }: ParticleGl
     // Set canvas size
     const updateCanvasSize = () => {
       const rect = canvas.getBoundingClientRect()
-      const dpr = window.devicePixelRatio || 1
+      // Optimize device pixel ratio for mobile
+      const dpr = deviceInfo.isMobile 
+        ? Math.min(window.devicePixelRatio || 1, 1.5) 
+        : Math.min(window.devicePixelRatio || 1, 2)
+      
       canvas.width = rect.width * dpr
       canvas.height = rect.height * dpr
       ctx.scale(dpr, dpr)
@@ -56,7 +65,7 @@ export default function ParticleGlobe({ className = "", size = 800 }: ParticleGl
 
     // Create particles in a sphere distribution
     const particles: Particle[] = []
-    const particleCount = window.innerWidth < 768 ? 180 : 350
+    const particleCount = performanceBudget.particleGlobeCount
     const radius = size * 0.32
 
     // Fibonacci sphere distribution for even particle placement
@@ -77,21 +86,32 @@ export default function ParticleGlobe({ className = "", size = 800 }: ParticleGl
         originalZ: z,
         color: colors[Math.floor(Math.random() * colors.length)],
         alpha: Math.random() * 0.7 + 0.3,
-        size: Math.random() * 2.5 + 1,
+        size: Math.random() * (deviceInfo.isMobile ? 1.8 : 2.5) + 0.8,
       })
     }
 
     let rotation = 0
 
     const animate = () => {
+      const now = performance.now()
+      const targetFrameTime = 1000 / performanceBudget.targetFPS
+      
+      // Frame rate limiting
+      if (now - lastFrameTime.current < targetFrameTime) {
+        animationRef.current = requestAnimationFrame(animate)
+        return
+      }
+
+      lastFrameTime.current = now
+
       const rect = canvas.getBoundingClientRect()
       const centerX = rect.width / 2
       const centerY = rect.height / 2
 
       ctx.clearRect(0, 0, rect.width, rect.height)
 
-      // Static slow rotation only
-      rotation += 0.001
+      // Slower rotation for mobile to reduce calculations
+      rotation += deviceInfo.isMobile ? 0.0008 : 0.001
 
       // Sort particles by z-depth for proper 3D rendering
       const rotatedParticles = particles
@@ -109,53 +129,59 @@ export default function ParticleGlobe({ className = "", size = 800 }: ParticleGl
         })
         .sort((a, b) => b.z - a.z)
 
-      // Draw connections between nearby particles first (behind particles)
-      ctx.save()
-      ctx.globalAlpha = 0.15
-      ctx.strokeStyle = "#06b6d4"
-      ctx.lineWidth = 0.8
+      // Draw connections between nearby particles first (only on desktop/tablet)
+      if (!deviceInfo.isMobile) {
+        ctx.save()
+        ctx.globalAlpha = 0.12
+        ctx.strokeStyle = "#06b6d4"
+        ctx.lineWidth = 0.6
 
-      for (let i = 0; i < rotatedParticles.length; i++) {
-        const p1 = rotatedParticles[i]
-        const perspective1 = 1000
-        const scale1 = perspective1 / (perspective1 + p1.z)
+        const maxConnections = deviceInfo.isTablet ? 20 : 30
+        let connectionCount = 0
 
-        // Skip particles that are too far back
-        if (scale1 < 0.3) continue
+        for (let i = 0; i < rotatedParticles.length && connectionCount < maxConnections; i++) {
+          const p1 = rotatedParticles[i]
+          const perspective1 = 1000
+          const scale1 = perspective1 / (perspective1 + p1.z)
 
-        const x1 = centerX + p1.x * scale1
-        const y1 = centerY + p1.y * scale1
+          // Skip particles that are too far back
+          if (scale1 < 0.3) continue
 
-        // Connect to nearby particles
-        for (let j = i + 1; j < rotatedParticles.length; j++) {
-          const p2 = rotatedParticles[j]
-          const perspective2 = 1000
-          const scale2 = perspective2 / (perspective2 + p2.z)
+          const x1 = centerX + p1.x * scale1
+          const y1 = centerY + p1.y * scale1
 
-          if (scale2 < 0.3) continue
+          // Connect to nearby particles (reduced iterations for performance)
+          for (let j = i + 1; j < Math.min(rotatedParticles.length, i + 15); j++) {
+            const p2 = rotatedParticles[j]
+            const perspective2 = 1000
+            const scale2 = perspective2 / (perspective2 + p2.z)
 
-          const dx = p1.x - p2.x
-          const dy = p1.y - p2.y
-          const dz = p1.z - p2.z
-          const distance = Math.sqrt(dx * dx + dy * dy + dz * dz)
+            if (scale2 < 0.3) continue
 
-          // Connect particles within a certain distance
-          if (distance < 120) {
-            const x2 = centerX + p2.x * scale2
-            const y2 = centerY + p2.y * scale2
+            const dx = p1.x - p2.x
+            const dy = p1.y - p2.y
+            const dz = p1.z - p2.z
+            const distance = Math.sqrt(dx * dx + dy * dy + dz * dz)
 
-            // Calculate connection opacity based on distance and depth
-            const connectionOpacity = (1 - distance / 120) * 0.3 * Math.min(scale1, scale2)
+            // Connect particles within a certain distance
+            if (distance < 120) {
+              const x2 = centerX + p2.x * scale2
+              const y2 = centerY + p2.y * scale2
 
-            ctx.globalAlpha = connectionOpacity
-            ctx.beginPath()
-            ctx.moveTo(x1, y1)
-            ctx.lineTo(x2, y2)
-            ctx.stroke()
+              // Calculate connection opacity based on distance and depth
+              const connectionOpacity = (1 - distance / 120) * 0.25 * Math.min(scale1, scale2)
+
+              ctx.globalAlpha = connectionOpacity
+              ctx.beginPath()
+              ctx.moveTo(x1, y1)
+              ctx.lineTo(x2, y2)
+              ctx.stroke()
+              connectionCount++
+            }
           }
         }
+        ctx.restore()
       }
-      ctx.restore()
 
       // Draw particles on top of connections
       rotatedParticles.forEach((particle) => {
@@ -175,20 +201,26 @@ export default function ParticleGlobe({ className = "", size = 800 }: ParticleGl
         ctx.save()
         ctx.globalAlpha = finalAlpha
         ctx.fillStyle = particle.color
-        ctx.shadowColor = particle.color
-        ctx.shadowBlur = particle.size * 1.5
+
+        // Add shadows only on desktop if enabled
+        if (performanceBudget.useShadows) {
+          ctx.shadowColor = particle.color
+          ctx.shadowBlur = particle.size * 1.2
+        }
 
         // Draw particle with glow effect
         ctx.beginPath()
         ctx.arc(x2d, y2d, particle.size * scale, 0, Math.PI * 2)
         ctx.fill()
 
-        // Add inner bright core
-        ctx.globalAlpha = finalAlpha * 1.5
-        ctx.shadowBlur = 0
-        ctx.beginPath()
-        ctx.arc(x2d, y2d, particle.size * scale * 0.4, 0, Math.PI * 2)
-        ctx.fill()
+        // Add inner bright core (mobile gets simplified version)
+        if (!deviceInfo.isLowEndDevice) {
+          ctx.globalAlpha = finalAlpha * 1.3
+          ctx.shadowBlur = 0
+          ctx.beginPath()
+          ctx.arc(x2d, y2d, particle.size * scale * 0.4, 0, Math.PI * 2)
+          ctx.fill()
+        }
 
         ctx.restore()
       })
@@ -204,7 +236,7 @@ export default function ParticleGlobe({ className = "", size = 800 }: ParticleGl
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [size])
+  }, [size, deviceInfo, performanceBudget])
 
   return (
     <canvas
@@ -214,6 +246,8 @@ export default function ParticleGlobe({ className = "", size = 800 }: ParticleGl
         width: "100%",
         height: "100%",
         minHeight: "500px",
+        willChange: "transform",
+        transform: "translateZ(0)", // Hardware acceleration
       }}
     />
   )

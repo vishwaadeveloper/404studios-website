@@ -12,6 +12,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/react'
 import ModernPerformanceOptimizer from "@/components/performance/ModernPerformanceOptimizer"
 import SmartResourceManager from "@/components/performance/SmartResourceManager"
+import PerformanceMonitor from "@/components/performance/PerformanceMonitor"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -128,6 +129,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ModernPerformanceOptimizer />
         <SmartResourceManager />
+        <PerformanceMonitor />
         <AppProviders>
           <PageLoader />
           <Navbar />
