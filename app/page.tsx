@@ -37,14 +37,14 @@ const organizationSchema = {
   ],
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+1-XXX-XXX-XXXX",
+    telephone: "+91-7845890089",
     contactType: "customer service",
     email: "contact@404studios.com",
     availableLanguage: "English",
   },
   address: {
     "@type": "PostalAddress",
-    addressCountry: "US",
+    addressCountry: "IN",
   },
   foundingDate: "2025",
   numberOfEmployees: "2-10",

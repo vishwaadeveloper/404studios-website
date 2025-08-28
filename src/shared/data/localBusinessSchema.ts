@@ -11,18 +11,18 @@ export const localBusinessSchema = {
     "https://404studios.com/og-image.jpg",
     "https://404studios.com/office-image.jpg"
   ],
-  "telephone": "+1-XXX-XXX-XXXX",
+  "telephone": "+91-7845890089",
   "email": "contact@404studios.com",
   "address": {
     "@type": "PostalAddress",
-    "addressCountry": "US",
-    "addressRegion": "CA",
-    "addressLocality": "San Francisco"
+    "addressCountry": "IN",
+    "addressRegion": "Tamil Nadu",
+    "addressLocality": "Coimbatore"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "37.7749",
-    "longitude": "-122.4194"
+    "latitude": "11.0168",
+    "longitude": "76.9558"
   },
   "openingHoursSpecification": [
     {
@@ -38,8 +38,8 @@ export const localBusinessSchema = {
     "https://twitter.com/404studios"
   ],
   "priceRange": "$5000-$50000",
-  "paymentAccepted": ["Credit Card", "Bank Transfer", "PayPal"],
-  "currenciesAccepted": "USD",
+  "paymentAccepted": ["Credit Card", "Bank Transfer", "UPI", "PayPal"],
+  "currenciesAccepted": "INR",
   "serviceArea": {
     "@type": "Place",
     "name": "Worldwide"
@@ -58,8 +58,8 @@ export const localBusinessSchema = {
         },
         "priceSpecification": {
           "@type": "PriceSpecification",
-          "priceCurrency": "USD",
-          "price": "5000-30000"
+          "priceCurrency": "INR",
+          "price": "200000-1500000"
         }
       },
       {
@@ -71,8 +71,8 @@ export const localBusinessSchema = {
         },
         "priceSpecification": {
           "@type": "PriceSpecification",
-          "priceCurrency": "USD",
-          "price": "10000-50000"
+          "priceCurrency": "INR",
+          "price": "500000-2500000"
         }
       }
     ]
