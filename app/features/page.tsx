@@ -13,7 +13,6 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import ParticleBackground from "@/components/particle-background"
 import { useFeaturesCatalog } from "@/src/features/features-catalog"
 
 export default function FeaturesPage() {
@@ -27,8 +26,7 @@ export default function FeaturesPage() {
   } = useFeaturesCatalog()
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
-      <ParticleBackground />
+    <div className="relative min-h-screen">
 
       {/* Header */}
       <section className="relative pt-16 pb-6 sm:pt-20 sm:pb-8 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 xl:pt-40 xl:pb-20 z-20">

@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
-import ParticleBackground from "@/components/particle-background"
 import Link from "next/link"
 
 // Clean Architecture Imports
@@ -32,8 +31,7 @@ export default function ServicesPage() {
   } = useServicesManager()
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-slate-900 to-slate-800">
-      <ParticleBackground />
+    <div className="relative min-h-screen">
 
       {/* Header */}
       <section className="relative pt-16 pb-6 sm:pt-20 sm:pb-8 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 z-20">

@@ -3,19 +3,17 @@
 import { useEffect, useRef, useState } from "react"
 import type { ReactNode } from "react"
 
-interface AnimatedSectionProps {
+interface FadeInSectionProps {
   children: ReactNode
   className?: string
   delay?: number
-  direction?: "up" | "down" | "left" | "right"
 }
 
-export default function AnimatedSection({
+export default function FadeInSection({
   children,
   className = "",
   delay = 0,
-  direction = "up",
-}: AnimatedSectionProps) {
+}: FadeInSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -37,29 +35,13 @@ export default function AnimatedSection({
     return () => observer.disconnect()
   }, [delay])
 
-  const getInitialTransform = () => {
-    switch (direction) {
-      case "up":
-        return "translateY(30px)"
-      case "down":
-        return "translateY(-30px)"
-      case "left":
-        return "translateX(30px)"
-      case "right":
-        return "translateX(-30px)"
-      default:
-        return "translateY(30px)"
-    }
-  }
-
   return (
     <div
       ref={ref}
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translate(0)" : getInitialTransform(),
-        transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+        transition: "opacity 0.4s ease-out",
       }}
     >
       {children}

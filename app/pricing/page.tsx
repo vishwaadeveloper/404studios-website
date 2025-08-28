@@ -56,7 +56,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import ParticleBackground from "@/components/particle-background"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 
@@ -539,8 +538,7 @@ export default function PricingPage() {
         }}
       />
       
-      <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
-      <ParticleBackground />
+      <div className="relative min-h-screen">
 
       {/* Header */}
       <section className="relative pt-20 pb-8 sm:pt-24 sm:pb-12 md:pt-32 md:pb-16 lg:pt-40 lg:pb-20 z-20">

@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import ParticleBackground from "@/components/particle-background"
 import { useContactForm } from "@/src/features/contact"
 
 const iconMap = {
@@ -60,8 +59,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-black via-slate-900 to-slate-800">
-      <ParticleBackground />
+    <div className="relative min-h-screen">
 
       {/* Header */}
       <section className="relative pt-20 pb-10 md:pt-24 md:pb-16 animate-fade-in-up">
