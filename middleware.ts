@@ -223,9 +223,8 @@ function getCSPHeader(): string {
   ].join('; ')
 }
 
-// Configure for Edge Runtime
+// Configure middleware matcher
 export const config = {
-  runtime: 'edge',
   matcher: [
     '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|manifest.json|sw.js|service-worker.js).*)',
   ],
