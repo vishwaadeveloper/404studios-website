@@ -164,7 +164,7 @@ export const OfflineIndicator: React.FC = () => {
           
           <div className="flex-1">
             <h3 className="text-white font-semibold text-sm mb-1">
-              You're offline
+              You&apos;re offline
             </h3>
             <p className="text-gray-300 text-xs">
               Some features may be limited while offline

@@ -2,20 +2,11 @@
 
 import type React from "react"
 
-import { useState } from "react"
 import {
   ArrowRight,
   Plus,
   Minus,
   Play,
-  Code,
-  Database,
-  Smartphone,
-  Search,
-  CreditCard,
-  Calendar,
-  BarChart,
-  Shield,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"

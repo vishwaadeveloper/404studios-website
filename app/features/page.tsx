@@ -219,7 +219,7 @@ export default function FeaturesPage() {
                 </span>
               </h2>
               <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 sm:mb-6 md:mb-8 px-2 sm:px-0">
-                Now that you understand our features and tiers, let's create a custom quote tailored to your specific
+                Now that you understand our features and tiers, let&apos;s create a custom quote tailored to your specific
                 needs and budget.
               </p>
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-0">

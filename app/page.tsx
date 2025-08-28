@@ -303,7 +303,7 @@ export default function HomePage() {
                     Your Digital Presence?
                   </h2>
                   <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-                    Get a custom quote tailored to your specific business needs and requirements. Let's build something
+                    Get a custom quote tailored to your specific business needs and requirements. Let&apos;s build something
                     amazing together.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">

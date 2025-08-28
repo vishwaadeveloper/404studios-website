@@ -49,7 +49,7 @@ export default function PackagesPage() {
               <span className="text-white">Breakdown</span>
             </h1>
             <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed px-2 sm:px-4 md:px-0 mb-6 sm:mb-8">
-              Explore our detailed service packages and understand exactly what's included. Every feature tier 
+              Explore our detailed service packages and understand exactly what&apos;s included. Every feature tier 
               explained to help you choose the perfect solution for your project.
             </p>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-0">
@@ -219,7 +219,7 @@ export default function PackagesPage() {
                 </span>
               </h2>
               <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 sm:mb-6 md:mb-8 px-2 sm:px-0">
-                With a clear understanding of our service packages, let's discuss your specific needs and create 
+                With a clear understanding of our service packages, let&apos;s discuss your specific needs and create 
                 a custom solution that fits your vision and budget.
               </p>
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-0">
