@@ -1,20 +1,86 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { RateLimit, securityHeaders, corsHeaders } from '@/lib/apiSecurity'
-import { performanceMonitor, createLogger } from '@/lib/monitoring'
-import { config as appConfig } from '@/lib/config'
 
-const logger = createLogger('middleware')
-const rateLimit = new RateLimit()
+/**
+ * Edge Runtime compatible middleware
+ * Simplified version without Node.js-specific monitoring features
+ */
+
+const logger = {
+  info: (message: string, meta?: any) => {
+    console.log(`[INFO] ${new Date().toISOString()} - ${message}`, meta ? JSON.stringify(meta) : '')
+  },
+  warn: (message: string, meta?: any) => {
+    console.warn(`[WARN] ${new Date().toISOString()} - ${message}`, meta ? JSON.stringify(meta) : '')
+  },
+  error: (message: string, error?: Error, meta?: any) => {
+    console.error(`[ERROR] ${new Date().toISOString()} - ${message}`, error?.message || '', meta ? JSON.stringify(meta) : '')
+  },
+  debug: (message: string, meta?: any) => {
+    console.log(`[DEBUG] ${new Date().toISOString()} - ${message}`, meta ? JSON.stringify(meta) : '')
+  }
+}
+
+// Simple rate limiting for Edge Runtime
+class EdgeRateLimit {
+  private requests = new Map<string, { count: number; resetTime: number }>()
+  private readonly windowMs = 60 * 1000 // 1 minute
+  private readonly maxRequests = 100
+
+  check(request: NextRequest): { success: boolean; limit: number; remaining: number; resetTime: number } {
+    const key = request.headers.get('x-forwarded-for') || 'unknown'
+    const now = Date.now()
+    
+    const record = this.requests.get(key)
+    
+    if (!record || now > record.resetTime) {
+      const resetTime = now + this.windowMs
+      this.requests.set(key, { count: 1, resetTime })
+      return {
+        success: true,
+        limit: this.maxRequests,
+        remaining: this.maxRequests - 1,
+        resetTime
+      }
+    }
+    
+    if (record.count >= this.maxRequests) {
+      return {
+        success: false,
+        limit: this.maxRequests,
+        remaining: 0,
+        resetTime: record.resetTime
+      }
+    }
+    
+    record.count++
+    return {
+      success: true,
+      limit: this.maxRequests,
+      remaining: this.maxRequests - record.count,
+      resetTime: record.resetTime
+    }
+  }
+}
+
+const rateLimit = new EdgeRateLimit()
+
+// Security headers for Edge Runtime
+const securityHeaders = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'X-XSS-Protection': '1; mode=block',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'X-DNS-Prefetch-Control': 'on'
+}
 
 export function middleware(request: NextRequest) {
   const startTime = Date.now()
-  const { pathname, origin } = request.nextUrl
+  const { pathname } = request.nextUrl
   
-  logger.debug('Middleware processing request', {
+  logger.debug('Edge middleware processing request', {
     method: request.method,
     pathname,
-    userAgent: request.headers.get('user-agent'),
-    ip: request.headers.get('x-forwarded-for') || request.ip
+    userAgent: request.headers.get('user-agent')?.substring(0, 100)
   })
 
   // Skip middleware for static files and internal Next.js routes
@@ -23,7 +89,6 @@ export function middleware(request: NextRequest) {
   }
 
   try {
-    // Security headers for all responses
     const response = NextResponse.next()
     
     // Add security headers
@@ -31,93 +96,67 @@ export function middleware(request: NextRequest) {
       response.headers.set(key, value)
     })
 
-    // Add CORS headers for API routes
+    // Handle API routes
     if (pathname.startsWith('/api/')) {
-            const corsHeadersObj = corsHeaders(request.headers.get('origin') || undefined)
-      Object.entries(corsHeadersObj).forEach(([key, value]) => {
-        response.headers.set(key, value)
-      })
+      // CORS headers
+      response.headers.set('Access-Control-Allow-Origin', '*')
+      response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+      response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
       // Handle preflight requests
       if (request.method === 'OPTIONS') {
         return new Response(null, { status: 200, headers: response.headers })
       }
 
-      // Rate limiting for API routes
-      if (appConfig.features.enableRateLimit) {
-        const rateLimitResult = rateLimit.check(request)
-        
-        if (!rateLimitResult.success) {
-          logger.warn('Rate limit exceeded', {
-            pathname,
-            ip: request.headers.get('x-forwarded-for') || request.ip,
-            limit: rateLimitResult.limit,
-            resetTime: rateLimitResult.resetTime
-          })
-
-          return new NextResponse(
-            JSON.stringify({
-              success: false,
-              error: {
-                message: 'Too many requests',
-                code: 'RATE_LIMITED',
-                resetTime: rateLimitResult.resetTime,
-                timestamp: new Date().toISOString()
-              }
-            }),
-            {
-              status: 429,
-              headers: {
-                'Content-Type': 'application/json',
-                'Retry-After': Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000).toString(),
-                ...response.headers
-              }
-            }
-          )
-        }
-
-        // Add rate limit headers
-        response.headers.set('X-RateLimit-Limit', rateLimitResult.limit.toString())
-        response.headers.set('X-RateLimit-Remaining', rateLimitResult.remaining.toString())
-        response.headers.set('X-RateLimit-Reset', rateLimitResult.resetTime.toString())
-      }
-    }
-
-    // Add security headers for pages
-    if (!pathname.startsWith('/api/')) {
-      // Content Security Policy
-      response.headers.set('Content-Security-Policy', getCSPHeader(appConfig.app.environment))
+      // Simple rate limiting
+      const rateLimitResult = rateLimit.check(request)
       
-      // Additional page security headers
-      response.headers.set('X-DNS-Prefetch-Control', 'on')
-      response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
-      response.headers.set('Permissions-Policy', getPermissionsPolicyHeader())
+      if (!rateLimitResult.success) {
+        logger.warn('Rate limit exceeded', {
+          pathname,
+          ip: request.headers.get('x-forwarded-for') || 'unknown'
+        })
+
+        return new NextResponse(
+          JSON.stringify({
+            success: false,
+            error: {
+              message: 'Too many requests',
+              code: 'RATE_LIMITED',
+              timestamp: new Date().toISOString()
+            }
+          }),
+          {
+            status: 429,
+            headers: {
+              'Content-Type': 'application/json',
+              'Retry-After': '60',
+              ...response.headers
+            }
+          }
+        )
+      }
+
+      // Add rate limit headers
+      response.headers.set('X-RateLimit-Limit', rateLimitResult.limit.toString())
+      response.headers.set('X-RateLimit-Remaining', rateLimitResult.remaining.toString())
     }
 
-    // Performance monitoring
+    // Add CSP for pages
+    if (!pathname.startsWith('/api/')) {
+      response.headers.set('Content-Security-Policy', getCSPHeader())
+    }
+
     const responseTime = Date.now() - startTime
     
-    if (appConfig.monitoring.enabled) {
-      // Record performance metrics
-      performanceMonitor.recordRequest(
-        request.method,
-        pathname,
-        responseTime,
-        true // We'll update this in the response handler if there's an error
-      )
-
-      // Add performance headers for debugging
-      if (appConfig.app.environment === 'development') {
-        response.headers.set('X-Response-Time', `${responseTime}ms`)
-        response.headers.set('X-Timestamp', new Date().toISOString())
-      }
-    }
+    // Add performance headers for debugging
+    response.headers.set('X-Response-Time', `${responseTime}ms`)
+    response.headers.set('X-Runtime', 'edge')
 
     logger.info('Request processed successfully', {
       method: request.method,
       pathname,
-      responseTime,
-      status: response.status || 200
+      responseTime
     })
 
     return response
@@ -125,25 +164,12 @@ export function middleware(request: NextRequest) {
   } catch (error) {
     const responseTime = Date.now() - startTime
     
-    logger.error('Middleware error', error instanceof Error ? error : new Error('Unknown middleware error'), {
+    logger.error('Edge middleware error', error instanceof Error ? error : new Error('Unknown error'), {
       method: request.method,
       pathname,
-      responseTime,
-      userAgent: request.headers.get('user-agent'),
-      ip: request.headers.get('x-forwarded-for') || request.ip
+      responseTime
     })
 
-    // Record failed request
-    if (appConfig.monitoring.enabled) {
-      performanceMonitor.recordRequest(
-        request.method,
-        pathname,
-        responseTime,
-        false
-      )
-    }
-
-    // Return a generic error response
     return new NextResponse(
       JSON.stringify({
         success: false,
@@ -166,90 +192,41 @@ export function middleware(request: NextRequest) {
 
 function shouldSkipMiddleware(pathname: string): boolean {
   const skipPatterns = [
-    // Next.js internal routes
     '/_next/',
     '/__nextjs_original-stack-frame',
-    
-    // Static files
     '/favicon.ico',
     '/robots.txt',
     '/sitemap.xml',
     '/manifest.json',
-    
-    // Public assets
     '/images/',
     '/icons/',
     '/assets/',
-    
-    // Service worker
     '/sw.js',
     '/service-worker.js',
-    
-    // Health check (to avoid rate limiting)
     '/api/health'
   ]
 
   return skipPatterns.some(pattern => pathname.startsWith(pattern))
 }
 
-function getCSPHeader(environment: string): string {
-  const isDev = environment === 'development'
-  
-  const csp = [
+function getCSPHeader(): string {
+  return [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.hotjar.com https://script.hotjar.com",
+    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
-    "img-src 'self' data: blob: https://www.google-analytics.com https://static.hotjar.com https://script.hotjar.com",
-    "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://*.hotjar.com https://*.hotjar.io wss://*.hotjar.com",
-    "frame-src 'self' https://www.google.com",
+    "img-src 'self' data: blob: https://www.google-analytics.com",
+    "connect-src 'self' https://www.google-analytics.com",
+    "frame-src 'self'",
     "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'none'",
-    "block-all-mixed-content"
-  ]
-
-  // Add localhost for development
-  if (isDev) {
-    csp[1] += " 'unsafe-eval' http://localhost:* ws://localhost:*"
-    csp[4] += " http://localhost:*"
-    csp[5] += " http://localhost:* ws://localhost:*"
-  }
-
-  return csp.join('; ')
+    "base-uri 'self'"
+  ].join('; ')
 }
 
-function getPermissionsPolicyHeader(): string {
-  return [
-    'camera=()',
-    'microphone=()',
-    'geolocation=()',
-    'interest-cohort=()',
-    'payment=()',
-    'usb=()',
-    'serial=()',
-    'bluetooth=()',
-    'magnetometer=()',
-    'accelerometer=()',
-    'gyroscope=()',
-    'fullscreen=(self)',
-    'picture-in-picture=()'
-  ].join(', ')
-}
-
-// Configure which paths the middleware should run on
+// Configure for Edge Runtime
 export const config = {
-  // Use Node.js runtime for full monitoring features
-  runtime: 'nodejs',
+  runtime: 'edge',
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder files
-     */
     '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|manifest.json|sw.js|service-worker.js).*)',
   ],
 }

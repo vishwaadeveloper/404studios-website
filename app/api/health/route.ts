@@ -67,12 +67,6 @@ async function performHealthChecks(): Promise<HealthStatus> {
   const checks: HealthStatus['checks'] = {}
   let overallStatus: HealthStatus['status'] = 'healthy'
 
-  // Database connectivity check
-  const dbCheck = await checkDatabase()
-  checks.database = dbCheck
-  if (dbCheck.status === 'fail') overallStatus = 'unhealthy'
-  if (dbCheck.status === 'warn' && overallStatus === 'healthy') overallStatus = 'degraded'
-
   // Memory usage check
   const memoryCheck = checkMemoryUsage()
   checks.memory = memoryCheck
@@ -100,41 +94,6 @@ async function performHealthChecks(): Promise<HealthStatus> {
     checks,
     timestamp: new Date().toISOString(),
     version: '1.0.0'
-  }
-}
-
-async function checkDatabase(): Promise<{ status: 'pass' | 'fail' | 'warn'; message?: string; responseTime?: number }> {
-  const startTime = Date.now()
-  
-  try {
-    // TODO: Replace with actual database connectivity check
-    // const db = await getDatabase()
-    // await db.ping()
-    
-    // Simulate database check
-    await new Promise(resolve => setTimeout(resolve, 10))
-    
-    const responseTime = Date.now() - startTime
-    
-    if (responseTime > 1000) {
-      return {
-        status: 'warn',
-        message: 'Database response time is slow',
-        responseTime
-      }
-    }
-    
-    return {
-      status: 'pass',
-      message: 'Database connection healthy',
-      responseTime
-    }
-  } catch (error) {
-    return {
-      status: 'fail',
-      message: `Database connection failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-      responseTime: Date.now() - startTime
-    }
   }
 }
 

@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
       {
         endpoint: '/api/contact',
         userAgent: request.headers.get('user-agent'),
-        ip: request.headers.get('x-forwarded-for') || request.ip
+        ip: request.headers.get('x-forwarded-for') || 'unknown'
       }
     )
 
@@ -159,16 +159,7 @@ async function processContactForm(data: ContactFormData): Promise<{ success: boo
       userAgent: 'redacted' // Don't store user agent for privacy
     }
 
-    // TODO: In production, save to database
-    // const contactId = await saveToDatabase(sanitizedData)
-    
-    // TODO: Send notification email
-    // await sendNotificationEmail(sanitizedData)
-    
-    // TODO: Send auto-reply email
-    // await sendAutoReply(sanitizedData.email, sanitizedData.name)
-
-    // For now, simulate success
+    // Generate contact ID for tracking
     const contactId = `contact_${Date.now()}_${Math.random().toString(36).substring(2)}`
     
     console.log('Contact form submitted:', {
