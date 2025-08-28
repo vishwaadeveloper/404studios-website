@@ -62,20 +62,20 @@ export default function ContactPage() {
     <div className="relative min-h-screen">
 
       {/* Header */}
-      <section className="relative pt-20 pb-10 md:pt-24 md:pb-16 animate-fade-in-up">
+      <section className="relative pt-20 pb-10 md:pt-24 md:pb-16">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <Badge
                 variant="outline"
-                className="border-cyan-500 text-cyan-500 px-3 py-1.5 text-sm backdrop-blur-sm bg-black/20 animate-pulse-glow"
+                className="border-cyan-500 text-cyan-500 px-3 py-1.5 text-sm"
               >
                 Get In Touch
               </Badge>
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-gradient-x">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-cyan-400">
                 Contact Us
               </h1>
-              <p className="max-w-[700px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed animate-fade-in-up animation-delay-200">
+              <p className="max-w-[700px] text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Ready to start your project? Get in touch for a consultation and detailed quote.
               </p>
             </div>
@@ -88,9 +88,9 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Contact Information */}
-            <div className="space-y-6 animate-fade-in-left">
-              {/* Glassmorphism Contact Card */}
-              <Card className="border-slate-800 bg-slate-900/30 backdrop-blur-md hover:shadow-[0_8px_32px_rgba(56,189,248,0.2)] transition-all duration-300">
+            <div className="space-y-6">
+              {/* Contact Card */}
+              <Card className="border-slate-800 transition-all duration-300">
                 <CardHeader>
                   <CardTitle className="text-white">Get In Touch</CardTitle>
                   <CardDescription>We&apos;d love to hear about your project</CardDescription>
@@ -120,7 +120,7 @@ export default function ContactPage() {
               </Card>
 
               {/* Consultation Booking Calendar */}
-              <Card className="border-slate-800 bg-slate-900/50 backdrop-blur-sm hover:shadow-[0_8px_32px_rgba(56,189,248,0.2)] transition-all duration-300">
+              <Card className="border-slate-800 transition-all duration-300">
                 <CardHeader>
                   <CardTitle className="text-white">Book a Consultation</CardTitle>
                   <CardDescription>Schedule a free 30-minute consultation call</CardDescription>
@@ -129,13 +129,13 @@ export default function ContactPage() {
                   <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-3">
                       {availableTimeSlots.map((slot, index) => (
-                        <div key={slot.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                        <div key={slot.id}>
                           <button
                             onClick={() => setSelectedTimeSlot(slot.id)}
                             className={`w-full p-4 rounded-lg border-2 transition-all duration-300 relative overflow-hidden ${
                               selectedTimeSlot === slot.id
-                                ? "bg-gradient-to-r from-cyan-500 to-blue-600 border-cyan-400 text-white shadow-lg transform scale-105"
-                                : "bg-slate-800/80 border-slate-700 text-gray-300 hover:bg-slate-700/90 hover:border-cyan-500/60 hover:text-white hover:transform hover:scale-[1.02]"
+                                ? "border-cyan-400 bg-cyan-50 text-white"
+                                : "bg-slate-800 border-slate-700 text-gray-300 hover:bg-slate-700 hover:border-cyan-500 hover:text-white"
                             }`}
                           >
                             <div className="flex flex-col items-center justify-center space-y-1 relative z-10">
@@ -155,14 +155,14 @@ export default function ContactPage() {
                               </div>
                             </div>
                             {selectedTimeSlot === slot.id && (
-                              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 animate-pulse" />
+                              <div className="absolute inset-0" />
                             )}
                           </button>
                         </div>
                       ))}
                     </div>
                     {selectedSlot && (
-                      <div className="rounded-lg border border-cyan-500/50 bg-cyan-500/10 p-4 animate-fade-in">
+                      <div className="rounded-lg border border-cyan-500 bg-cyan-500/10 p-4">
                         <div className="flex items-center space-x-2">
                           <Check className="h-5 w-5 text-cyan-400" />
                           <div>
@@ -180,7 +180,7 @@ export default function ContactPage() {
             </div>
 
             {/* Multi-step Quote Request Form */}
-            <Card className="border-slate-800 bg-slate-900/50 backdrop-blur-sm hover:shadow-[0_8px_32px_rgba(56,189,248,0.2)] transition-all duration-300 animate-fade-in-right">
+            <Card className="border-slate-800 transition-all duration-300">
               <CardHeader>
                 <CardTitle className="text-white">Request a Quote</CardTitle>
                 <CardDescription>Tell us about your project requirements</CardDescription>
@@ -192,7 +192,7 @@ export default function ContactPage() {
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-500 ${
                           step <= currentStep
-                            ? "bg-gradient-to-r from-cyan-500 to-purple-600 text-white transform scale-110"
+                            ? "bg-cyan-500 text-white"
                             : "bg-slate-800 text-gray-400"
                         }`}
                       >
@@ -201,7 +201,7 @@ export default function ContactPage() {
                       {step < totalSteps && (
                         <div
                           className={`w-12 h-0.5 mx-2 transition-all duration-500 ${
-                            step < currentStep ? "bg-gradient-to-r from-cyan-500 to-purple-600" : "bg-slate-800"
+                            step < currentStep ? "bg-cyan-500" : "bg-slate-800"
                           }`}
                         />
                       )}
@@ -214,7 +214,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Step 1: Basic Information */}
                   {currentStep === 1 && (
-                    <div className="space-y-4 animate-fade-in">
+                    <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name" className="text-white">
@@ -271,7 +271,7 @@ export default function ContactPage() {
 
                   {/* Step 2: Project Details */}
                   {currentStep === 2 && (
-                    <div className="space-y-4 animate-fade-in">
+                    <div className="space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="projectType" className="text-white">
                           Project Type *

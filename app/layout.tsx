@@ -2,12 +2,12 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import Navbar from "@/components/navbar"
+import AnimatedHeader from "@/components/animated-header"
 import Footer from "@/components/footer"
 import PageLoader from "@/components/page-loader"
 import PageTransition from "@/components/page-transition"
 import AppProviders from "@/components/AppProviders"
-import { ResourcePreloader, FontPreloader, ConnectionPreloader } from '@/components/performance/ResourcePreloader'
+import { ElectricCardStyles } from "@/components/ui/electric-card-styles"
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/react'
 import ModernPerformanceOptimizer from "@/components/performance/ModernPerformanceOptimizer"
@@ -104,35 +104,17 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         
-        {/* Performance optimizations */}
-        <ResourcePreloader
-          resources={[
-            { href: '/placeholder-logo.svg', as: 'image' },
-            { href: '/favicon.svg', as: 'image' },
-            { href: '/_next/static/css/app/layout.css', as: 'style' }
-          ]}
-          priority="high"
-        />
-        <FontPreloader
-          fonts={[
-            { href: 'https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2' }
-          ]}
-        />
-        <ConnectionPreloader
-          domains={[
-            'https://fonts.googleapis.com',
-            'https://fonts.gstatic.com',
-            'https://api.404studios.com'
-          ]}
-        />
+        {/* Performance optimizations - temporarily disabled */}
+        {/* ResourcePreloader, FontPreloader and ConnectionPreloader removed - incompatible with app directory */}
       </head>
       <body className={inter.className}>
+        <ElectricCardStyles />
         <ModernPerformanceOptimizer />
         <SmartResourceManager />
         <PerformanceMonitor />
         <AppProviders>
           <PageLoader />
-          <Navbar />
+          <AnimatedHeader />
           <PageTransition>
             <main>{children}</main>
           </PageTransition>

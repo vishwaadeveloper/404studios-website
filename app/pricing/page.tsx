@@ -152,7 +152,7 @@ function PageManager({ pageNames, onUpdateNames, pageType }: PageManagerProps) {
             </Button>
             <Button
               onClick={handleSave}
-              className="flex-1 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700"
+              className="flex-1"
             >
               Save Changes
             </Button>
@@ -442,7 +442,7 @@ function FeatureGroupCard({
 
   return (
     <Card
-      className={`bg-slate-900/80 border-slate-700/50 backdrop-blur-sm transition-all duration-300 ${groupColorMap[group.group] || ""}`}
+      className={`transition-all duration-300 ${groupColorMap[group.group] || ""}`}
     >
       <Collapsible open={isExpanded} onOpenChange={onToggleExpanded}>
         <CollapsibleTrigger asChild>
@@ -546,7 +546,7 @@ export default function PricingPage() {
           <div className="text-center max-w-4xl mx-auto">
             <Badge
               variant="outline"
-              className="border-cyan-500 text-cyan-500 px-3 py-1.5 text-xs sm:text-sm backdrop-blur-sm bg-black/20 animate-pulse-glow mb-4 sm:mb-6"
+              className="border-cyan-500 text-cyan-500 px-3 py-1.5 text-xs sm:text-sm mb-4 sm:mb-6"
             >
               <Calculator className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
               Advanced Page Calculator
@@ -570,7 +570,7 @@ export default function PricingPage() {
         <div className="container px-4 sm:px-6 md:px-8 mx-auto">
           <div className="max-w-7xl mx-auto">
             {/* Business Type Selection */}
-            <Card className="mb-6 sm:mb-8 bg-slate-900/80 border-slate-700/50 backdrop-blur-sm hover:shadow-[0_8px_32px_rgba(56,189,248,0.2)] transition-all duration-300">
+            <Card className="mb-6 sm:mb-8 transition-all duration-300">
               <CardHeader className="text-center pb-4 sm:pb-6">
                 <CardTitle className="text-white text-xl sm:text-2xl md:text-3xl mb-2">
                   Choose Your Business Type
@@ -587,8 +587,8 @@ export default function PricingPage() {
                       onClick={() => setBusinessType(key)}
                       className={`group relative p-4 sm:p-6 rounded-xl text-left transition-all duration-300 border-2 ${
                         businessType === key
-                          ? "bg-gradient-to-br from-cyan-500/20 to-purple-600/20 border-cyan-400 shadow-[0_0_20px_rgba(56,189,248,0.3)] transform scale-105"
-                          : "bg-slate-800/40 border-slate-700/50 hover:border-cyan-500/50 hover:bg-slate-700/60 hover:transform hover:scale-102"
+                          ? "border-cyan-400 bg-cyan-50"
+                          : "border-slate-300 hover:border-slate-400"
                       }`}
                     >
                       <div className="space-y-3">
@@ -633,7 +633,7 @@ export default function PricingPage() {
                         </p>
                       </div>
                       {businessType === key && (
-                        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/10 to-purple-600/10 animate-pulse" />
+                        <div className="absolute inset-0 rounded-xl" />
                       )}
                     </button>
                   ))}
@@ -664,7 +664,7 @@ export default function PricingPage() {
               {/* Summary Sidebar - Takes 1 column */}
               <div className="lg:col-span-1">
                 <div className="sticky top-24">
-                  <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-sm hover:shadow-[0_8px_32px_rgba(56,189,248,0.2)] transition-all duration-300">
+                  <Card className="transition-all duration-300">
                     <CardHeader>
                       <CardTitle className="text-white text-lg sm:text-xl">Project Summary</CardTitle>
                       <CardDescription className="text-sm">Your customized package</CardDescription>
@@ -757,7 +757,7 @@ export default function PricingPage() {
                       <div className="space-y-4 sm:space-y-6">
                         <div className="text-center">
                           <div className="text-xs sm:text-sm text-gray-400 mb-1">Total Project Cost</div>
-                          <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+                          <div className="text-2xl sm:text-3xl font-bold text-cyan-400">
                             ₹{totalPrice.toLocaleString()}
                           </div>
                         </div>
@@ -774,7 +774,7 @@ export default function PricingPage() {
 
                         <div className="flex flex-col space-y-3 sm:space-y-4">
                           <Link href="/contact">
-                            <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] transition-all duration-300 h-10 sm:h-12">
+                            <Button className="w-full transition-all duration-300 h-10 sm:h-12">
                               Get Detailed Quote
                               <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
@@ -797,21 +797,6 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
-
-      <style jsx global>{`
-        @keyframes pulse-glow {
-          0%, 100% {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-          }
-          50% {
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
-          }
-        }
-        
-        .animate-pulse-glow {
-          animation: pulse-glow 2s ease-in-out infinite;
-        }
-      `}</style>
     </div>
     </>
   )

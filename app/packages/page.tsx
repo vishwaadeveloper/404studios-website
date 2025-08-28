@@ -34,13 +34,13 @@ export default function PackagesPage() {
           <div className="text-center max-w-4xl mx-auto">
             <Badge
               variant="outline"
-              className="border-cyan-500 text-cyan-500 px-2 py-1 sm:px-3 sm:py-1.5 text-xs backdrop-blur-sm bg-black/20 animate-pulse-glow mb-3 sm:mb-4 md:mb-6"
+              className="border-cyan-500 text-cyan-500 px-2 py-1 sm:px-3 sm:py-1.5 text-xs mb-3 sm:mb-4 md:mb-6"
             >
               <Package className="w-3 h-3 mr-1 sm:mr-1.5" />
               Comprehensive Packages
             </Badge>
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tighter mb-3 sm:mb-4 md:mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <span className="text-cyan-400">
                 Service Packages
               </span>
               <br />
@@ -52,7 +52,7 @@ export default function PackagesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-0">
               <Link href="/pricing" className="w-full sm:w-auto">
-                <Button className="relative overflow-hidden rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:shadow-[0_0_50px_rgba(56,189,248,0.8)] transition-all duration-300 w-full hover:transform hover:scale-105 text-xs sm:text-sm md:text-base">
+                <Button className="relative overflow-hidden rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 transition-all duration-300 w-full text-xs sm:text-sm md:text-base">
                   <span className="relative z-10">Calculate Your Quote</span>
                   <Rocket className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
@@ -60,7 +60,7 @@ export default function PackagesPage() {
               <Link href="/contact" className="w-full sm:w-auto">
                 <Button
                   variant="outline"
-                  className="rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 border-2 border-cyan-500/50 text-cyan-400 hover:text-cyan-300 hover:border-cyan-400 bg-transparent backdrop-blur-sm w-full hover:bg-cyan-500/10 transition-all duration-300 hover:transform hover:scale-105 text-xs sm:text-sm md:text-base"
+                  className="rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 border-2 border-cyan-500 text-cyan-400 hover:text-cyan-300 hover:border-cyan-400 w-full transition-all duration-300 text-xs sm:text-sm md:text-base"
                 >
                   Get Custom Quote
                   <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
@@ -78,7 +78,7 @@ export default function PackagesPage() {
             {featureCatalog.map((section, sectionIndex) => (
               <Card
                 key={section.group}
-                className="border-slate-700/50 bg-slate-900/50 backdrop-blur-sm animate-fade-in-up"
+                className="transition-all"
                 style={{ animationDelay: `${sectionIndex * 0.1}s` }}
               >
                 <Collapsible
@@ -89,7 +89,7 @@ export default function PackagesPage() {
                     <CardHeader className="cursor-pointer hover:bg-slate-800/30 transition-colors duration-300 rounded-t-lg p-4 sm:p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
-                          <div className="rounded-full bg-slate-800/80 backdrop-blur-sm p-2 sm:p-3 border border-slate-600/50 flex-shrink-0">
+                          <div className="rounded-full bg-slate-800 p-2 sm:p-3 border border-slate-600 flex-shrink-0">
                             {section.icon}
                           </div>
                           <div className="text-left min-w-0 flex-1">
@@ -118,7 +118,7 @@ export default function PackagesPage() {
                     </CardHeader>
                   </CollapsibleTrigger>
 
-                  <CollapsibleContent className="animate-slide-down">
+                  <CollapsibleContent>
                     <CardContent className="pt-0 p-4 sm:p-6 space-y-4 sm:space-y-6">
                       {section.features.map((feature, featureIndex) => (
                         <div
@@ -149,7 +149,7 @@ export default function PackagesPage() {
                               </div>
                             </CollapsibleTrigger>
 
-                            <CollapsibleContent className="animate-slide-down">
+                            <CollapsibleContent>
                               <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-3 sm:mt-4 mb-4 sm:mb-6">
                                 {feature.tiers.map((tier, tierIndex) => (
                                   <Card
@@ -208,12 +208,12 @@ export default function PackagesPage() {
       {/* CTA Section */}
       <section className="relative py-8 sm:py-12 md:py-16 lg:py-20 xl:py-28 z-20">
         <div className="container px-3 sm:px-4 md:px-6 lg:px-8 mx-auto">
-          <Card className="max-w-4xl mx-auto border-slate-700/50 bg-slate-900/50 backdrop-blur-sm">
+          <Card className="max-w-4xl mx-auto">
             <CardContent className="p-6 sm:p-8 md:p-12 lg:p-16 text-center">
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
                 Ready to{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
-                  Start Your Project?
+                                <span className="text-cyan-400">
+                  Ready to Build Your Project?
                 </span>
               </h2>
               <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 sm:mb-6 md:mb-8 px-2 sm:px-0">
@@ -222,7 +222,7 @@ export default function PackagesPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 sm:px-0">
                 <Link href="/pricing" className="w-full sm:w-auto">
-                  <Button className="relative overflow-hidden rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:shadow-[0_0_50px_rgba(56,189,248,0.8)] transition-all duration-300 w-full hover:transform hover:scale-105 text-xs sm:text-sm md:text-base">
+                  <Button className="relative overflow-hidden rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 transition-all duration-300 w-full text-xs sm:text-sm md:text-base">
                     <span className="relative z-10">Calculate Your Project</span>
                     <Rocket className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
@@ -230,7 +230,7 @@ export default function PackagesPage() {
                 <Link href="/contact" className="w-full sm:w-auto">
                   <Button
                     variant="outline"
-                    className="rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 border-2 border-cyan-500/50 text-cyan-400 hover:text-cyan-300 hover:border-cyan-400 bg-transparent backdrop-blur-sm w-full hover:bg-cyan-500/10 transition-all duration-300 hover:transform hover:scale-105 text-xs sm:text-sm md:text-base"
+                    className="rounded-full h-10 sm:h-11 md:h-12 px-4 sm:px-6 md:px-8 border-2 border-cyan-500 text-cyan-400 hover:text-cyan-300 hover:border-cyan-400 w-full transition-all duration-300 text-xs sm:text-sm md:text-base"
                   >
                     Schedule Discussion
                     <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
@@ -241,52 +241,6 @@ export default function PackagesPage() {
           </Card>
         </div>
       </section>
-
-      <style jsx global>{`
-        @keyframes pulse-glow {
-          0%, 100% {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-          }
-          50% {
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
-          }
-        }
-        
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes slide-down {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-pulse-glow {
-          animation: pulse-glow 2s ease-in-out infinite;
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-slide-down {
-          animation: slide-down 0.3s ease-out;
-        }
-      `}</style>
     </div>
   )
 }

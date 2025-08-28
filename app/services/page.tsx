@@ -40,14 +40,14 @@ export default function ServicesPage() {
             <div className="space-y-2">
               <Badge
                 variant="outline"
-                className="border-cyan-500 text-cyan-500 px-2 py-1 sm:px-3 sm:py-1.5 text-xs backdrop-blur-sm bg-black/20 animate-pulse-glow"
+                className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs"
               >
                 Individual Features
               </Badge>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-gradient-x leading-tight">
-                Our Services
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter leading-tight">
+                Our <span className="text-primary">Services</span>
               </h1>
-              <p className="max-w-[700px] text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed animate-fade-in-up animation-delay-200 px-2 sm:px-0">
+              <p className="max-w-[700px] text-muted-foreground text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed px-2 sm:px-0">
                 Explore our individual features and add-ons to customize your project
               </p>
             </div>
@@ -60,30 +60,30 @@ export default function ServicesPage() {
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl">
           <div className="grid gap-4 sm:gap-6 lg:grid-cols-4">
             {/* Main Content */}
-            <div className="lg:col-span-3 animate-fade-in-left">
+            <div className="lg:col-span-3">
               <Tabs defaultValue="all" className="w-full">
-                <TabsList className="bg-slate-800/50 mb-6 sm:mb-8 grid grid-cols-2 sm:grid-cols-4 w-full">
+                <TabsList className="mb-6 sm:mb-8 grid grid-cols-2 sm:grid-cols-4 w-full">
                   <TabsTrigger
                     value="all"
-                    className="data-[state=active]:bg-cyan-500 data-[state=active]:text-white text-xs sm:text-sm"
+                    className="text-xs sm:text-sm"
                   >
                     All Services
                   </TabsTrigger>
                   <TabsTrigger
                     value="frontend"
-                    className="data-[state=active]:bg-cyan-500 data-[state=active]:text-white text-xs sm:text-sm"
+                    className="text-xs sm:text-sm"
                   >
                     Frontend
                   </TabsTrigger>
                   <TabsTrigger
                     value="backend"
-                    className="data-[state=active]:bg-cyan-500 data-[state=active]:text-white text-xs sm:text-sm"
+                    className="text-xs sm:text-sm"
                   >
                     Backend
                   </TabsTrigger>
                   <TabsTrigger
                     value="mobile"
-                    className="data-[state=active]:bg-cyan-500 data-[state=active]:text-white text-xs sm:text-sm"
+                    className="text-xs sm:text-sm"
                   >
                     Mobile
                   </TabsTrigger>
@@ -91,76 +91,56 @@ export default function ServicesPage() {
 
                 <TabsContent value="all" className="mt-0">
                   <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-                    {getServicesByCategory("all").map((service, index) => (
-                      <div
+                    {getServicesByCategory("all").map((service) => (
+                      <ServiceCard
                         key={service.id}
-                        className="animate-fade-in-up"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      >
-                        <ServiceCard
-                          service={service}
-                          isSelected={selectedFeatures.includes(service.id)}
-                          onAdd={() => addFeature(service.id)}
-                          onRemove={() => removeFeature(service.id)}
-                        />
-                      </div>
+                        service={service}
+                        isSelected={selectedFeatures.includes(service.id)}
+                        onAdd={() => addFeature(service.id)}
+                        onRemove={() => removeFeature(service.id)}
+                      />
                     ))}
                   </div>
                 </TabsContent>
 
                 <TabsContent value="frontend" className="mt-0">
                   <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-                    {getServicesByCategory("frontend").map((service, index) => (
-                      <div
+                    {getServicesByCategory("frontend").map((service) => (
+                      <ServiceCard
                         key={service.id}
-                        className="animate-fade-in-up"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      >
-                        <ServiceCard
-                          service={service}
-                          isSelected={selectedFeatures.includes(service.id)}
-                          onAdd={() => addFeature(service.id)}
-                          onRemove={() => removeFeature(service.id)}
-                        />
-                      </div>
+                        service={service}
+                        isSelected={selectedFeatures.includes(service.id)}
+                        onAdd={() => addFeature(service.id)}
+                        onRemove={() => removeFeature(service.id)}
+                      />
                     ))}
                   </div>
                 </TabsContent>
 
                 <TabsContent value="backend" className="mt-0">
                   <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-                    {getServicesByCategory("backend").map((service, index) => (
-                      <div
+                    {getServicesByCategory("backend").map((service) => (
+                      <ServiceCard
                         key={service.id}
-                        className="animate-fade-in-up"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      >
-                        <ServiceCard
-                          service={service}
-                          isSelected={selectedFeatures.includes(service.id)}
-                          onAdd={() => addFeature(service.id)}
-                          onRemove={() => removeFeature(service.id)}
-                        />
-                      </div>
+                        service={service}
+                        isSelected={selectedFeatures.includes(service.id)}
+                        onAdd={() => addFeature(service.id)}
+                        onRemove={() => removeFeature(service.id)}
+                      />
                     ))}
                   </div>
                 </TabsContent>
 
                 <TabsContent value="mobile" className="mt-0">
                   <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-                    {getServicesByCategory("mobile").map((service, index) => (
-                      <div
+                    {getServicesByCategory("mobile").map((service) => (
+                      <ServiceCard
                         key={service.id}
-                        className="animate-fade-in-up"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      >
-                        <ServiceCard
-                          service={service}
-                          isSelected={selectedFeatures.includes(service.id)}
-                          onAdd={() => addFeature(service.id)}
-                          onRemove={() => removeFeature(service.id)}
-                        />
-                      </div>
+                        service={service}
+                        isSelected={selectedFeatures.includes(service.id)}
+                        onAdd={() => addFeature(service.id)}
+                        onRemove={() => removeFeature(service.id)}
+                      />
                     ))}
                   </div>
                 </TabsContent>
@@ -168,9 +148,9 @@ export default function ServicesPage() {
             </div>
 
             {/* Floating Sidebar */}
-            <div className="lg:col-span-1 animate-fade-in-right">
+            <div className="lg:col-span-1">
               <div className="sticky top-20 sm:top-24">
-                <Card className="border-slate-800 bg-slate-900/50 backdrop-blur-md hover:shadow-[0_8px_32px_rgba(56,189,248,0.2)] transition-all duration-300">
+                <Card className="h-full">
                   <CardHeader className="p-4 sm:p-6">
                     <CardTitle className="text-white text-base sm:text-lg">Selected Features</CardTitle>
                     <CardDescription className="text-xs sm:text-sm">Build your custom package</CardDescription>
@@ -215,13 +195,13 @@ export default function ServicesPage() {
                       <>
                         <Separator className="bg-slate-700" />
                         <div className="flex justify-between items-center">
-                          <span className="text-white font-medium text-sm sm:text-base">Total:</span>
-                          <span className="text-lg sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
+                          <span className="text-foreground font-medium text-sm sm:text-base">Total:</span>
+                          <span className="text-lg sm:text-2xl font-bold text-primary">
                             ₹{totalPrice.toLocaleString()}
                           </span>
                         </div>
                         <Link href="/contact">
-                          <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white transition-all duration-300 text-xs sm:text-sm">
+                          <Button className="w-full text-xs sm:text-sm">
                             Get Quote
                             <ArrowRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                           </Button>
@@ -235,88 +215,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
-      <style jsx global>{`
-        @keyframes pulse-glow {
-          0%, 100% {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-          }
-          50% {
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
-          }
-        }
-        
-        @keyframes gradient-x {
-          0%, 100% {
-            background-size: 200% 200%;
-            background-position: left center;
-          }
-          50% {
-            background-size: 200% 200%;
-            background-position: right center;
-          }
-        }
-        
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fade-in-left {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes fade-in-right {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        .animate-pulse-glow {
-          animation: pulse-glow 2s ease-in-out infinite;
-        }
-        
-        .animate-gradient-x {
-          animation: gradient-x 3s ease infinite;
-        }
-        
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-fade-in-left {
-          animation: fade-in-left 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-fade-in-right {
-          animation: fade-in-right 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animation-delay-200 {
-          animation-delay: 0.2s;
-        }
-      `}</style>
     </div>
   )
 }
@@ -330,11 +228,11 @@ interface ServiceCardProps {
 
 function ServiceCard({ service, isSelected, onAdd, onRemove }: ServiceCardProps) {
   return (
-    <Card className="group border-slate-800 bg-slate-900/50 backdrop-blur-md hover:border-cyan-500/50 hover:shadow-[0_8px_32px_rgba(56,189,248,0.2)] transition-all duration-300 h-full">
+    <Card className="h-full">
       <CardHeader className="p-4 sm:p-6">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3 min-w-0 flex-1">
-            <div className="rounded-full bg-slate-800/80 backdrop-blur-sm p-2 sm:p-3 border border-slate-600/50 group-hover:border-cyan-500/50 transition-colors duration-300 flex-shrink-0">
+            <div className="rounded-full bg-slate-800 p-2 sm:p-3 border border-slate-600 group-hover:border-cyan-500 transition-colors duration-300 flex-shrink-0">
               {service.icon}
             </div>
             <div className="min-w-0 flex-1">
@@ -352,9 +250,9 @@ function ServiceCard({ service, isSelected, onAdd, onRemove }: ServiceCardProps)
       </CardHeader>
       <CardContent className="p-4 sm:p-6 pt-0 flex flex-col justify-between flex-1">
         <div className="space-y-3 sm:space-y-4">
-          <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">{service.description}</p>
+          <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{service.description}</p>
           <div className="flex items-center justify-between">
-            <div className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
+            <div className="text-lg sm:text-xl font-bold text-primary">
               ₹{service.price.min.toLocaleString()} - ₹{service.price.max.toLocaleString()}
             </div>
           </div>
@@ -364,7 +262,7 @@ function ServiceCard({ service, isSelected, onAdd, onRemove }: ServiceCardProps)
             <Button
               size="sm"
               variant="outline"
-              className="border-slate-600 text-gray-300 hover:text-cyan-400 hover:border-cyan-500 bg-transparent backdrop-blur-sm flex-1 text-xs sm:text-sm"
+              className="flex-1 text-xs sm:text-sm"
             >
               <Play className="mr-1 sm:mr-2 h-3 w-3" />
               Demo
@@ -373,11 +271,8 @@ function ServiceCard({ service, isSelected, onAdd, onRemove }: ServiceCardProps)
           <Button
             size="sm"
             onClick={isSelected ? onRemove : onAdd}
-            className={`flex-1 transition-all duration-300 text-xs sm:text-sm ${
-              isSelected
-                ? "bg-red-500 hover:bg-red-600 text-white"
-                : "bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white"
-            }`}
+            variant={isSelected ? "destructive" : "default"}
+            className="flex-1 text-xs sm:text-sm"
           >
             {isSelected ? (
               <>
