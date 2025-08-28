@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { apiResponse, RateLimit, validateRequest } from '@/lib/apiSecurity'
+import { apiResponse, RateLimit } from '@/lib/apiSecurity'
 
 const rateLimit = new RateLimit({
   windowMs: 60000, // 1 minute

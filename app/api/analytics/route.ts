@@ -1,6 +1,5 @@
 import { NextRequest } from 'next/server'
 import { apiResponse, RateLimit, validateRequest } from '@/lib/apiSecurity'
-import { trackBusinessError } from '@/lib/errorTracking'
 
 const rateLimit = new RateLimit({
   windowMs: 60000, // 1 minute
@@ -130,7 +129,7 @@ async function processAnalyticsEvent(
       metadata: {
         userAgent: request.headers.get('user-agent'),
         referer: request.headers.get('referer'),
-        ip: hashIP(request.headers.get('x-forwarded-for') || request.ip || 'unknown')
+        ip: hashIP(request.headers.get('x-forwarded-for') || 'unknown')
       }
     }
 

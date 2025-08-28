@@ -95,7 +95,7 @@ export default function ContactPage() {
               <Card className="border-slate-800 bg-slate-900/30 backdrop-blur-md hover:shadow-[0_8px_32px_rgba(56,189,248,0.2)] transition-all duration-300">
                 <CardHeader>
                   <CardTitle className="text-white">Get In Touch</CardTitle>
-                  <CardDescription>We'd love to hear about your project</CardDescription>
+                  <CardDescription>We&apos;d love to hear about your project</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid gap-4">
