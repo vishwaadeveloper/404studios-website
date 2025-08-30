@@ -67,11 +67,11 @@ const cardColors = [
 interface ElectricCardProps {
   step: ProcessStep
   index: number
-  isActive: boolean
   isVisible: boolean
 }
 
-function ElectricCard({ step, index, isActive, isVisible }: ElectricCardProps) {
+function ElectricCard({ step, index, isVisible }: ElectricCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
   const cardColor = cardColors[index] || cardColors[0]
 
   // Get specific animation for each card type
@@ -115,13 +115,17 @@ function ElectricCard({ step, index, isActive, isVisible }: ElectricCardProps) {
     opacity: isVisible ? 1 : 0,
     transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     overflow: 'hidden',
-    ...(isActive ? activeStyle : dormantStyle)
+    ...(isHovered ? activeStyle : dormantStyle)
   }
 
   return (
-    <div className="relative w-full max-w-[320px] mx-auto">
-      {/* Outer electric aura - only when active */}
-      {isActive && (
+    <div 
+      className="relative w-full max-w-[320px] mx-auto"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Outer electric aura - only when hovered */}
+      {isHovered && (
         <div 
           className="absolute inset-0 rounded-2xl pointer-events-none -m-2"
           style={{
@@ -133,8 +137,8 @@ function ElectricCard({ step, index, isActive, isVisible }: ElectricCardProps) {
       )}
       
       <div style={baseCardStyle} className="relative z-10">
-        {/* Electric effects - only when active */}
-        {isActive && (
+        {/* Electric effects - only when hovered */}
+        {isHovered && (
           <>
             {/* Top electric line */}
             <div 
@@ -143,6 +147,29 @@ function ElectricCard({ step, index, isActive, isVisible }: ElectricCardProps) {
                 background: `linear-gradient(90deg, transparent 0%, ${cardColor.glow} 50%, transparent 100%)`,
                 animation: 'electricFlow 3s ease-in-out infinite'
               }}
+            />
+
+            {/* Animated gradient overlay */}
+            <div 
+              className="absolute inset-0 opacity-20 pointer-events-none"
+              style={{
+                background: `linear-gradient(45deg, transparent 30%, ${cardColor.glow}40 50%, transparent 70%)`,
+                animation: 'shimmer 2s ease-in-out infinite'
+              }}
+            />
+
+            {/* Corner glow effects */}
+            <div className="absolute top-2 right-2 w-3 h-3 rounded-full" 
+                 style={{
+                   background: `radial-gradient(circle, ${cardColor.glow} 0%, transparent 70%)`,
+                   animation: 'pulse 2s ease-in-out infinite'
+                 }} 
+            />
+            <div className="absolute bottom-2 left-2 w-3 h-3 rounded-full" 
+                 style={{
+                   background: `radial-gradient(circle, ${cardColor.glow} 0%, transparent 70%)`,
+                   animation: 'pulse 2s ease-in-out infinite 1s'
+                 }} 
             />
           </>
         )}
@@ -154,11 +181,11 @@ function ElectricCard({ step, index, isActive, isVisible }: ElectricCardProps) {
             <div 
               className="inline-flex items-center justify-center w-16 h-16 rounded-full mx-auto transition-all duration-500"
               style={{
-                background: isActive ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.05)',
-                border: isActive ? `1px solid ${cardColor.border}` : '1px solid rgba(255, 255, 255, 0.1)',
-                color: isActive ? cardColor.glow : 'rgba(255, 255, 255, 0.4)',
+                background: isHovered ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.05)',
+                border: isHovered ? `1px solid ${cardColor.border}` : '1px solid rgba(255, 255, 255, 0.1)',
+                color: isHovered ? cardColor.glow : 'rgba(255, 255, 255, 0.4)',
                 fontSize: '24px',
-                boxShadow: isActive ? `0 0 20px ${cardColor.glow}60` : 'none',
+                boxShadow: isHovered ? `0 0 20px ${cardColor.glow}60` : 'none',
                 animation: getIconAnimation()
               }}
             >
@@ -169,142 +196,26 @@ function ElectricCard({ step, index, isActive, isVisible }: ElectricCardProps) {
           {/* Content section */}
           <div className="flex-grow text-center">
             <h3 className={`text-2xl font-bold mb-3 transition-colors duration-500 ${
-              isActive ? 'text-white' : 'text-white/50'
+              isHovered ? 'text-white' : 'text-white/50'
             }`}>
               {step.title}
             </h3>
             <p className={`text-base leading-relaxed mb-4 transition-colors duration-500 ${
-              isActive ? 'text-white/80' : 'text-white/40'
+              isHovered ? 'text-white/80' : 'text-white/40'
             }`}>
               {step.description}
             </p>
             <div 
               className="text-sm font-semibold transition-all duration-500"
               style={{ 
-                color: isActive ? cardColor.glow : 'rgba(255, 255, 255, 0.3)',
-                textShadow: isActive ? `0 0 10px ${cardColor.glow}` : 'none'
+                color: isHovered ? cardColor.glow : 'rgba(255, 255, 255, 0.3)',
+                textShadow: isHovered ? `0 0 10px ${cardColor.glow}` : 'none'
               }}
             >
               {step.duration}
             </div>
           </div>
         </div>
-
-        {/* Lightning bolt connection */}
-        {index < processSteps.length - 1 && (
-          <div className="absolute top-1/2 -right-12 w-24 h-5 z-10 hidden lg:block">
-            <svg className="w-full h-full" viewBox="0 0 100 20" fill="none">
-              <defs>
-                <filter id={`lightningGlow-${index}`}>
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                  <feMerge> 
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-              
-              {/* Lightning bolt path - only show when current is flowing */}
-              {isActive && (
-                <>
-                  {/* Main lightning bolt zigzag path */}
-                  <path
-                    d="M5 10 L25 8 L35 12 L55 7 L65 13 L85 9 L95 10"
-                    stroke={cardColor.glow}
-                    strokeWidth="2"
-                    fill="none"
-                    filter={`url(#lightningGlow-${index})`}
-                    style={{
-                      strokeDasharray: '3 2',
-                      animation: 'lightningFlow 1s ease-in-out infinite'
-                    }}
-                  />
-                  
-                  {/* Lightning branches */}
-                  <path
-                    d="M25 8 L30 5 M35 12 L32 15 M55 7 L60 4 M65 13 L62 16"
-                    stroke={cardColor.glow}
-                    strokeWidth="1"
-                    fill="none"
-                    opacity="0.7"
-                    filter={`url(#lightningGlow-${index})`}
-                    style={{
-                      strokeDasharray: '2 1',
-                      animation: 'lightningFlow 1s ease-in-out infinite 0.2s'
-                    }}
-                  />
-                  
-                  {/* Electric sparks along the path */}
-                  <circle 
-                    r="2" 
-                    cy="10"
-                    fill={cardColor.glow} 
-                    style={{ 
-                      filter: `drop-shadow(0 0 6px ${cardColor.glow})`,
-                    }}
-                  >
-                    <animate
-                      attributeName="cx"
-                      values="5;25;35;55;65;85;95"
-                      dur="1s"
-                      repeatCount="indefinite"
-                    />
-                    <animate
-                      attributeName="cy"
-                      values="10;8;12;7;13;9;10"
-                      dur="1s"
-                      repeatCount="indefinite"
-                    />
-                    <animate
-                      attributeName="r"
-                      values="2;3;2;3;2;3;2"
-                      dur="1s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                  
-                  {/* Additional random sparks */}
-                  <circle 
-                    cx="40" cy="10" r="1" 
-                    fill={cardColor.glow} 
-                    opacity="0.8"
-                    style={{ 
-                      filter: `drop-shadow(0 0 4px ${cardColor.glow})`,
-                      animation: 'sparkFlicker 0.5s ease-in-out infinite'
-                    }}
-                  />
-                  <circle 
-                    cx="70" cy="11" r="1" 
-                    fill={cardColor.glow} 
-                    opacity="0.6"
-                    style={{ 
-                      filter: `drop-shadow(0 0 4px ${cardColor.glow})`,
-                      animation: 'sparkFlicker 0.3s ease-in-out infinite 0.2s'
-                    }}
-                  />
-                </>
-              )}
-              
-              {/* Connection points */}
-              <circle 
-                cx="5" cy="10" r="2" 
-                fill={isActive ? cardColor.glow : 'rgba(255,255,255,0.2)'} 
-                style={{ 
-                  filter: isActive ? `drop-shadow(0 0 6px ${cardColor.glow})` : 'none',
-                  transition: 'all 0.3s ease'
-                }}
-              />
-              
-              <circle 
-                cx="95" cy="10" r="2" 
-                fill={'rgba(255,255,255,0.2)'} 
-                style={{ 
-                  transition: 'all 0.3s ease'
-                }}
-              />
-            </svg>
-          </div>
-        )}
       </div>
     </div>
   )
@@ -313,14 +224,12 @@ function ElectricCard({ step, index, isActive, isVisible }: ElectricCardProps) {
 export default function ElectricCascadeCards() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [currentActiveIndex, setCurrentActiveIndex] = useState(-1)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
+        if (entry.isIntersecting) {
           setIsVisible(true)
-          startElectricLoop()
         }
       },
       { threshold: 0.2 }
@@ -331,39 +240,7 @@ export default function ElectricCascadeCards() {
     }
 
     return () => observer.disconnect()
-  }, [isVisible])
-
-  const startElectricLoop = () => {
-    const cardActivationTime = 1500 // How long each card stays lit
-    const pauseBetweenCards = 200 // Pause between cards
-    const pauseBetweenCycles = 2000 // Pause between full cycles
-    
-    const runCycle = () => {
-      // Reset all cards
-      setCurrentActiveIndex(-1)
-      
-      // Light up each card sequentially
-      processSteps.forEach((_, index) => {
-        // Turn on
-        setTimeout(() => {
-          setCurrentActiveIndex(index)
-        }, index * (cardActivationTime + pauseBetweenCards))
-        
-        // Turn off
-        setTimeout(() => {
-          setCurrentActiveIndex(-1)
-        }, index * (cardActivationTime + pauseBetweenCards) + cardActivationTime)
-      })
-      
-      // Schedule next cycle
-      setTimeout(() => {
-        runCycle()
-      }, processSteps.length * (cardActivationTime + pauseBetweenCards) + pauseBetweenCycles)
-    }
-    
-    // Start the first cycle after a brief delay
-    setTimeout(runCycle, 500)
-  }
+  }, [])
 
   return (
     <div 
@@ -375,7 +252,6 @@ export default function ElectricCascadeCards() {
           key={step.title}
           step={step}
           index={index}
-          isActive={currentActiveIndex === index}
           isVisible={isVisible}
         />
       ))}

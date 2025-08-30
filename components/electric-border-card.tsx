@@ -1,3 +1,5 @@
+import React from 'react'
+
 interface ElectricBorderCardProps {
   icon?: React.ReactNode;
   title?: string;
@@ -13,11 +15,20 @@ export default function ElectricBorderCard({
   badge = "Metallic",
   color = 'silver'
 }: ElectricBorderCardProps) {
+  const [isHovered, setIsHovered] = React.useState(false)
+  
+  // Create unique filter ID based on title to prevent cross-card interference
+  const uniqueFilterId = `turbulent-displace-${title.replace(/\s+/g, '-').toLowerCase()}`
+  
   return (
-    <>
+    <div 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="transition-all duration-300"
+    >
       <svg className="svg-container">
         <defs>
-          <filter id="turbulent-displace" colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
+          <filter id={uniqueFilterId} colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
             <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
               <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
@@ -56,15 +67,52 @@ export default function ElectricBorderCard({
       <div className={`card-container ${color !== 'silver' ? `electric-${color}` : ''}`}>
         <div className="inner-container">
           <div className="border-outer">
-            <div className="main-card"></div>
+            <div 
+              className="main-card"
+              style={{
+                filter: `url(#${uniqueFilterId})`,
+                opacity: isHovered ? 1 : 0.3,
+                transition: 'all 0.3s ease'
+              }}
+            ></div>
           </div>
-          <div className="glow-layer-1"></div>
-          <div className="glow-layer-2"></div>
+          <div 
+            className="glow-layer-1"
+            style={{
+              opacity: isHovered ? 1 : 0.2,
+              transition: 'opacity 0.3s ease'
+            }}
+          ></div>
+          <div 
+            className="glow-layer-2"
+            style={{
+              opacity: isHovered ? 1 : 0.2,
+              transition: 'opacity 0.3s ease'
+            }}
+          ></div>
         </div>
 
-        <div className="overlay-1"></div>
-        <div className="overlay-2"></div>
-        <div className="background-glow"></div>
+        <div 
+          className="overlay-1"
+          style={{
+            opacity: isHovered ? 1 : 0.3,
+            transition: 'opacity 0.3s ease'
+          }}
+        ></div>
+        <div 
+          className="overlay-2"
+          style={{
+            opacity: isHovered ? 1 : 0.3,
+            transition: 'opacity 0.3s ease'
+          }}
+        ></div>
+        <div 
+          className="background-glow"
+          style={{
+            opacity: isHovered ? 1 : 0.1,
+            transition: 'opacity 0.3s ease'
+          }}
+        ></div>
 
         <div className="content-container">
           <div className="content-top">
@@ -84,6 +132,6 @@ export default function ElectricBorderCard({
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

@@ -84,11 +84,18 @@ export default function Particle404StudiosNew() {
         const y = Math.floor(Math.random() * canvas.height)
 
         if (data[(y * canvas.width + x) * 4 + 3] > 128) {
-          // Calculate the actual center of the text area
-          const totalHeight = (isMobile ? 80 : 120) * 1.2 * 2
+          // Calculate the actual center based on the text positioning
+          // Text is drawn at: canvas.height / 2 - totalHeight / 2 + 30
+          // With "404" at y=0 and "Studios" at y=lineHeight in translated coordinates
+          const fontSize = isMobile ? 80 : 120
+          const lineHeight = fontSize * 1.2
+          const totalHeight = lineHeight * 2
           const textStartY = canvas.height / 2 - totalHeight / 2 + 30
-          const textCenterY = textStartY + totalHeight / 2
-          const is404Text = y < textCenterY // Top half is "404", bottom half is "Studios"
+          const line404Y = textStartY  // "404" line position
+          const lineStudiosY = textStartY + lineHeight  // "Studios" line position
+          const dividerY = textStartY + lineHeight / 2  // Middle point between lines
+          
+          const is404Text = y < dividerY // Top half is "404", bottom half is "Studios"
           
           return {
             x: x,
