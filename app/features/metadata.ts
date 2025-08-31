@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Features & Tiers - Complete Development Services Guide",
-  description: "Explore our comprehensive web development features and service tiers. From basic websites to advanced applications - understand exactly what's included in each package.",
-  keywords: ["web development features", "service tiers", "development packages", "website features", "custom development", "web app features"],
+  title: "AI Features & Tiers - Intelligent Development Capabilities",
+  description: "Explore AI development features: agents, automation, predictive analytics, smart monitoring, and adaptive UX tiers for every scale.",
+  keywords: ["AI features", "automation tiers", "AI agents", "predictive analytics", "workflow automation features", "intelligent monitoring"],
   openGraph: {
-    title: "Features & Tiers - 404studios Development Services",
-    description: "Explore our comprehensive web development features and service tiers. From basic websites to advanced applications.",
+    title: "AI Features & Tiers - 404studios",
+    description: "Browse AI development, automation, analytics, and intelligent optimization feature tiers.",
     url: "https://404studios.com/features",
     type: "website",
     images: [
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Features & Tiers - 404studios Development Services",
-    description: "Explore our comprehensive web development features and service tiers.",
+    title: "AI Features & Tiers - 404studios",
+    description: "AI development, automation, analytics, and monitoring capabilities.",
     images: ["/features-twitter-image.jpg"]
   }
 }

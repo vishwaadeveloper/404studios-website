@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Service Packages - Comprehensive Web Development Solutions",
-  description: "Discover our detailed service packages for web development, mobile apps, and digital solutions. Compare features, pricing, and choose the perfect package for your project needs.",
-  keywords: ["service packages", "web development packages", "development services", "website packages", "mobile app packages", "digital solutions"],
+  title: "AI Service Packages - Development & Automation Bundles",
+  description: "Compare AI-powered development, automation, chatbot, and intelligence packages. Faster delivery, lower cost, future-ready.",
+  keywords: ["AI service packages", "automation bundles", "AI development packages", "chatbot package", "business automation pricing"],
   openGraph: {
-    title: "Service Packages - 404studios Development Solutions",
-    description: "Discover our detailed service packages for web development, mobile apps, and digital solutions.",
+    title: "AI Service Packages - 404studios",
+    description: "AI development, automation, chatbot, and predictive analytics bundles.",
     url: "https://404studios.com/packages",
     type: "website",
     images: [
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Service Packages - 404studios Development Solutions", 
-    description: "Discover our detailed service packages for web development, mobile apps, and digital solutions.",
+    title: "AI Service Packages - 404studios", 
+    description: "Compare AI development & automation bundle options.",
     images: ["/packages-twitter-image.jpg"]
   }
 }

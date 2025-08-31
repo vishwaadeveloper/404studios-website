@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Website Pricing Calculator - Get Instant Development Quotes",
-  description: "Calculate your custom website development cost instantly. Interactive pricing tool for web applications, mobile apps, and digital solutions. Get accurate quotes based on your requirements.",
-  keywords: ["pricing calculator", "website cost", "development pricing", "web app pricing", "custom quote", "website estimate", "development cost calculator"],
+  title: "AI-Powered Pricing Calculator - Intelligent Project Estimator",
+  description: "Estimate AI development, automation, chatbot, and integration costs instantly. 50% faster delivery & 30% lower total build cost.",
+  keywords: ["AI pricing calculator", "automation project cost", "AI development estimate", "AI agent pricing", "chatbot cost", "workflow automation pricing"],
   openGraph: {
-    title: "Website Pricing Calculator - 404studios",
-    description: "Calculate your custom website development cost instantly with our interactive pricing tool.",
+    title: "AI Project Pricing Calculator - 404studios",
+    description: "Get instant AI development & automation estimates with intelligent pricing logic.",
     url: "https://404studios.com/pricing",
     type: "website",
     images: [
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Website Pricing Calculator - 404studios",
-    description: "Calculate your custom website development cost instantly with our interactive pricing tool.",
+    title: "AI Project Pricing Calculator - 404studios",
+    description: "Instant AI development & automation cost estimates.",
     images: ["/pricing-twitter-image.jpg"]
   }
 }

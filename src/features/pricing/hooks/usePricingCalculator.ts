@@ -4,7 +4,7 @@ import { businessTypes } from "../data/businessTypes"
 import type { CalculatorHookReturn } from "../types/pricing.types"
 
 export const usePricingCalculator = (): CalculatorHookReturn => {
-  const [businessType, setBusinessType] = useState<string>("portfolio")
+  const [businessType, setBusinessType] = useState<string>("ai-startup")
   const [selections, setSelections] = useState<Record<string, string | null>>({})
   const [pageCounts, setPageCounts] = useState<Record<string, number>>({})
   const [pageNames, setPageNames] = useState<Record<string, string[]>>({})

@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { useFeaturesCatalog } from "@/src/features/features-catalog"
+import { getTierLabel } from "@/lib/tierLabels"
 
 export default function PackagesPage() {
   const { 
@@ -182,7 +183,7 @@ export default function PackagesPage() {
                                                 : "text-purple-400"
                                           }`}
                                         >
-                                          {tier.tier}
+                                          {getTierLabel(tier.tier, 'short')}
                                         </CardTitle>
                                       </div>
                                     </CardHeader>

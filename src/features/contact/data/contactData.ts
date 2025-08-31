@@ -41,36 +41,36 @@ export const availableTimeSlots: TimeSlot[] = [
 ];
 
 export const projectTypes = [
-  { value: 'website', label: 'Website' },
-  { value: 'mobile-app', label: 'Mobile App' },
-  { value: 'web-app', label: 'Web Application' },
-  { value: 'ecommerce', label: 'E-commerce' },
-  { value: 'redesign', label: 'Redesign' },
-  { value: 'other', label: 'Other' }
+  { value: 'ai-website-development', label: 'AI Website Development' },
+  { value: 'mobile-app-ai', label: 'Mobile App with AI Features' },
+  { value: 'business-process-automation', label: 'Business Process Automation' },
+  { value: 'custom-ai-agent', label: 'Custom AI Agent Development' },
+  { value: 'intelligent-chatbot', label: 'Intelligent Chatbot Implementation' },
+  { value: 'legacy-ai-enhancement', label: 'Legacy System AI Enhancement' },
+  { value: 'workflow-automation', label: 'Workflow Automation' },
+  { value: 'ecommerce-ai-integration', label: 'E-commerce AI Integration' },
+  { value: 'other', label: 'Other / Not Listed' }
 ];
 
 export const budgetRanges = [
-  { value: 'under-5k', label: 'Under ₹5,000' },
-  { value: '5k-10k', label: '₹5,000 - ₹10,000' },
-  { value: '10k-25k', label: '₹10,000 - ₹25,000' },
-  { value: '25k-50k', label: '₹25,000 - ₹50,000' },
-  { value: '50k-100k', label: '₹50,000 - ₹100,000' },
-  { value: 'above-100k', label: 'Above ₹100,000' }
+  { value: '15k-35k', label: '₹15,000 - ₹35,000 (AI Starter)' },
+  { value: '35k-65k', label: '₹35,000 - ₹65,000 (AI Professional)' },
+  { value: '65k-100k', label: '₹65,000 - ₹1,00,000 (AI Professional Plus)' },
+  { value: '100k+', label: '₹1,00,000+ (AI Enterprise)' }
 ];
 
 export const timelineOptions = [
-  { value: 'asap', label: 'ASAP' },
-  { value: '1-2-weeks', label: '1-2 weeks' },
-  { value: '2-4-weeks', label: '2-4 weeks' },
-  { value: '1-2-months', label: '1-2 months' },
-  { value: '2-3-months', label: '2-3 months' },
-  { value: 'flexible', label: 'Flexible' }
+  { value: '1-2-weeks', label: '1-2 weeks (AI Rapid)' },
+  { value: '2-4-weeks', label: '2-4 weeks (AI Standard)' },
+  { value: '1-2-months', label: '1-2 months (AI Enterprise)' },
+  { value: '2plus-months', label: '2+ months (Custom AI Solutions)' },
+  { value: 'flexible', label: 'Flexible / Not Sure' }
 ];
 
 export const packageOptions = [
-  { value: 'basic', label: 'Basic Package' },
-  { value: 'standard', label: 'Standard Package' },
-  { value: 'advanced', label: 'Advanced Package' },
-  { value: 'custom', label: 'Custom Solution' },
+  { value: 'ai-starter', label: 'AI-Starter Package' },
+  { value: 'ai-professional', label: 'AI-Professional Package' },
+  { value: 'ai-enterprise', label: 'AI-Enterprise Package' },
+  { value: 'custom', label: 'Custom AI Solution' },
   { value: 'not-sure', label: 'Not Sure Yet' }
 ];

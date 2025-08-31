@@ -1,364 +1,221 @@
-import { 
-  Code, 
-  Database, 
-  MessageCircle, 
-  Settings, 
-  Shield 
+import {
+  Cpu,
+  Bot,
+  Zap,
+  Settings2,
+  BrainCircuit,
+  MessageSquare,
+  LineChart,
+  Gauge,
+  Cable,
+  Eye,
+  ShieldCheck
 } from 'lucide-react';
 import { FeatureCatalog } from '../types/features.types';
 
 export const featureCatalogData: FeatureCatalog = [
   {
-    group: "Core Website Features",
-    icon: <Code className="h-5 w-5 sm:h-6 sm:w-6 text-cyan-400" />,
-    description: "Essential building blocks for any modern website",
+    group: "AI Development Core",
+    icon: <Cpu className="h-5 w-5 sm:h-6 sm:w-6 text-cyan-400" />,
+    description: "Foundational intelligent build capabilities for accelerated delivery",
     features: [
       {
-        feature: "Static Page",
-        explanation: "A classic site page (like Home, About, or Contact)—always mobile friendly.",
+        feature: "AI Code Generation",
+        explanation: "Automated, optimization-aware code scaffolding & refactoring.",
         tiers: [
-          {
-            tier: "Basic",
-            include:
-              "A straightforward web page with text and images, built to look clean and function well on any device. No advanced layouts.",
-          },
-          {
-            tier: "Standard",
-            include:
-              "A custom-designed page with richer structure, sections, and subtle UI animations. Handles more detailed content and gives your brand a distinct feel.",
-          },
-          {
-            tier: "Advanced",
-            include:
-              "Highly-polished layouts with interactive sections, advanced CSS/JS effects, and modular structure for maximum impact.",
-          },
+          { tier: "Basic", include: "Starter templates & component generation." },
+          { tier: "Standard", include: "Contextual multi-module generation & refactoring." },
+          { tier: "Advanced", include: "Architecture-guided output with performance tuning." },
         ],
       },
       {
-        feature: "Dynamic Page",
-        explanation: "Content-managed pages—blogs, listings, etc.—easily updatable by you.",
+        feature: "Smart UI/UX",
+        explanation: "AI-driven layout, accessibility and interaction refinement.",
         tiers: [
-          {
-            tier: "Basic",
-            include:
-              "A content-managed page (like a blog or news feed) editable from your admin panel. Data is stored in a backend, and updates are instant.",
-          },
-          {
-            tier: "Standard",
-            include:
-              "Adds user-friendly search, filtering, and richer content types. Ideal for product listings, event calendars, or portfolios needing more interactivity.",
-          },
-          {
-            tier: "Advanced",
-            include:
-              "Enables user accounts, permissions, analytics modules, custom content types, and API-driven data integrations—suited for dashboards or complex listings.",
-          },
+          { tier: "Basic", include: "Heuristic-based layout suggestions." },
+          { tier: "Standard", include: "Flow optimization & contrast/accessibility improvements." },
+          { tier: "Advanced", include: "Predictive adaptive interfaces & personalization." },
         ],
       },
       {
-        feature: "Animations & Interactions",
-        explanation: "Modern motion effects—from subtle hovers to 3D wow.",
+        feature: "Performance AI",
+        explanation: "Continuous telemetry-led performance enhancement.",
         tiers: [
-          {
-            tier: "Basic",
-            include: "Smooth transitions (e.g., fades, button animations) that make the experience feel modern.",
-          },
-          {
-            tier: "Standard",
-            include: "Section reveals, scroll effects, and basic parallax motion for an engaging, interactive flow.",
-          },
-          {
-            tier: "Advanced",
-            include:
-              "High-end animations and 3D or scroll-driven interactive UI—think immersive effects, animated cards, or visual storytelling.",
-          },
+          { tier: "Basic", include: "Baseline Core Web Vitals uplift." },
+          { tier: "Standard", include: "Intelligent asset & bundle optimization cycles." },
+          { tier: "Advanced", include: "Self-adjusting runtime profiling & anomaly prevention." },
         ],
       },
       {
-        feature: "Image Gallery",
-        explanation: "Visually showcase your photos, work, or products.",
+        feature: "Quality Assurance",
+        explanation: "AI-assisted test generation & defect detection.",
         tiers: [
-          { tier: "Basic", include: "Grid layout of images with basic click-to-enlarge (lightbox functionality)." },
-          {
-            tier: "Standard",
-            include:
-              "Includes filtering options, subtle entry animations, and responsive design so galleries adapt to any screen.",
-          },
-          {
-            tier: "Advanced",
-            include: "Enhanced lightboxes, custom carousels/sliders, and built-in sharing or tagging.",
-          },
-        ],
-      },
-      {
-        feature: "Contact Form",
-        explanation: "Let customers contact you in one click.",
-        tiers: [
-          {
-            tier: "Basic",
-            include: "Standard online form with necessary fields. Secure and delivers queries to your email.",
-          },
-          {
-            tier: "Standard",
-            include: "Adds dynamic validation, spam prevention, and support for custom contact fields.",
-          },
-          {
-            tier: "Advanced",
-            include:
-              "Multi-step forms, file uploads, conditional logic (fields can change based on user input), and backend routing for smarter response handling.",
-          },
-        ],
-      },
-      {
-        feature: "SEO Essentials",
-        explanation: "Foundational tools for being discovered on Google.",
-        tiers: [
-          {
-            tier: "Basic",
-            include: "Meta tags set up, sitemap.xml, and basic mobile/desktop optimization for discoverability.",
-          },
-          {
-            tier: "Standard",
-            include:
-              "Social media previews (Open Graph), Google Analytics integration, and schema markup for better search result snippets.",
-          },
-          {
-            tier: "Advanced",
-            include:
-              "Technical SEO (structured data, advanced schema), content suggestions, and regular audits for ongoing improvement.",
-          },
+          { tier: "Basic", include: "Smoke & core flow automation." },
+          { tier: "Standard", include: "Mutation + integration + visual diff coverage." },
+          { tier: "Advanced", include: "Risk-based prioritization & self-healing suites." },
         ],
       },
     ],
   },
   {
-    group: "Business & Transactional Features",
-    icon: <Database className="h-5 w-5 sm:h-6 sm:w-6 text-purple-400" />,
-    description: "Advanced functionality for commerce and user management",
+    group: "Business Automation",
+    icon: <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-purple-400" />,
+    description: "Intelligent automation layers reducing operational overhead",
     features: [
       {
-        feature: "User Authentication",
-        explanation: "Let visitors create secure accounts and control what they access.",
+        feature: "Custom AI Agents",
+        explanation: "Autonomous task agents orchestrating business logic.",
         tiers: [
-          {
-            tier: "Basic",
-            include: "User registration and login forms, password reset via email, with security best practices.",
-          },
-          { tier: "Standard", include: "Profile pages, email verification for signup, and basic permission controls." },
-          {
-            tier: "Advanced",
-            include: "Social logins (Google/Facebook), 2FA, and granular access levels for different user types.",
-          },
+          { tier: "Basic", include: "Single-scope deterministic agent." },
+          { tier: "Standard", include: "Multi-step contextual agent with memory." },
+          { tier: "Advanced", include: "Distributed agent network & supervision." },
         ],
       },
       {
-        feature: "Payment Integration",
-        explanation: "Accept payments through trusted online gateways, all secure.",
+        feature: "Chatbot Integration",
+        explanation: "Conversational AI for support & conversion.",
         tiers: [
-          { tier: "Basic", include: "Single provider (e.g., UPI, major card) connected via secure gateway." },
-          {
-            tier: "Standard",
-            include: "Multiple payment options, order/invoice linking, and payment status tracking.",
-          },
-          {
-            tier: "Advanced",
-            include: "Support for subscriptions, custom payment flows, and detailed payment reporting.",
-          },
+          { tier: "Basic", include: "FAQ & intent classification bot." },
+          { tier: "Standard", include: "Retrieval-augmented domain knowledge agent." },
+          { tier: "Advanced", include: "Multi-channel adaptive assistant with analytics." },
         ],
       },
       {
-        feature: "Cart & Checkout",
-        explanation: "From browsing to buying—manage every step for online sales.",
+        feature: "Workflow Automation",
+        explanation: "Process orchestration & trigger-based execution.",
         tiers: [
-          { tier: "Basic", include: "Simple cart and checkout system—core add-to-cart and purchase flow." },
-          {
-            tier: "Standard",
-            include: "Cart persistence, coupon codes, customer addresses, and save-for-later features.",
-          },
-          {
-            tier: "Advanced",
-            include: "Automation (abandoned cart emails), analytics, and custom checkout experiences.",
-          },
+          { tier: "Basic", include: "Linear 2–3 step flows." },
+          { tier: "Standard", include: "Conditional branching, retries & logging." },
+          { tier: "Advanced", include: "Cross-system orchestration & audit trails." },
         ],
       },
       {
-        feature: "Booking/Appointment System",
-        explanation: "Let clients schedule services or meetings in seconds.",
+        feature: "Data Intelligence",
+        explanation: "AI-powered enrichment, classification & insights.",
         tiers: [
-          { tier: "Basic", include: "Scheduling for a single service. Admin approves bookings from the backend." },
-          {
-            tier: "Standard",
-            include:
-              "Multiple services, automated reminders, customer self-management, and real-time calendar updates.",
-          },
-          {
-            tier: "Advanced",
-            include:
-              "Full workflow automation (e.g., payment-on-booking), recurring reservations, customer dashboard, and analytics integration.",
-          },
-        ],
-      },
-      {
-        feature: "Admin Panel",
-        explanation: "Your all-in-one dashboard to publish, manage, and analyze—powered by Directus.",
-        tiers: [
-          {
-            tier: "Basic",
-            include: "Visual dashboard for managing pages, media, and core content. Standard user access.",
-          },
-          { tier: "Standard", include: "Modules for orders, bookings, product management, and basic analytics." },
-          {
-            tier: "Advanced",
-            include:
-              "Customizable roles and permissions, workflow automations, API/webhook integrations, and advanced analytics.",
-          },
+          { tier: "Basic", include: "Scheduled cleansing & normalization." },
+          { tier: "Standard", include: "Entity extraction + aggregation dashboards." },
+          { tier: "Advanced", include: "Predictive modeling & real-time scoring." },
         ],
       },
     ],
   },
   {
-    group: "Growth & Communication",
-    icon: <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 text-green-400" />,
-    description: "Tools to engage visitors and grow your audience",
+    group: "AI Integration Services",
+    icon: <Cable className="h-5 w-5 sm:h-6 sm:w-6 text-green-400" />,
+    description: "Embedding intelligence into existing platforms & data flows",
     features: [
       {
-        feature: "Testimonials/Reviews",
-        explanation: "Build trust with real customer feedback.",
+        feature: "Legacy Enhancement",
+        explanation: "Wrap and modernize legacy systems with inference layers.",
         tiers: [
-          { tier: "Basic", include: "Site admin displays and updates a fixed set of customer quotes or reviews." },
-          { tier: "Standard", include: "User reviews/ratings, slider or carousel display, moderation by admin." },
-          { tier: "Advanced", include: "End-users submit reviews onsite, advanced moderation and filtering support." },
+          { tier: "Basic", include: "Read-only augmentation adapter." },
+          { tier: "Standard", include: "Bi-directional sync + caching." },
+          { tier: "Advanced", include: "Modular modernization & inference routing." },
         ],
       },
       {
-        feature: "Newsletter Signup",
-        explanation: "Grow your audience and nurture leads for email marketing.",
+        feature: "API Intelligence",
+        explanation: "Smart API orchestration & LLM provider abstraction.",
         tiers: [
-          { tier: "Basic", include: "Single-field email capture with manual export/download option." },
-          { tier: "Standard", include: "Automated integration with newsletter platforms, segmentation support." },
-          {
-            tier: "Advanced",
-            include: "Double opt-in flows, analytics, and personalized subscription management for visitors.",
-          },
+          { tier: "Basic", include: "Single AI provider integration." },
+          { tier: "Standard", include: "Multi-provider fallback routing." },
+          { tier: "Advanced", include: "Adaptive model selection + observability." },
         ],
       },
       {
-        feature: "Live Chat/Chatbot",
-        explanation: "Connect with visitors instantly—live or automated.",
+        feature: "Predictive Analytics",
+        explanation: "Forecasting & anomaly detection intelligence.",
         tiers: [
-          { tier: "Basic", include: "Operator chat box for direct messaging during set business hours." },
-          { tier: "Standard", include: "Automated chat assistance (scripts or basic AI), FAQ handling." },
-          { tier: "Advanced", include: "AI-powered (GPT-class) chat, custom knowledge integration, 24/7 response." },
+          { tier: "Basic", include: "Trend projections & KPI baselines." },
+          { tier: "Standard", include: "Multi-variable forecasting & dashboards." },
+          { tier: "Advanced", include: "Real-time streaming predictive alerts." },
         ],
       },
       {
-        feature: "Blog/Content Module",
-        explanation: "Share updates, resources, and articles for SEO and authority.",
+        feature: "Smart Monitoring",
+        explanation: "AI-observed performance, stability & usage telemetry.",
         tiers: [
-          { tier: "Basic", include: "Admin-published articles with a simple editor and basic categories/tags." },
-          { tier: "Standard", include: "Rich media content, SEO formatting, author profiles, and scheduling." },
-          { tier: "Advanced", include: "User submissions, commenting, multimedia, and advanced publishing workflows." },
-        ],
-      },
-      {
-        feature: "Multilingual Support",
-        explanation: "Make your content available in multiple languages.",
-        tiers: [
-          { tier: "Basic", include: "Supports one additional language; users enter all content manually." },
-          { tier: "Standard", include: "Three language support, language-picker UI, content in multiple languages." },
-          {
-            tier: "Advanced",
-            include: "Automated translation tools, unlimited languages, and CMS-driven content management.",
-          },
+          { tier: "Basic", include: "Core metric tracking & notifications." },
+          { tier: "Standard", include: "Anomaly detection & trend insights." },
+          { tier: "Advanced", include: "Proactive remediation suggestions & root cause analysis." },
         ],
       },
     ],
   },
   {
-    group: "Backend & Integrations",
-    icon: <Settings className="h-5 w-5 sm:h-6 sm:w-6 text-orange-400" />,
-    description: "Technical infrastructure and third-party connections",
+    group: "Intelligent Experience Layer",
+    icon: <Eye className="h-5 w-5 sm:h-6 sm:w-6 text-orange-400" />,
+    description: "Adaptive, optimized, user-facing intelligence",
     features: [
       {
-        feature: "Supabase/Firebase Backend",
-        explanation: "Fast, modern backends for app-like experiences.",
+        feature: "AI Content Management",
+        explanation: "Generation, moderation & personalization workflows.",
         tiers: [
-          { tier: "Basic", include: "User auth, basic data storage, and real-time updates." },
-          { tier: "Standard", include: "Custom data models, file storage, and serverless functions." },
-          { tier: "Advanced", include: "Role permissions, advanced triggers, API integrations." },
+          { tier: "Basic", include: "Assisted draft generation + moderation queue." },
+          { tier: "Standard", include: "Multi-channel enrichment & tagging." },
+          { tier: "Advanced", include: "Personalized delivery & semantic clustering." },
         ],
       },
       {
-        feature: "Custom Backend/API",
-        explanation: "Tailored data & integration for your unique needs.",
+        feature: "Automated Testing",
+        explanation: "AI-authored and self-healing test frameworks.",
         tiers: [
-          { tier: "Basic", include: "Simple CRUD endpoints, connection for data display or collection." },
-          { tier: "Standard", include: "Secure authentication, role-based APIs, and business automation logic." },
-          {
-            tier: "Advanced",
-            include: "Complex, scalable APIs, real-time callbacks, third-party integration support.",
-          },
+          { tier: "Basic", include: "Core regression coverage." },
+          { tier: "Standard", include: "Visual & mutation testing harness." },
+          { tier: "Advanced", include: "Adaptive flake detection & prioritization." },
         ],
       },
       {
-        feature: "Analytics Dashboard",
-        explanation: "Visualize site visits and user behavior data.",
+        feature: "AI-Enhanced SEO",
+        explanation: "Semantic optimization & competitive intelligence.",
         tiers: [
-          { tier: "Basic", include: "Google Analytics embed, page traffic, basic engagement stats." },
-          { tier: "Standard", include: "Custom events, conversion funnel tracking, dashboard visualizations." },
-          { tier: "Advanced", include: "Real-time metrics, advanced segmenting, and export features." },
+          { tier: "Basic", include: "Metadata + baseline semantic suggestions." },
+          { tier: "Standard", include: "Keyword gap + structured data automation." },
+          { tier: "Advanced", include: "Continuous AI content scoring & strategy insights." },
         ],
       },
       {
-        feature: "Performance Optimization",
-        explanation: "Make your site load and run at its absolute best.",
+        feature: "User Feedback Intelligence",
+        explanation: "Automated clustering & sentiment evaluation.",
         tiers: [
-          { tier: "Basic", include: "Lazy image loading, asset minification, and gzip compression." },
-          { tier: "Standard", include: "Code splitting, CDN integration, advanced caching." },
-          { tier: "Advanced", include: "In-depth audits, custom runtime tuning, uptime/load monitoring." },
+          { tier: "Basic", include: "Feedback aggregation & tagging." },
+          { tier: "Standard", include: "Sentiment scoring & trend grouping." },
+          { tier: "Advanced", include: "Predictive churn risk & feature impact scoring." },
         ],
       },
     ],
   },
   {
-    group: "After-Launch Support",
-    icon: <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" />,
-    description: "Ongoing maintenance and optimization services",
+    group: "Lifecycle & Security",
+    icon: <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" />,
+    description: "Post-launch assurance, resilience & evolution",
     features: [
       {
         feature: "Maintenance & Support",
-        explanation: "Keep your site healthy with ongoing support.",
+        explanation: "Predictive maintenance & assisted triage.",
         tiers: [
-          { tier: "Basic", include: "Occasional support via email, minor bug fixes, basic uptime monitoring." },
-          { tier: "Standard", include: "Regular content updates, troubleshooting, and system health checks." },
-          { tier: "Advanced", include: "Priority help, proactive monitoring, and upgrade management." },
+          { tier: "Basic", include: "Core patching & uptime monitoring." },
+          { tier: "Standard", include: "Automated diagnostics & prioritized response." },
+          { tier: "Advanced", include: "Predictive incident prevention & SLA guarantees." },
         ],
       },
       {
-        feature: "SEO Optimization",
-        explanation: "Set your site up for ongoing search success.",
+        feature: "Security & Compliance AI",
+        explanation: "Adaptive vulnerability & policy intelligence.",
         tiers: [
-          { tier: "Basic", include: "Snapshot SEO review (titles, tags, crawl), basic improvement suggestions." },
-          {
-            tier: "Standard",
-            include: "Social previews, enhanced metadata, performance tuning, and competitor insight.",
-          },
-          {
-            tier: "Advanced",
-            include: "Full-site technical audit, deep analysis, search ranking tracking, and actionable plan.",
-          },
+          { tier: "Basic", include: "Static scans & dependency audit." },
+          { tier: "Standard", include: "Runtime anomaly detection & policy checks." },
+          { tier: "Advanced", include: "Threat modeling & automated remediation proposals." },
         ],
       },
       {
-        feature: "Custom Add-ons (AI, 3D, etc.)",
-        explanation: "Future-ready extras like AI chatbots or interactive 3D.",
+        feature: "Custom Add-ons",
+        explanation: "Specialized AI or immersive capability deployment.",
         tiers: [
-          { tier: "Basic", include: "Simple add-on (e.g., animated widget or basic AI bot for FAQs)" },
-          { tier: "Standard", include: "Trained AI assistant or interactive 3D product/scene." },
-          {
-            tier: "Advanced",
-            include: "Deeply integrated AI, business automation, or fully custom 3D/AR/VR features.",
-          },
+          { tier: "Basic", include: "Single auxiliary AI enhancement." },
+          { tier: "Standard", include: "Integrated workflow or interface module." },
+          { tier: "Advanced", include: "Bespoke autonomous or multi-agent system." },
         ],
       },
     ],

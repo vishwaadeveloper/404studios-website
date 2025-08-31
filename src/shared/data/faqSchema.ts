@@ -5,42 +5,42 @@ export const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How much does a custom website cost?",
+      "name": "How does AI make development faster?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Website costs vary based on complexity and features. Our pricing calculator helps you get an accurate estimate ranging from $5,000 for basic sites to $50,000+ for complex applications. Use our interactive pricing tool for a personalized quote."
+        "text": "AI accelerates development by generating boilerplate code, auto-refactoring modules, and predicting optimal architecture decisions—resulting in up to 50% faster delivery compared to traditional processes."
       }
     },
     {
       "@type": "Question",
-      "name": "How long does it take to build a website?",
+      "name": "What is the cost benefit of AI-powered development?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Development time depends on project scope. Simple websites take 1-2 weeks, while complex web applications can take 4-12 weeks. We provide detailed timelines during our discovery phase."
+        "text": "AI-driven automation reduces manual engineering, testing, and optimization time—typically lowering total project cost by 30% while improving long-term maintainability."
       }
     },
     {
       "@type": "Question",
-      "name": "Do you provide ongoing maintenance and support?",
+      "name": "Can you integrate AI into existing websites?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, we offer comprehensive maintenance packages including security updates, performance optimization, content updates, and technical support. Our maintenance plans ensure your website stays secure and up-to-date."
+        "text": "Yes. We layer AI capabilities like chatbots, classification, predictive analytics, and workflow automation on top of existing systems without full rewrites through modular integration."
       }
     },
     {
       "@type": "Question",
-      "name": "What technologies do you use for web development?",
+      "name": "What types of AI agents do you develop?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We use modern technologies including React, Next.js, TypeScript, Node.js, and various databases. Our tech stack is chosen based on project requirements to ensure optimal performance and scalability."
+        "text": "We build custom AI agents for customer support, data processing, lead qualification, operational monitoring, and workflow execution—each tailored to your unique business logic and objectives."
       }
     },
     {
       "@type": "Question",
-      "name": "Can you help with SEO and digital marketing?",
+      "name": "How do AI chatbots improve business efficiency?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely! We provide comprehensive SEO optimization, including technical SEO, on-page optimization, performance improvements, and structured data implementation. We also offer ongoing digital marketing consultation."
+        "text": "AI chatbots deliver 24/7 intelligent responses, reduce support workload, increase lead conversion, and provide structured feedback data—allowing teams to focus on higher-value tasks."
       }
     }
   ]

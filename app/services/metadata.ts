@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Our Services - Professional Web & Mobile Development",
-  description: "Comprehensive web development, mobile app development, UI/UX design, and digital transformation services. Expert solutions with modern technologies and cutting-edge design.",
-  keywords: ["web development services", "mobile app development", "UI/UX design", "digital services", "custom software", "full-stack development"],
+  title: "AI-Powered Services - Intelligent Development & Automation",
+  description: "AI-powered development, automation, and integration services delivering 50% faster delivery, 30% cost reduction, and future-ready solutions.",
+  keywords: ["AI-powered development", "business automation", "AI agents", "intelligent chatbots", "workflow automation", "predictive analytics", "AI integration"],
   openGraph: {
-    title: "Our Services - 404studios Professional Development",
-    description: "Comprehensive web development, mobile app development, UI/UX design, and digital transformation services.",
+    title: "AI-Powered Services - 404studios Intelligent Development",
+    description: "AI development, automation, agents, chatbots, and predictive analytics for faster, smarter delivery.",
     url: "https://404studios.com/services",
     type: "website",
     images: [
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Our Services - 404studios Professional Development",
-    description: "Comprehensive web development, mobile app development, UI/UX design, and digital transformation services.",
+    title: "AI-Powered Services - 404studios",
+    description: "AI development, automation, agents, chatbots, and predictive analytics for faster, smarter delivery.",
     images: ["/services-twitter-image.jpg"]
   }
 }

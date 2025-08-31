@@ -26,7 +26,7 @@ export default function Particle404Studios() {
 
     updateCanvasSize()
 
-    let particles: {
+    type Particle = {
       x: number
       y: number
       baseX: number
@@ -36,7 +36,9 @@ export default function Particle404Studios() {
       scatteredColor: string
       life: number
       is404: boolean
-    }[] = []
+    }
+
+    let particles: Particle[] = []
 
     let textImageData: ImageData | null = null
 
@@ -107,8 +109,7 @@ export default function Particle404Studios() {
 
     function createSystematicParticles(fontSize: number) {
       if (!ctx || !canvas || !textImageData) return []
-
-      const particles: typeof particles = []
+      const localParticles: Particle[] = []
       const data = textImageData.data
       const step = 2 // Smaller step for sharper text
       
@@ -122,7 +123,7 @@ export default function Particle404Studios() {
             const centerY = canvas.height / 2
             const is404Text = y < centerY
             
-            particles.push({
+    localParticles.push({
               x: x,
               y: y,
               baseX: x,
@@ -137,7 +138,7 @@ export default function Particle404Studios() {
         }
       }
       
-      return particles
+  return localParticles
     }
 
     function createInitialParticles(fontSize: number) {

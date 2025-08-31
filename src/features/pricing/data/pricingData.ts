@@ -1,258 +1,180 @@
 import type { PricingData } from "../types/pricing.types"
 
+// NOTE: Tier names remain the same TypeScript-wise (Basic/Standard/Advanced) to avoid refactoring runtime logic.
+// We reinterpret them as AI-Starter (Basic), AI-Professional (Standard), AI-Enterprise (Advanced) in UI copy elsewhere.
 export const pricingData: PricingData = [
   {
-    group: "Core Website Features",
+    group: "AI Development Core",
+    features: [
+      {
+        feature: "AI Code Generation",
+        desc: "Automated code scaffolding & acceleration (50% faster delivery)",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Foundational AI-assisted generation.", price: 3000 },
+          { name: "Standard", desc: "AI-Professional: Context-aware multi-module generation.", price: 5000 },
+          { name: "Advanced", desc: "AI-Enterprise: Architecture-guided, optimization-focused generation.", price: 8000 },
+        ],
+        isCountable: false,
+      },
+      {
+        feature: "Automated UI/UX Enhancement",
+        desc: "AI-driven heuristic & accessibility improvements",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Basic layout & contrast suggestions.", price: 2500 },
+          { name: "Standard", desc: "AI-Professional: Interaction flow optimization & heatmap insights.", price: 4000 },
+          { name: "Advanced", desc: "AI-Enterprise: Adaptive personalization & predictive UX tuning.", price: 6500 },
+        ],
+        isCountable: false,
+      },
+      {
+        feature: "Performance AI Optimization",
+        desc: "Adaptive performance tuning with AI analysis",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Core Web Vitals baseline improvements.", price: 2000 },
+          { name: "Standard", desc: "AI-Professional: Predictive bundle & latency optimization.", price: 3500 },
+          { name: "Advanced", desc: "AI-Enterprise: Continuous intelligence loop & anomaly prevention.", price: 5000 },
+        ],
+        isCountable: false,
+      },
+      {
+        feature: "AI-Powered Testing",
+        desc: "Automated test generation & regression detection",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Core flow coverage & smoke tests.", price: 1500 },
+          { name: "Standard", desc: "AI-Professional: Mutation + visual diff + integration tests.", price: 3000 },
+          { name: "Advanced", desc: "AI-Enterprise: Risk-based prioritization & self-healing suites.", price: 4500 },
+        ],
+        isCountable: false,
+      },
+    ],
+  },
+  {
+    group: "Business Automation",
+    features: [
+      {
+        feature: "Custom AI Agents",
+        desc: "Task-focused autonomous agents reducing manual load",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Single-scope agent with prompt logic.", price: 8000 },
+          { name: "Standard", desc: "AI-Professional: Multi-step agent with state & memory.", price: 15000 },
+          { name: "Advanced", desc: "AI-Enterprise: Orchestrated agent network w/ monitoring.", price: 25000 },
+        ],
+        isCountable: false,
+      },
+      {
+        feature: "Intelligent Chatbots",
+        desc: "Conversational AI for support & conversion",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: FAQ & scripted knowledge.", price: 5000 },
+          { name: "Standard", desc: "AI-Professional: Domain-tuned retrieval augmented bot.", price: 12000 },
+          { name: "Advanced", desc: "AI-Enterprise: Multi-channel contextual assistant with analytics.", price: 20000 },
+        ],
+        isCountable: false,
+      },
+      {
+        feature: "Workflow Automation",
+        desc: "End-to-end process orchestration",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: 2-3 step automation flows.", price: 6000 },
+          { name: "Standard", desc: "AI-Professional: Conditional branching & error recovery.", price: 12000 },
+          { name: "Advanced", desc: "AI-Enterprise: Multi-system orchestration w/ audit trails.", price: 18000 },
+        ],
+        isCountable: false,
+      },
+      {
+        feature: "Data Processing AI",
+        desc: "Automated enrichment & transformation pipelines",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Scheduled cleansing & normalization.", price: 4000 },
+          { name: "Standard", desc: "AI-Professional: Entity extraction & aggregation.", price: 8000 },
+          { name: "Advanced", desc: "AI-Enterprise: Predictive classification & adaptive tuning.", price: 15000 },
+        ],
+        isCountable: false,
+      },
+    ],
+  },
+  {
+    group: "AI Integration",
+    features: [
+      {
+        feature: "API AI Enhancement",
+        desc: "Embed intelligent reasoning into existing APIs",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Single AI endpoint integration.", price: 3000 },
+          { name: "Standard", desc: "AI-Professional: Multi-provider fallback routing.", price: 6000 },
+          { name: "Advanced", desc: "AI-Enterprise: Observability + adaptive model selection.", price: 10000 },
+        ],
+        isCountable: false,
+      },
+      {
+        feature: "Legacy System AI",
+        desc: "Augment legacy platforms with intelligence",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Read-only augmentation layer.", price: 10000 },
+          { name: "Standard", desc: "AI-Professional: Bi-directional enhancement & caching.", price: 18000 },
+          { name: "Advanced", desc: "AI-Enterprise: Modular modernization & inference adapters.", price: 30000 },
+        ],
+        isCountable: false,
+      },
+      {
+        feature: "Predictive Analytics",
+        desc: "Forecasting & anomaly detection models",
+        tiers: [
+          { name: "Basic", desc: "AI-Starter: Core trend projections.", price: 7000 },
+          { name: "Standard", desc: "AI-Professional: Multi-variable forecasting & dashboards.", price: 14000 },
+          { name: "Advanced", desc: "AI-Enterprise: Real-time predictive insights & alerting.", price: 22000 },
+        ],
+        isCountable: false,
+      },
+    ],
+  },
+  {
+    group: "Foundational Web Elements",
     features: [
       {
         feature: "Static Page",
-        desc: "Traditional content page (Home, About, etc.)",
+        desc: "AI-optimized content-ready static page",
         tiers: [
-          { name: "Basic", desc: "Simple layout, text/images.", price: 1600 },
-          { name: "Standard", desc: "Custom layout, richer visuals.", price: 2200 },
-          { name: "Advanced", desc: "Interactive/multi-section, premium visuals.", price: 3000 },
+          { name: "Basic", desc: "AI-Starter: Core layout generation.", price: 2000 },
+          { name: "Standard", desc: "AI-Professional: Conversion-focused modular layout.", price: 2600 },
+          { name: "Advanced", desc: "AI-Enterprise: Dynamic personalization zones.", price: 3400 },
         ],
         isCountable: true,
         minCount: 1,
       },
       {
         feature: "Dynamic Page",
-        desc: "Admin-managed pages (blogs, listings, etc.)",
+        desc: "Content/data driven page with smart caching",
         tiers: [
-          { name: "Basic", desc: "Editable content, basic list/detail.", price: 3000 },
-          { name: "Standard", desc: "Search/filter, advanced layout.", price: 6000 },
-          { name: "Advanced", desc: "User logins, integrations.", price: 9600 },
+          { name: "Basic", desc: "AI-Starter: Base CRUD powered page.", price: 3200 },
+          { name: "Standard", desc: "AI-Professional: Search + filters + semantic tagging.", price: 6400 },
+          { name: "Advanced", desc: "AI-Enterprise: User auth + adaptive recommendations.", price: 9800 },
         ],
         isCountable: true,
         minCount: 0,
       },
-      {
-        feature: "Animations & Interactions",
-        desc: "Site-wide motion, micro-interactions, and advanced effects.",
-        tiers: [
-          { name: "Basic", desc: "Just smooth transitions, buttons, loading.", price: 2000 },
-          { name: "Standard", desc: "Section reveals, parallax, moderate interactive effects.", price: 4800 },
-          { name: "Advanced", desc: "3D, scroll magic, highly custom, immersive.", price: 12000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Image Gallery",
-        desc: "Showcase photos/work in an animated gallery or lightbox.",
-        tiers: [
-          { name: "Basic", desc: "Simple grid, click-to-enlarge.", price: 1600 },
-          { name: "Standard", desc: "Filterable albums, animations.", price: 3000 },
-          { name: "Advanced", desc: "Slideshow, social sharing, advanced lightbox.", price: 4000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Contact Form",
-        desc: "Visitors can quickly send you messages or inquiries.",
-        tiers: [
-          { name: "Basic", desc: "Simple form, email notifications.", price: 1600 },
-          { name: "Standard", desc: "Add validation, spam checks, extra fields.", price: 2400 },
-          { name: "Advanced", desc: "Multi-step, uploads, logic routing.", price: 3200 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "SEO Essentials",
-        desc: "Meta tags, sitemap, clean structure—Google-friendly setup.",
-        tiers: [
-          { name: "Basic", desc: "Meta, titles, sitemap, robots.txt.", price: 2400 },
-          { name: "Standard", desc: "OG/social meta, Google Analytics.", price: 3200 },
-          { name: "Advanced", desc: "Rich snippet/schema, in-depth reports.", price: 6400 },
-        ],
-        isCountable: false,
-      },
     ],
   },
   {
-    group: "Business & Transactional Features",
-    features: [
-      {
-        feature: "User Authentication",
-        desc: "Let visitors register, login, and access secure content.",
-        tiers: [
-          { name: "Basic", desc: "Signup/login, password reset.", price: 1600 },
-          { name: "Standard", desc: "Profile, email verification.", price: 3000 },
-          { name: "Advanced", desc: "Social logins, 2FA/MFA.", price: 4000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Payment Integration",
-        desc: "Take payments online via secure gateways like UPI, cards, wallets.",
-        tiers: [
-          { name: "Basic", desc: "One gateway (e.g. UPI/Razorpay).", price: 4000 },
-          { name: "Standard", desc: "Multiple options, order linking.", price: 8000 },
-          { name: "Advanced", desc: "Subscriptions, custom payment workflow.", price: 12000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Cart & Checkout",
-        desc: "Sell products or services, manage orders end-to-end.",
-        tiers: [
-          { name: "Basic", desc: "Simple cart, 1-step checkout.", price: 6400 },
-          { name: "Standard", desc: "Cart editing, addresses, coupons.", price: 12000 },
-          { name: "Advanced", desc: "Abandoned cart, analytics, multi-step.", price: 16000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Booking/Appointment System",
-        desc: "Book meetings, services, consults, or classes online.",
-        tiers: [
-          { name: "Basic", desc: "Single service, owner approval.", price: 4000 },
-          { name: "Standard", desc: "Multiple services, auto notifies.", price: 6000 },
-          { name: "Advanced", desc: "Automated, payments, analytics.", price: 8000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Admin Panel",
-        desc: "Easily manage your website—including content, orders, analytics. Powered by Directus.",
-        tiers: [
-          { name: "Basic", desc: "Content pages, images, blog, users.", price: 16000 },
-          { name: "Standard", desc: "Add order/booking/inventory management, basic stats.", price: 20000 },
-          { name: "Advanced", desc: "Role-based permissions, automations, integrations.", price: 40000 },
-        ],
-        isCountable: false,
-      },
-    ],
-  },
-  {
-    group: "Growth & Communication",
-    features: [
-      {
-        feature: "Testimonials/Reviews",
-        desc: "Showcase positive feedback for instant trust.",
-        tiers: [
-          { name: "Basic", desc: "Manual admin update.", price: 2400 },
-          { name: "Standard", desc: "Star ratings, slider/carousel.", price: 4000 },
-          { name: "Advanced", desc: "User-submitted and moderated.", price: 6400 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Newsletter Signup",
-        desc: "Collect leads and grow your mailing list.",
-        tiers: [
-          { name: "Basic", desc: "Simple email capture.", price: 1600 },
-          { name: "Standard", desc: "Mailchimp/API sync.", price: 2400 },
-          { name: "Advanced", desc: "Double opt-in, segmentation.", price: 3200 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Live Chat/Chatbot",
-        desc: "Support or convert visitors instantly via chat or AI.",
-        tiers: [
-          { name: "Basic", desc: "Manual live chat only.", price: 8000 },
-          { name: "Standard", desc: "Scripted or basic AI bot.", price: 16000 },
-          { name: "Advanced", desc: "GPT-powered, trained chatbot.", price: 32000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Blog/Content Module",
-        desc: "Publish updates and attract SEO traffic with editable blog.",
-        tiers: [
-          { name: "Basic", desc: "Simple admin editor & publish.", price: 4800 },
-          { name: "Standard", desc: "Categories, tags, images/media.", price: 7000 },
-          { name: "Advanced", desc: "User posts, comments, multimedia.", price: 9600 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Multilingual Support",
-        desc: "Expand reach with multi-language site capability.",
-        tiers: [
-          { name: "Basic", desc: "1 extra language, manual translation.", price: 4800 },
-          { name: "Standard", desc: "UI toggle, up to 3 languages.", price: 12000 },
-          { name: "Advanced", desc: "Automated CMS-driven, unlimited.", price: 20000 },
-        ],
-        isCountable: false,
-      },
-    ],
-  },
-  {
-    group: "Backend & Integrations",
-    features: [
-      {
-        feature: "Supabase/Firebase Backend",
-        desc: "Scalable backend/auth/storage for web/apps.",
-        tiers: [
-          { name: "Basic", desc: "Auth, database, basic setup.", price: 6400 },
-          { name: "Standard", desc: "Custom data/functions, notifications.", price: 9000 },
-          { name: "Advanced", desc: "Full logic, advanced integrations.", price: 12000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Custom Backend/API",
-        desc: "Build custom APIs or backends for special requirements.",
-        tiers: [
-          { name: "Basic", desc: "Simple CRUD/API/minimal endpoints.", price: 20000 },
-          { name: "Standard", desc: "Business logic, user auth, secure APIs.", price: 30000 },
-          { name: "Advanced", desc: "Complex workflows, realtime or third-party sync.", price: 40000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Analytics Dashboard",
-        desc: "Track visits, user activity, and custom events.",
-        tiers: [
-          { name: "Basic", desc: "Google Analytics embed.", price: 1600 },
-          { name: "Standard", desc: "Dashboard, basic custom metrics.", price: 2400 },
-          { name: "Advanced", desc: "Real-time, custom reports/exports.", price: 3200 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "Performance Optimization",
-        desc: "Boost loading speed and smooth delivery.",
-        tiers: [
-          { name: "Basic", desc: "Image compression/lazy loading.", price: 1600 },
-          { name: "Standard", desc: "JS/CSS optimization, CDN.", price: 4800 },
-          { name: "Advanced", desc: "Advanced audits, bundle splitting.", price: 8000 },
-        ],
-        isCountable: false,
-      },
-    ],
-  },
-  {
-    group: "After-Launch Support",
+    group: "Quality & Lifecycle",
     features: [
       {
         feature: "Maintenance & Support",
-        desc: "Ongoing updates, fixes, and monitoring.",
+        desc: "Proactive AI-informed support & updates",
         tiers: [
-          { name: "Basic", desc: "Email support, minor updates.", price: 2400 },
-          { name: "Standard", desc: "Bugfixes, quick content edits.", price: 5000 },
-          { name: "Advanced", desc: "Proactive care, high-touch SLA.", price: 8000 },
-        ],
-        isCountable: false,
-      },
-      {
-        feature: "SEO Optimization",
-        desc: "Detailed post-launch SEO improvements.",
-        tiers: [
-          { name: "Basic", desc: "Diagnose meta, mobile, crawl status.", price: 2400 },
-          { name: "Standard", desc: "OG/schema tweak, improve speed.", price: 3200 },
-          { name: "Advanced", desc: "Full audit & report, deep keyword/content strategy.", price: 6400 },
+          { name: "Basic", desc: "AI-Starter: Core updates & email support.", price: 3000 },
+          { name: "Standard", desc: "AI-Professional: Monitoring + prioritized fixes.", price: 6000 },
+          { name: "Advanced", desc: "AI-Enterprise: Predictive issue prevention & SLA.", price: 9000 },
         ],
         isCountable: false,
       },
       {
         feature: "Custom Add-ons",
-        desc: "Advanced features like AI chatbot, 3D, etc.",
+        desc: "Specialized AI or automation feature modules",
         tiers: [
-          { name: "Basic", desc: "Simple AI or Lottie animation.", price: 6400 },
-          { name: "Standard", desc: "Trained chatbot, custom 3D elements.", price: 16000 },
-          { name: "Advanced", desc: "Bespoke AI workflow or full 3D scene.", price: 40000 },
+          { name: "Basic", desc: "AI-Starter: Single auxiliary enhancement.", price: 7000 },
+          { name: "Standard", desc: "AI-Professional: Integrated advanced feature.", price: 18000 },
+          { name: "Advanced", desc: "AI-Enterprise: Bespoke automation/agent ecosystem.", price: 42000 },
         ],
         isCountable: false,
       },

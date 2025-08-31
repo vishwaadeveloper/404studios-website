@@ -2,9 +2,9 @@
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "404studios",
+  "name": "404studios - AI-Powered Development",
   "alternateName": ["404 Studios", "404studios Web Development", "404 Studios Coimbatore"],
-  "description": "Professional web development studio based in Coimbatore, India, specializing in React, Next.js applications and mobile app development.",
+  "description": "Leading AI-powered web development and business automation studio delivering faster, lower-cost, future-ready solutions.",
   "url": "https://404studios.com",
   "logo": {
     "@type": "ImageObject",
@@ -82,40 +82,40 @@ export const organizationSchema = {
     }
   ],
   "knowsAbout": [
-    "React Development",
-    "Next.js Development", 
-    "Web Application Development",
-    "Mobile App Development",
-    "UI/UX Design",
-    "Full Stack Development",
-    "Custom Software Development"
+    "AI Development",
+    "Business Automation",
+    "AI Agents",
+    "Chatbots",
+    "Predictive Analytics",
+    "Workflow Automation",
+    "Intelligent Monitoring"
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Web Development Services",  
+    "name": "AI Development & Automation Services",  
     "itemListElement": [
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Web Development",
-          "description": "Custom web application development using React, Next.js"
+          "name": "Custom AI Agents",
+          "description": "Autonomous agents for workflow and decision automation"
         }
       },
       {
         "@type": "Offer", 
         "itemOffered": {
           "@type": "Service",
-          "name": "Mobile App Development",
-          "description": "Cross-platform mobile application development"
+          "name": "AI-Enhanced Development",
+          "description": "Accelerated web & mobile builds with embedded intelligence"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service", 
-          "name": "UI/UX Design",
-          "description": "Modern, responsive user interface and experience design"
+          "name": "Predictive Analytics",
+          "description": "Forecasting, anomaly detection, and insight automation"
         }
       }
     ]

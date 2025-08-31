@@ -4,7 +4,7 @@ export const localBusinessSchema = {
   "@type": "ProfessionalService",
   "name": "404studios",
   "alternateName": "404 Studios",
-  "description": "Professional web development and mobile app development services specializing in modern technologies and cutting-edge design",
+  "description": "AI-powered web development, mobile apps, and business automation services with intelligent optimization",
   "url": "https://404studios.com",
   "logo": "https://404studios.com/logo.png",
   "image": [
@@ -37,7 +37,7 @@ export const localBusinessSchema = {
     "https://linkedin.com/company/404studios",
     "https://twitter.com/404studios"
   ],
-  "priceRange": "$5000-$50000",
+  "priceRange": "₹15,000-₹2,00,000",
   "paymentAccepted": ["Credit Card", "Bank Transfer", "UPI", "PayPal"],
   "currenciesAccepted": "INR",
   "serviceArea": {

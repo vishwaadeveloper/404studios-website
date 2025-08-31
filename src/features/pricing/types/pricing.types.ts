@@ -1,6 +1,6 @@
 // TypeScript definitions for pricing calculator
 export interface PricingTier {
-  name: "Basic" | "Standard" | "Advanced"
+  name: "Basic" | "Standard" | "Advanced" // Interpreted as AI-Starter | AI-Professional | AI-Enterprise
   desc: string
   price: number
 }
@@ -50,7 +50,7 @@ export interface PricingSummaryProps {
   onRemoveFeature: (featureKey: string) => void
 }
 
-export type BusinessType = "portfolio" | "restaurant" | "ecommerce" | "business" | "fitness"
+export type BusinessType = "ai-startup" | "automation-business" | "smart-ecommerce" | "ai-enterprise" | "tech-agency"
 
 export interface PageConfig {
   count: number
@@ -67,7 +67,7 @@ export interface BusinessConfiguration {
     dynamic: PageConfig
   }
   defaults: {
-    [key: string]: "Basic" | "Standard" | "Advanced"
+    [key: string]: "Basic" | "Standard" | "Advanced" // Tier mapping persists
   }
 }
 
