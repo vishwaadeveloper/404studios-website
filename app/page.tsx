@@ -2,10 +2,16 @@
 
 import type React from "react"
 import Link from "next/link"
-import { ArrowRight, Zap, Rocket, Search, Code, Layers, Send } from "lucide-react"
+import { ArrowRight, Search, Code, Layers, Send, Eye, ClipboardList, Settings, Rocket, LifeBuoy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import HeroSection from "@/components/hero-section"
+import { ArcTimeline } from "@/components/magicui/arc-timeline"
+import { FeatureCards } from "@/components/feature-cards"
+import { Meteors } from "@/components/magicui/meteors"
+import { Particles } from "@/components/magicui/particles"
+import { ShimmerButton } from "@/components/magicui/shimmer-button"
+import { motion } from "framer-motion"
 
 // SEO Structured Data
 const organizationSchema = {
@@ -93,23 +99,53 @@ const processSteps = [
   },
 ]
 
-// Features data for "Why Choose Us" section
-const features = [
+// How We Work timeline data
+const howWeWorkData = [
   {
-    icon: Zap,
-    title: "Lightning Fast",
-    description: "Optimized for speed and performance with modern web technologies and best practices.",
+    time: "Step 1",
+    steps: [
+      { 
+        icon: <Eye className="w-6 h-6" />, 
+        content: "Discover & Understand - We begin by capturing your vision and business needs clearly and quickly."
+      }
+    ]
   },
   {
-    icon: Rocket,
-    title: "Modern Stack",
-    description: "Built with cutting-edge technologies like React, Next.js, and TypeScript for scalability.",
+    time: "Step 2",
+    steps: [
+      { 
+        icon: <ClipboardList className="w-6 h-6" />, 
+        content: "Plan & Strategize - We create a detailed project plan using AI-driven insights to speed up decisions."
+      }
+    ]
   },
   {
-    icon: ArrowRight,
-    title: "Future-Ready",
-    description: "Designed to evolve with your business needs and adapt to emerging technologies.",
+    time: "Step 3",
+    steps: [
+      { 
+        icon: <Settings className="w-6 h-6" />, 
+        content: "Develop & Build - Your website or app is built with modern frameworks and AI-optimized workflows."
+      }
+    ]
   },
+  {
+    time: "Step 4",
+    steps: [
+      { 
+        icon: <Rocket className="w-6 h-6" />, 
+        content: "Test & Launch - We thoroughly test on all devices to ensure a smooth, flawless launch."
+      }
+    ]
+  },
+  {
+    time: "Step 5",
+    steps: [
+      { 
+        icon: <LifeBuoy className="w-6 h-6" />, 
+        content: "Support & Optimize - Continuous support and AI-powered optimization keep your systems updated."
+      }
+    ]
+  }
 ]
 
 export default function HomePage() {
@@ -126,148 +162,178 @@ export default function HomePage() {
         }}
       />
 
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-28">
-          <div className="container px-4 sm:px-6 md:px-8 mx-auto">
-            <div className="flex flex-col items-center text-center space-y-6 sm:space-y-8 max-w-4xl mx-auto">
-              <Badge
-                variant="secondary"
-                className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm bg-orange-500/10 text-orange-400 border border-orange-500/20 hover:bg-orange-500/20 transition-colors"
-                style={{ backgroundColor: 'rgba(255, 107, 53, 0.1)', color: '#FF6B35', borderColor: 'rgba(255, 107, 53, 0.3)' }}
-              >
-                <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-                Next-Gen Web Development
-              </Badge>
+        <HeroSection />
 
-              <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20">
-                <div className="h-64 sm:h-80 md:h-96 lg:h-[28rem] xl:h-[32rem] 2xl:h-[36rem] bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Hero Content Area</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Section Separator */}
+        <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
 
-        {/* Our Specialty */}
-        <section className="py-8 sm:py-12 md:py-16 lg:py-20">
+        {/* How We Work */}
+        <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-background">
           <div className="container px-4 sm:px-6 md:px-8 mx-auto">
-            <div className="text-center mb-8 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-3 sm:mb-4">
-                Our{" "}
+            <div className="text-center mb-12 sm:mb-16 md:mb-20">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-4 sm:mb-6">
+                How We{" "}
                 <span className="text-primary">
-                  Specialty
+                  Work
                 </span>
               </h2>
               <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-muted-foreground px-4 sm:px-0">
-                Our streamlined approach to building your project
+                Our proven 5-step process to transform your ideas into reality
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Fast Development",
-                  description: "Quick turnaround with efficient workflows",
-                  icon: Zap
-                },
-                {
-                  title: "Modern Technology", 
-                  description: "Latest frameworks and best practices",
-                  icon: Code
-                },
-                {
-                  title: "SEO Optimized",
-                  description: "Built for search engine visibility",
-                  icon: Search
-                }
-              ].map((item) => {
-                const Icon = item.icon
-                return (
-                  <Card key={item.title} className="h-full">
-                    <CardHeader>
-                      <div className="flex items-center gap-3 mb-2">
-                        <Icon className="w-6 h-6 text-primary" />
-                        <CardTitle className="text-lg">{item.title}</CardTitle>
-                      </div>
-                      <CardDescription>{item.description}</CardDescription>
-                    </CardHeader>
-                  </Card>
-                )
-              })}
+            <div className="max-w-6xl mx-auto">
+              <ArcTimeline 
+                data={howWeWorkData}
+                className="w-full"
+              />
             </div>
           </div>
         </section>
 
-        {/* Why Choose Us */}
-        <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-muted/50">
-          <div className="container px-4 sm:px-6 md:px-8 mx-auto">
-            <div className="text-center mb-8 sm:mb-12 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-3 sm:mb-4">
-                Why Choose{" "}
-                <span className="text-primary">Us</span>
+        {/* Section Separator */}
+        <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+
+        {/* Feature Cards */}
+        <FeatureCards />
+
+        {/* Section Separator */}
+        <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+
+        {/* CTA Section - Cinematic Hero Style */}
+        <section className="relative w-full min-h-[600px] flex items-center justify-center overflow-hidden bg-background">
+          {/* Meteors Background Effect */}
+          <Meteors number={20} className="absolute inset-0" />
+          
+          {/* Particles Background Effect */}
+          <Particles
+            className="absolute inset-0"
+            quantity={80}
+            ease={70}
+            color="#6366f1"
+            staticity={40}
+            size={0.8}
+          />
+
+          {/* Content Container */}
+          <div className="relative z-10 container px-4 sm:px-6 md:px-8 mx-auto text-center">
+            {/* Animated Text Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-6 sm:space-y-8 mb-8 sm:mb-12"
+            >
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter">
+                Ready to{" "}
+                <motion.span 
+                  className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent bg-[length:200%] animate-gradient-shift"
+                  animate={{ 
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] 
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: "linear" 
+                  }}
+                >
+                  Transform
+                </motion.span>{" "}
+                Your Digital Presence?
               </h2>
-              <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-muted-foreground px-4 sm:px-0">
-                We deliver exceptional value through our expertise and commitment to quality
-              </p>
-            </div>
+              
+              <motion.p 
+                className="text-lg sm:text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-muted-foreground"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                Get a custom quote tailored to your specific business needs and requirements. 
+                Let&apos;s build something amazing together.
+              </motion.p>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
-              {features.map((feature) => {
-                const Icon = feature.icon as React.ComponentType<{ className?: string }>
-                return (
-                  <Card key={feature.title} className="h-full">
-                    <CardHeader>
-                      <div className="flex items-center gap-3 mb-2">
-                        <Icon className="w-6 h-6 text-primary" />
-                        <CardTitle className="text-lg">{feature.title}</CardTitle>
-                      </div>
-                      <CardDescription>{feature.description}</CardDescription>
-                    </CardHeader>
-                  </Card>
-                )
-              })}
-            </div>
-          </div>
-        </section>
+            {/* Animated Buttons */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center items-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              {/* Primary CTA - Shimmer Button */}
+              <Link href="/pricing">
+                <ShimmerButton
+                  shimmerColor="#ffffff"
+                  shimmerSize="0.1em"
+                  shimmerDuration="2s"
+                  borderRadius="12px"
+                  background="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+                  className="text-white font-semibold text-lg px-8 py-4 min-w-[280px] transform hover:scale-105 transition-transform duration-300"
+                >
+                  Calculate Your Website Cost
+                </ShimmerButton>
+              </Link>
 
-        {/* CTA Section */}
-        <section className="py-12 sm:py-16 md:py-20 lg:py-28">
-          <div className="container px-4 sm:px-6 md:px-8 mx-auto">
-            <Card className="max-w-6xl mx-auto">
-              <CardHeader className="text-center space-y-2">
-                <CardTitle className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter">
-                  Ready to{" "}
-                  <span className="text-primary">
-                    Transform
-                  </span>{" "}
-                  Your Digital Presence?
-                </CardTitle>
-                <CardDescription className="text-base sm:text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-                  Get a custom quote tailored to your specific business needs and requirements. Let&apos;s build something
-                  amazing together.
-                </CardDescription>
-              </CardHeader>
-              <CardFooter className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                <Button asChild size="lg" className="w-full sm:w-auto">
-                  <Link href="/pricing">
-                    <span className="hidden sm:inline">Calculate Your Website Cost</span>
-                    <span className="sm:hidden">Get Quote</span>
-                  </Link>
-                </Button>
+              {/* Secondary CTA - Enhanced Button */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   asChild
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  className="text-lg px-8 py-4 min-w-[240px] border-2 border-purple-300/50 bg-background/80 backdrop-blur-sm hover:bg-purple-50/10 hover:border-purple-300 transition-all duration-300 group"
                 >
-                  <Link href="/contact">
+                  <Link href="/contact" className="flex items-center gap-3">
                     Contact Us
-                    <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                    <motion.div
+                      className="flex items-center"
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </motion.div>
                   </Link>
                 </Button>
-              </CardFooter>
-            </Card>
+              </motion.div>
+            </motion.div>
+
+            {/* Floating Elements */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-purple-400/30 rounded-full"
+                  style={{
+                    left: `${20 + i * 15}%`,
+                    top: `${30 + (i % 2) * 40}%`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0],
+                    opacity: [0.3, 0.8, 0.3],
+                    scale: [0.8, 1.2, 0.8],
+                  }}
+                  transition={{
+                    duration: 3 + i * 0.5,
+                    repeat: Infinity,
+                    delay: i * 0.3,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Ambient Glow Effects */}
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl" />
           </div>
         </section>
       </div>

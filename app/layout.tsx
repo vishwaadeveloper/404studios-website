@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Space_Mono } from "next/font/google"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -8,7 +8,12 @@ import AppProviders from "@/components/AppProviders"
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/react'
 
-const inter = Inter({ subsets: ["latin"] })
+const spaceMono = Space_Mono({ 
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-space-mono",
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://404studios.com'),
@@ -79,7 +84,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en-US" dir="ltr" data-scroll-behavior="smooth" className="scroll-smooth">
+    <html 
+      lang="en-US" 
+      dir="ltr" 
+      data-scroll-behavior="smooth" 
+      className={`scroll-smooth ${spaceMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="canonical" href="https://404studios.com" />
@@ -101,7 +112,7 @@ export default function RootLayout({
         {/* Performance optimizations - temporarily disabled */}
         {/* ResourcePreloader, FontPreloader and ConnectionPreloader removed - incompatible with app directory */}
       </head>
-      <body className={inter.className}>
+      <body className={`${spaceMono.className} ${spaceMono.variable}`}>
         <AppProviders>
           <Header />
           <main>{children}</main>

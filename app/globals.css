@@ -4,58 +4,171 @@
 
 @layer base {
   :root {
-    --background: oklch(100% 0 0);
-    --foreground: oklch(9% 0.026 285.75);
-    --card: oklch(100% 0 0);
-    --card-foreground: oklch(9% 0.026 285.75);
-    --popover: oklch(100% 0 0);
-    --popover-foreground: oklch(9% 0.026 285.75);
-    --primary: oklch(47.4% 0.224 303.9);
-    --primary-foreground: oklch(100% 0 0);
-    --secondary: oklch(96.1% 0.013 237.69);
-    --secondary-foreground: oklch(45.3% 0.171 303.9);
-    --muted: oklch(96.1% 0.013 237.69);
-    --muted-foreground: oklch(65.4% 0.033 248.06);
-    --accent: oklch(96.1% 0.013 237.69);
-    --accent-foreground: oklch(45.3% 0.171 303.9);
-    --destructive: oklch(62.8% 0.257 29.23);
-    --destructive-foreground: oklch(98.3% 0.008 106.47);
-    --border: oklch(89.8% 0.013 237.69);
-    --input: oklch(89.8% 0.013 237.69);
-    --ring: oklch(9% 0.026 285.75);
-    --chart-1: oklch(70% 0.14 29);
-    --chart-2: oklch(55% 0.12 180);
-    --chart-3: oklch(45% 0.08 220);
-    --chart-4: oklch(75% 0.15 85);
-    --chart-5: oklch(70% 0.16 40);
+    /* === FREELANCE + AI AGENCY DESIGN PALETTE === */
+    /* Professional, Modern, Tech-forward Color System */
+
+    /* Font Variables */
+    --font-space-mono: 'Space Mono', monospace;
+
+    /* Core Brand Colors */
+    --brand-purple: 109 40 217; /* #6D28D9 - Deep Purple (Primary Brand) */
+    --brand-blue: 37 99 235; /* #2563EB - Electric Blue (Tech/Links) */
+    --brand-cyan: 6 182 212; /* #06B6D4 - Cyan/Teal (AI Accent) */
+    --brand-gray: 17 24 39; /* #111827 - Charcoal Gray (Neutral Dark) */
+    --brand-light: 249 250 251; /* #F9FAFB - Soft White/Silver (Neutral Light) */
+
+    /* Light Theme Variables */
+    --background: 0 0% 100%; /* Pure white */
+    --background-secondary: var(--brand-light); /* #F9FAFB */
+    --background-tertiary: 243 244 246; /* #F3F4F6 */
+
+    --foreground: 0 0% 3.9%; /* #111827 */
+    --foreground-muted: 107 114 128; /* #6B7280 */
+    --foreground-subtle: 156 163 175; /* #9CA3AF */
+
+    /* Component Colors - Light Mode */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    /* Primary: Deep Purple */
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 124 58 237; /* Lighter purple #7C3AED */
+    --primary-subtle: 237 233 254; /* Very light purple #EDE9FE */
+
+    /* Secondary: Electric Blue */
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --secondary-hover: 59 130 246; /* Lighter blue #3B82F6 */
+    --secondary-subtle: 219 234 254; /* Very light blue #DBEAFE */
+
+    /* Accent: Cyan/Teal */
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --accent-hover: 34 211 238; /* Lighter cyan #22D3EE */
+    --accent-subtle: 207 250 254; /* Very light cyan #CFFAFE */
+
+    /* Muted/Neutral Colors */
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --muted-hover: 243 244 246; /* #F3F4F6 */
+
+    /* UI Elements */
+    --border: 0 0% 89.8%; /* #E5E7EB */
+    --border-strong: 209 213 219; /* #D1D5DB */
+    --input: 0 0% 89.8%;
+    --input-border: 209 213 219; /* #D1D5DB */
+    --ring: 0 0% 3.9%;
+
+    /* Status Colors */
+    --success: 34 197 94; /* #22C55E */
+    --success-foreground: 255 255 255;
+    --warning: 245 158 11; /* #F59E0B */
+    --warning-foreground: 255 255 255;
+    --destructive: 0 84.2% 60.2%; /* #EF4444 */
+    --destructive-foreground: 0 0% 98%;
+    --info: var(--brand-blue);
+    --info-foreground: 255 255 255;
+
+    /* Chart Colors (Professional Data Viz) */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%; /* #8B5CF6 */
+    --chart-5: 27 87% 67%; /* #10B981 */
+
+    /* Gradient Stops for AI/Futuristic Effects */
+    --gradient-start: var(--brand-purple);
+    --gradient-middle: var(--brand-blue);
+    --gradient-end: var(--brand-cyan);
+
+    /* Design System */
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: oklch(9% 0.026 285.75);
-    --foreground: oklch(98.3% 0.008 106.47);
-    --card: oklch(9% 0.026 285.75);
-    --card-foreground: oklch(98.3% 0.008 106.47);
-    --popover: oklch(9% 0.026 285.75);
-    --popover-foreground: oklch(98.3% 0.008 106.47);
-    --primary: oklch(75% 0.265 303.9);
-    --primary-foreground: oklch(9% 0.026 285.75);
-    --secondary: oklch(25.1% 0.052 285.75);
-    --secondary-foreground: oklch(98.3% 0.008 106.47);
-    --muted: oklch(25.1% 0.052 285.75);
-    --muted-foreground: oklch(63.9% 0.024 237.69);
-    --accent: oklch(25.1% 0.052 285.75);
-    --accent-foreground: oklch(98.3% 0.008 106.47);
-    --destructive: oklch(58.5% 0.226 29.23);
-    --destructive-foreground: oklch(98.3% 0.008 106.47);
-    --border: oklch(25.1% 0.052 285.75);
-    --input: oklch(25.1% 0.052 285.75);
-    --ring: oklch(83.1% 0.032 237.69);
-    --chart-1: oklch(60% 0.15 240);
-    --chart-2: oklch(65% 0.12 180);
-    --chart-3: oklch(70% 0.18 85);
-    --chart-4: oklch(75% 0.14 290);
-    --chart-5: oklch(65% 0.16 350);
+    /* === DARK THEME === */
+    /* Sophisticated dark mode for professional feel */
+
+    /* Dark Backgrounds */
+    --background: 0 0% 3.9%; /* #0F0F12 - Deep dark */
+    --background-secondary: var(--brand-gray); /* #111827 */
+    --background-tertiary: 31 41 55; /* #1F2937 */
+
+    --foreground: 0 0% 98%; /* #F3F4F6 */
+    --foreground-muted: 156 163 175; /* #9CA3AF */
+    --foreground-subtle: 107 114 128; /* #6B7280 */
+
+    /* Component Colors - Dark Mode */
+    --card: 0 0% 3.9%; /* #111827 */
+    --card-foreground: 0 0% 98%; /* #F3F4F6 */
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary: Brighter Purple for dark mode */
+    --primary: 0 0% 98%; /* #8B5CF6 */
+    --primary-foreground: 0 0% 9%;
+    --primary-hover: 124 58 237; /* #7C3AED */
+    --primary-subtle: 68 76 231; /* #444CE7 */
+
+    /* Secondary: Brighter Blue for dark mode */
+    --secondary: 0 0% 14.9%; /* #3B82F6 */
+    --secondary-foreground: 0 0% 98%;
+    --secondary-hover: 37 99 235; /* #2563EB */
+    --secondary-subtle: 29 78 216; /* #1D4ED8 */
+
+    /* Accent: Bright Cyan for dark mode */
+    --accent: 0 0% 14.9%; /* #22D3EE */
+    --accent-foreground: 0 0% 98%;
+    --accent-hover: 6 182 212; /* #06B6D4 */
+    --accent-subtle: 8 145 178; /* #0891B2 */
+
+    /* Muted/Neutral Colors - Dark */
+    --muted: 0 0% 14.9%; /* #1F2937 */
+    --muted-foreground: 0 0% 63.9%;
+    --muted-hover: 55 65 81; /* #374151 */
+
+    /* UI Elements - Dark */
+    --border: 0 0% 14.9%; /* #374151 */
+    --border-strong: 75 85 99; /* #4B5563 */
+    --input: 0 0% 14.9%;
+    --input-border: 75 85 99; /* #4B5563 */
+    --ring: 0 0% 83.1%; /* #93C5FD */
+
+    /* Status Colors - Dark Mode Optimized */
+    --success: 52 211 153; /* #34D399 */
+    --success-foreground: var(--brand-gray);
+    --warning: 251 191 36; /* #FBBF24 */
+    --warning-foreground: var(--brand-gray);
+    --destructive: 0 62.8% 30.6%; /* #F87171 */
+    --destructive-foreground: 0 0% 98%;
+    --info: var(--secondary);
+    --info-foreground: var(--brand-gray);
+
+    /* Chart Colors - Dark Mode */
+    --chart-1: 220 70% 50%; /* #9333EA */
+    --chart-2: 160 60% 45%; /* #3B82F6 */
+    --chart-3: 30 80% 55%; /* #22D3EE */
+    --chart-4: 280 65% 60%; /* #A855F7 */
+    --chart-5: 340 75% 55%; /* #34D399 */
+
+    /* Gradient Stops for Dark Mode */
+    --gradient-start: 139 92 246; /* #8B5CF6 */
+    --gradient-middle: 59 130 246; /* #3B82F6 */
+    --gradient-end: 34 211 238; /* #22D3EE */
+  }
+  .theme {
+    --animate-marquee: marquee var(--duration) infinite linear;
+    --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+    --animate-shiny-text: shiny-text 8s infinite;
+    --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+    --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+    --animate-rainbow: rainbow 6s ease-in-out infinite;
+    --animate-background-position-spin: background-position-spin 3000ms infinite alternate;
+    --animate-border-beam: border-beam calc(var(--duration) * 1s) infinite linear;
+    --animate-meteor: meteor 5s linear infinite;
   }
 }
 
@@ -66,6 +179,8 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-space-mono), 'Space Mono', monospace;
+    font-feature-settings: "liga" 1, "calt" 1;
   }
 
   /* Smooth scrolling */
@@ -78,7 +193,7 @@
     html {
       scroll-behavior: auto;
     }
-    
+
     * {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
@@ -144,53 +259,123 @@
   animation: fadeIn 0.3s ease-out;
 }
 
-/* Utility classes for common patterns */
-.responsive-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-@media (min-width: 640px) {
-  .responsive-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .responsive-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-}
-
-.responsive-flex {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-@media (min-width: 640px) {
-  .responsive-flex {
-    flex-direction: row;
-    gap: 1.5rem;
-  }
-}
-
-
-
-  /* Ensure proper layering and border radius */
-  .nav-gradient-base {
-    border-radius: 0.5rem;
-    isolation: isolate;
-  }
-
 /* Text selection styling */
 ::selection {
-  @apply bg-primary/20;
+  background-color: rgba(var(--brand-purple), 0.2);
 }
 
 ::-moz-selection {
-  @apply bg-primary/20;
+  background-color: rgba(var(--brand-purple), 0.2);
+}
+
+@theme inline {
+  @keyframes marquee {
+  from {
+    transform: translateX(0);
+    }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+    }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
+  @keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+    }
+  }
+  @keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+    }
+  15%, 35% {
+    transform: translateZ(0) rotate(90deg);
+    }
+  65%, 85% {
+    transform: translateZ(0) rotate(270deg);
+    }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+    }
+  }
+  @keyframes rainbow {
+  0%, 100% {
+    background-position: 0% 50%;
+    }
+  50% {
+    background-position: 100% 50%;
+    }
+  }
+  @keyframes background-position-spin {
+  0% {
+    background-position: top center;
+    }
+  100% {
+    background-position: bottom center;
+    }
+  }
+  @keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+    }
+  }
+  @keyframes meteor {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 1;
+    }
+  70% {
+    opacity: 1;
+    }
+  100% {
+    transform: rotate(var(--angle)) translateX(-500px);
+    opacity: 0;
+    }
+  }
+  @keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+    }
+  }
+  @keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+    }
+  15%, 35% {
+    transform: translateZ(0) rotate(90deg);
+    }
+  65%, 85% {
+    transform: translateZ(0) rotate(270deg);
+    }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+    }
+  }
+  @keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+    }
+  50% {
+    background-position: 100% 50%;
+    }
+  }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }
