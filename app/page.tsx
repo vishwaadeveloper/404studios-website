@@ -6,13 +6,6 @@ import { ArrowRight, Zap, Rocket, Search, Code, Layers, Send } from "lucide-reac
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { useBusinessABTests } from "@/lib/abTesting"
-import { faqSchema } from "@/src/shared/data/faqSchema"
-import { localBusinessSchema } from "@/src/shared/data/localBusinessSchema"
-import { breadcrumbSchemas } from "@/src/shared/data/breadcrumbSchemas"
-import Particle404StudiosNew from "@/components/particle-404-studios-new"
-import ElectricBorderCard from "@/components/electric-border-card"
-import ElectricCascadeCards from "@/components/electric-cascade-cards"
 
 // SEO Structured Data
 const organizationSchema = {
@@ -103,25 +96,23 @@ const processSteps = [
 // Features data for "Why Choose Us" section
 const features = [
   {
-    icon: <Zap className="w-8 h-8" />,
+    icon: Zap,
     title: "Lightning Fast",
     description: "Optimized for speed and performance with modern web technologies and best practices.",
   },
   {
-    icon: <Rocket className="w-8 h-8" />,
+    icon: Rocket,
     title: "Modern Stack",
     description: "Built with cutting-edge technologies like React, Next.js, and TypeScript for scalability.",
   },
   {
-    icon: <ArrowRight className="w-8 h-8" />,
+    icon: ArrowRight,
     title: "Future-Ready",
     description: "Designed to evolve with your business needs and adapt to emerging technologies.",
   },
 ]
 
 export default function HomePage() {
-  const { homepageCTA } = useBusinessABTests()
-
   return (
     <>
       {/* Structured Data */}
@@ -131,9 +122,6 @@ export default function HomePage() {
           __html: JSON.stringify([
             organizationSchema,
             websiteSchema,
-            localBusinessSchema,
-            faqSchema,
-            breadcrumbSchemas.home,
           ]),
         }}
       />
@@ -153,8 +141,8 @@ export default function HomePage() {
               </Badge>
 
               <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20">
-                <div className="h-64 sm:h-80 md:h-96 lg:h-[28rem] xl:h-[32rem] 2xl:h-[36rem]">
-                  <Particle404StudiosNew />
+                <div className="h-64 sm:h-80 md:h-96 lg:h-[28rem] xl:h-[32rem] 2xl:h-[36rem] bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Hero Content Area</p>
                 </div>
               </div>
             </div>
@@ -176,7 +164,38 @@ export default function HomePage() {
               </p>
             </div>
 
-            <ElectricCascadeCards />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Fast Development",
+                  description: "Quick turnaround with efficient workflows",
+                  icon: Zap
+                },
+                {
+                  title: "Modern Technology", 
+                  description: "Latest frameworks and best practices",
+                  icon: Code
+                },
+                {
+                  title: "SEO Optimized",
+                  description: "Built for search engine visibility",
+                  icon: Search
+                }
+              ].map((item) => {
+                const Icon = item.icon
+                return (
+                  <Card key={item.title} className="h-full">
+                    <CardHeader>
+                      <div className="flex items-center gap-3 mb-2">
+                        <Icon className="w-6 h-6 text-primary" />
+                        <CardTitle className="text-lg">{item.title}</CardTitle>
+                      </div>
+                      <CardDescription>{item.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                )
+              })}
+            </div>
           </div>
         </section>
 
@@ -194,18 +213,19 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
-              {features.map((feature, index) => {
-                const colors = ['cyan', 'purple', 'orange'] as const;
+              {features.map((feature) => {
+                const Icon = feature.icon as React.ComponentType<{ className?: string }>
                 return (
-                  <ElectricBorderCard 
-                    key={feature.title}
-                    icon={feature.icon}
-                    title={feature.title}
-                    description={feature.description}
-                    badge=""
-                    color={colors[index]}
-                  />
-                );
+                  <Card key={feature.title} className="h-full">
+                    <CardHeader>
+                      <div className="flex items-center gap-3 mb-2">
+                        <Icon className="w-6 h-6 text-primary" />
+                        <CardTitle className="text-lg">{feature.title}</CardTitle>
+                      </div>
+                      <CardDescription>{feature.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                )
               })}
             </div>
           </div>

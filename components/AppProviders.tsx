@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-import { ABTestProvider } from "@/lib/abTesting"
 import { ThemeProvider } from "@/components/theme-provider"
 
 export default function AppProviders({ children }: { children: React.ReactNode }) {
@@ -12,7 +11,7 @@ export default function AppProviders({ children }: { children: React.ReactNode }
       enableSystem
       disableTransitionOnChange
     >
-      <ABTestProvider>{children}</ABTestProvider>
+      {children}
     </ThemeProvider>
   )
 }

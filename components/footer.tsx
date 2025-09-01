@@ -47,9 +47,6 @@ export default function Footer() {
               <Link href="/" className="block text-gray-300 hover:text-cyan-400 transition-colors duration-300">
                 Home
               </Link>
-              <Link href="/features" className="block text-gray-300 hover:text-cyan-400 transition-colors duration-300">
-                Features & Tiers
-              </Link>
               <Link href="/pricing" className="block text-gray-300 hover:text-cyan-400 transition-colors duration-300">
                 Pricing
               </Link>

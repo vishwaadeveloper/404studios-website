@@ -2,17 +2,11 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import AnimatedHeader from "@/components/animated-header"
+import Header from "@/components/header"
 import Footer from "@/components/footer"
-import PageLoader from "@/components/page-loader"
-import PageTransition from "@/components/page-transition"
 import AppProviders from "@/components/AppProviders"
-import { ElectricCardStyles } from "@/components/ui/electric-card-styles"
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/react'
-import ModernPerformanceOptimizer from "@/components/performance/ModernPerformanceOptimizer"
-import SmartResourceManager from "@/components/performance/SmartResourceManager"
-import PerformanceMonitor from "@/components/performance/PerformanceMonitor"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -108,16 +102,9 @@ export default function RootLayout({
         {/* ResourcePreloader, FontPreloader and ConnectionPreloader removed - incompatible with app directory */}
       </head>
       <body className={inter.className}>
-        <ElectricCardStyles />
-        <ModernPerformanceOptimizer />
-        <SmartResourceManager />
-        <PerformanceMonitor />
         <AppProviders>
-          <PageLoader />
-          <AnimatedHeader />
-          <PageTransition>
-            <main>{children}</main>
-          </PageTransition>
+          <Header />
+          <main>{children}</main>
           <Footer />
           <SpeedInsights />
           <Analytics />
